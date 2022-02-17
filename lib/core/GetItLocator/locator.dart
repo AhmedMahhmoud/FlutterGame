@@ -13,7 +13,7 @@ class InitLocator {
   }
 
   Future<void> _setUpLocator() async {
-    locator.registerLazySingleton(() => AnimalProvider());
+    // locator.registerLazySingleton(() => AnimalProvider());
     final sharedPrefs = await SharedPreferences.getInstance();
     instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
     instance.registerLazySingleton<AppPreferences>(

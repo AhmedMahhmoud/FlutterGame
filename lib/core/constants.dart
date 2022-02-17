@@ -1,5 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import 'ColorManager/ColorManager.dart';
+
+TextStyle boldStyle = TextStyle(
+    fontWeight: FontWeight.bold, fontSize: 17, color: ColorManager.accentColor);
 const kTextFieldDecorationWhite = InputDecoration(
   isDense: true,
 
@@ -26,3 +31,32 @@ const kTextFieldDecorationWhite = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
   ),
 );
+
+class RoundedButton extends StatelessWidget {
+  final String title;
+  final Function onTapped;
+  const RoundedButton({
+    this.title,
+    this.onTapped,
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTapped,
+      child: Container(
+        width: 100,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: ColorManager.grey, width: 2)),
+        child: Center(
+          child: AutoSizeText(
+            title,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+}

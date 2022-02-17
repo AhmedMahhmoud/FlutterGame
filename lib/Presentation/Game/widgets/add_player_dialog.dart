@@ -16,11 +16,11 @@ class AddPlayerDialog extends StatefulWidget {
 }
 
 TextEditingController _textEditingController = TextEditingController();
+final _formKey = GlobalKey<FormState>();
 
 class _AddPlayerDialogState extends State<AddPlayerDialog> {
   @override
   void initState() {
-    // TODO: implement initState
     _textEditingController.clear();
     super.initState();
   }
@@ -39,87 +39,103 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
             ),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            content: Container(
-              height: 150,
-              width: 500,
-              child: StatefulBuilder(
-                builder: (context, setState) {
-                  return Column(
-                    children: [
-                      AutoSizeText(
-                        "اضف اسم اللاعب",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Divider(
-                        thickness: 1,
-                      ),
-                      Expanded(
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            child: TextFormField(
-                              onFieldSubmitted: (_) {},
-                              textInputAction: TextInputAction.next,
-                              validator: (text) {},
-                              controller: _textEditingController,
-                              decoration: kTextFieldDecorationWhite.copyWith(
-                                  hintText: 'اسم اللاعب',
-                                  suffixIcon: const Icon(
-                                    Icons.person,
-                                    color: Colors.orange,
-                                  )),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (_textEditingController.text == "") {
-                                    Fluttertoast.showToast(
-                                        msg: "برجاء ادخال اسم اللاعب",
-                                        textColor: ColorManager.backGroundColor,
-                                        backgroundColor:
-                                            ColorManager.failColor);
-                                  } else {
-                                    Provider.of<PlayersProvider>(context,
-                                            listen: false)
-                                        .addPlayer(Players(
-                                            playerName:
-                                                _textEditingController.text,
-                                            playerScore: 0));
-                                    Navigator.pop(context);
+            content: Form(
+              key: _formKey,
+              child: Container(
+                height: 160,
+                width: 500,
+                child: StatefulBuilder(
+                  builder: (context, setState) {
+                    return Column(
+                      children: [
+                        AutoSizeText(
+                          "اضف اسم اللاعب",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Expanded(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              child: TextFormField(
+                                onFieldSubmitted: (_) {},
+                                textInputAction: TextInputAction.next,
+                                validator: (text) {
+                                  if (Provider.of<PlayersProvider>(context,
+                                          listen: false)
+                                      .checkPlayerExist(text)) {
+                                    return "اسم اللاعب موجود قبل كدة";
                                   }
+                                  return null;
                                 },
-                                child: Icon(
-                                  Icons.check,
-                                  color: ColorManager.successColor,
-                                  size: 30,
-                                ),
+                                controller: _textEditingController,
+                                decoration: kTextFieldDecorationWhite.copyWith(
+                                    errorStyle:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    hintText: 'اسم اللاعب',
+                                    suffixIcon: Icon(
+                                      Icons.person,
+                                      color: ColorManager.primary,
+                                    )),
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Icon(
-                                  FontAwesomeIcons.times,
-                                  color: ColorManager.failColor,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    if (_textEditingController.text == "") {
+                                      Fluttertoast.showToast(
+                                          msg: "اسم اللاعب اييه ",
+                                          textColor:
+                                              ColorManager.backGroundColor,
+                                          backgroundColor:
+                                              ColorManager.failColor);
+                                    } else {
+                                      if (!_formKey.currentState.validate()) {
+                                        return;
+                                      }
+                                      Provider.of<PlayersProvider>(context,
+                                              listen: false)
+                                          .addPlayer(Players(
+                                              playerName:
+                                                  _textEditingController.text,
+                                              playerScore: 0));
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                  child: Icon(
+                                    Icons.check,
+                                    color: ColorManager.successColor,
+                                    size: 30,
+                                  ),
                                 ),
-                              )
-                            ],
-                          )
-                        ],
-                      ))
-                    ],
-                  );
-                },
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Icon(
+                                    FontAwesomeIcons.times,
+                                    color: ColorManager.failColor,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ))
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),

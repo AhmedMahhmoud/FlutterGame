@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Domain/Models/PlayersModel.dart';
+import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
 import 'package:flutter_game/Presentation/Game/widgets/add_player_dialog.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
+import 'package:flutter_game/core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -79,18 +81,17 @@ class AddPlayerScreen extends StatelessWidget {
                       ? Container()
                       : Container(
                           margin: EdgeInsets.only(bottom: 50),
-                          child: Container(
-                            width: 100,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                    color: ColorManager.grey, width: 2)),
-                            child: Center(
-                              child: AutoSizeText(
-                                "التالى",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
+                          child: InkWell(
+                            onTap: () {},
+                            child: RoundedButton(
+                              title: "التالى",
+                              onTapped: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => WhoIsOut(),
+                                    ));
+                              },
                             ),
                           ),
                         )

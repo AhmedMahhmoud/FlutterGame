@@ -4,6 +4,7 @@ import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
 import 'package:flutter_game/Presentation/Game/views/add_players.dart';
+import 'package:flutter_game/core/Shared/animalData.dart';
 import 'package:flutter_game/main.dart';
 
 class Home extends StatefulWidget {
@@ -11,62 +12,51 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-Animal _animal = Animal();
-AnimalDatabase _animalDatabase = AnimalDatabase();
-Future animalFuture;
-Future<void> getAnimal() async {
-  _animal = await _animalDatabase.getAnimal(1);
-  locator.locator<AnimalProvider>().getAnimalFromDb(_animal);
-}
+// Animal _animal = Animal();
+// AnimalDatabase _animalDatabase = AnimalDatabase();
+// Future animalFuture;
+// Future<void> getAnimal() async {
+//   _animal = await _animalDatabase.getAnimal(1);
+//   locator.locator<AnimalProvider>().getAnimalFromDb(_animal);
+// }
 
 class _HomeState extends State<Home> {
   @override
   void initState() {
-    animalFuture = getAnimal();
+    // animalFuture = getAnimal();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final _animalProv = locator.locator<AnimalProvider>();
+    // final _animalProv = locator.locator<AnimalProvider>();
     return Scaffold(
         body: Container(
       width: double.infinity,
-      child: FutureBuilder(
-        future: animalFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddPlayerScreen(),
-                        ));
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset(
-                      "assets/images/animals.jpg",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                Container(
-                  child: AutoSizeText(_animalProv.animal.categoryName),
-                )
-              ],
-            );
-          }
-        },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddPlayerScreen(),
+                  ));
+            },
+            child: Container(
+              width: 100,
+              height: 100,
+              child: Image.asset(
+                "assets/images/animals.jpg",
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Container(
+            child: AutoSizeText(animalData.categoryName),
+          )
+        ],
       ),
     ));
   }

@@ -15,7 +15,7 @@ import 'core/sharedPrefrences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   locator.intalizeLocator();
-  await intitalizeGame();
+  // await intitalizeGame();
   runApp(MyApp());
 }
 
@@ -38,16 +38,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Future<void> intitalizeGame() async {
-  final Future _init = await Init.initialize();
-  if (!await locator.locator<AppPreferences>().isDatabaseCreated()) {
-    AnimalDatabase animalDatabase = AnimalDatabase();
-    await animalDatabase.insertGame(animalData).then((value) async {
-      if (value != null) {
-        await locator.locator<AppPreferences>().setDbInitialized();
-      }
-    });
-  } else {
-    print("already added b4");
-  }
-}
+// Future<void> intitalizeGame() async {
+//   final Future _init = await Init.initialize();
+//   if (!await locator.locator<AppPreferences>().isDatabaseCreated()) {
+//     AnimalDatabase animalDatabase = AnimalDatabase();
+//     await animalDatabase.insertGame(animalData).then((value) async {
+//       if (value != null) {
+//         await locator.locator<AppPreferences>().setDbInitialized();
+//       }
+//     });
+//   } else {
+//     print("already added b4");
+//   }
+// }
