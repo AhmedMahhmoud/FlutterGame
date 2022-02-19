@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Presentation/Game/views/questions_time.dart';
@@ -21,7 +22,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
   bool _switchToNewPlayer = true;
   int _playersLength;
   int _turnNumber = 0; // (number of players *2)
-  String _randomAnimalName;
+  String randomAnimalName;
   @override
   void initState() {
     _whoIsOutIndex = _getRandomIndex();
@@ -46,9 +47,10 @@ class _WhoIsOutState extends State<WhoIsOut> {
   String _getRandomAnimal() {
     int animalsTableLength = animalData.itemsName.length;
     final random = Random().nextInt(animalsTableLength);
-    _randomAnimalName = animalData.itemsName[random];
-    print("Animal name is :$_randomAnimalName ");
-    return _randomAnimalName;
+    randomAnimalName = animalData.itemsName[random];
+    Provider.of<AnimalProvider>(context, listen: false)
+        .setCurrentAnimal(randomAnimalName);
+    return randomAnimalName;
   }
 
   int _getRandomIndex() {
@@ -93,7 +95,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                         style: boldStyle,
                                       )
                                     : AutoSizeText(
-                                        "انت جوة اللعبة حاول تعرف مين اللي برة اسم الحيوان :$_randomAnimalName",
+                                        "انت جوة اللعبة حاول تعرف مين اللي برة اسم الحيوان :$randomAnimalName",
                                         style: boldStyle,
                                         textAlign: TextAlign.center,
                                       ),

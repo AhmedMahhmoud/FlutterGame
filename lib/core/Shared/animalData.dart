@@ -8,6 +8,11 @@ Animal animalData = Animal(
       "الفيل",
       "البطريق",
       "القطة",
+      "الكلب",
+      "الظرافة",
+      'الصقر',
+      "عصفورة",
+      "بطة"
     ],
     categoryImage: "assets/images/animals.jpg",
     categoryName: "حيوانات");

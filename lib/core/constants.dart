@@ -34,10 +34,12 @@ const kTextFieldDecorationWhite = InputDecoration(
 
 class RoundedButton extends StatelessWidget {
   final String title;
+  final Color btnColor;
   final Function onTapped;
   const RoundedButton({
     this.title,
     this.onTapped,
+    this.btnColor,
     Key key,
   }) : super(key: key);
 
@@ -48,6 +50,7 @@ class RoundedButton extends StatelessWidget {
       child: Container(
         width: 100,
         decoration: BoxDecoration(
+            color: btnColor,
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: ColorManager.grey, width: 2)),
         child: Center(

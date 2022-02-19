@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => PlayersProvider(),
           ),
+          ChangeNotifierProvider(
+            create: (context) => AnimalProvider(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
