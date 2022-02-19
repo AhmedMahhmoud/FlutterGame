@@ -26,6 +26,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
   @override
   void initState() {
     _whoIsOutIndex = _getRandomIndex();
+    Provider.of<PlayersProvider>(context,listen: false).whoIsOutIndex=_whoIsOutIndex;
     _getRandomAnimal();
     super.initState();
   }

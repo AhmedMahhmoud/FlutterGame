@@ -1,5 +1,5 @@
 class Players {
   final String playerName;
-  final int playerScore;
+   int playerScore;
   Players({this.playerName, this.playerScore});
 }

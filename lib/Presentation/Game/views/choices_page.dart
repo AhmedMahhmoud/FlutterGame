@@ -1,11 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
+import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
 import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:provider/provider.dart';
+
+import 'final_result.dart';
 
 class ChoiceScreen extends StatefulWidget {
   @override
@@ -50,8 +53,12 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         Provider.of<AnimalProvider>(context, listen: false).currentAnimal) {
       setState(() {
         _choiceResult = true;
+        Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore+=100;
+
       });
     } else {
+//      Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore=(Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore-100).abs();
+
       setState(() {
         _choiceResult = false;
       });
@@ -96,6 +103,16 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   ),
                 ),
               ),
+              _choiceResult!=null?    RoundedButton(
+                title: "التالى",
+                onTapped: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FinalResult(),
+                      ));
+                },
+              ):Container()
             ],
           ),
         ),
