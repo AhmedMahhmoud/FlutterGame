@@ -9,7 +9,7 @@ class PlayersProvider with ChangeNotifier {
 
   List<Players> randomPlayers = [];
   List<Players> suspectsPlayers = [];
-int whoIsOutIndex;
+  int whoIsOutIndex;
   int lastAskingPlayerIndex = -1;
   int askingPlayerIndex;
 
@@ -50,17 +50,24 @@ int whoIsOutIndex;
   }
 
   getRandomPlayers() {
+
+
+
     randomPlayers = [...playersList];
-    randomPlayers.removeAt(askingPlayerIndex);
+  randomPlayers.removeAt(askingPlayerIndex);
 
-    if (lastAskingPlayerIndex == -1) {
-      print('awel mara');
-      randomPlayers.removeAt(Random().nextInt(randomPlayers.length));
-    } else {
-      print('lastAskingPlayerIndex $lastAskingPlayerIndex');
 
-      randomPlayers.removeAt(lastAskingPlayerIndex);
+    if(playersList.length>3){
+      if (lastAskingPlayerIndex == -1) {
+        print('awel mara');
+        randomPlayers.removeAt(Random().nextInt(randomPlayers.length));
+      } else {
+        print('lastAskingPlayerIndex $lastAskingPlayerIndex');
+
+        randomPlayers.removeAt(lastAskingPlayerIndex);
+      }
     }
+
 
     notifyListeners();
   }
@@ -70,21 +77,20 @@ int whoIsOutIndex;
     notifyListeners();
   }
 
-getSuspectsPlayers(int index){
-suspectsPlayers=[...playersList];
-suspectsPlayers.removeAt(index);
-notifyListeners();
-}
-
-
+  getSuspectsPlayers(int index) {
+    suspectsPlayers = [...playersList];
+    suspectsPlayers.removeAt(index);
+    notifyListeners();
+  }
 
   getAskingPlayer() {
-    final random = Random().nextInt(playersList.length-1 );
+    final random = Random().nextInt(playersList.length - 1);
     if (random == lastAskingPlayerIndex) {
       print('wrong random');
       getAskingPlayer();
     } else {
-      print('random index is $random  last player index is $lastAskingPlayerIndex');
+      print(
+          'random index is $random  last player index is $lastAskingPlayerIndex');
       askingPlayerIndex = random;
 
       getRandomPlayers();

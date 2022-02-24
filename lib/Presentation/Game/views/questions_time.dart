@@ -9,6 +9,7 @@ import 'package:flutter_game/Presentation/Game/views/choices_page.dart';
 import 'package:flutter_game/Presentation/Game/views/random_questions_time.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/constants.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class QuestionScreen extends StatefulWidget {
@@ -53,6 +54,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Lottie.asset('assets/lotties/bg_top.json',
+            repeat: true, fit: BoxFit.fill),
         SizedBox(
           height: 70,
         ),

@@ -25,6 +25,10 @@ dependencies:
   animations: ^2.0.2
   auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
+  lottie: ^1.2.1
+  scratcher: ^2.1.0
+  google_fonts: ^1.1.2
+
   flutter:
     sdk: flutter
   fluttertoast: ^8.0.8
@@ -51,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/lotties/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
@@ -60,11 +65,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  #fonts:
+     #- family: Changa
+       #fonts:
+        # - asset: assets/fonts
+         #- asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

@@ -12,12 +12,16 @@ class VotingScreen extends StatefulWidget {
 
 class _VotingScreenState extends State<VotingScreen> {
   int playerIndex = 0;
-  int tmpIndex = 0;
+  int button_display_index = 0;
+  int ctr = 0;
 
   @override
   void initState() {
-    Provider.of<PlayersProvider>(context, listen: false)
-        .getSuspectsPlayers(playerIndex);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<PlayersProvider>(context, listen: false)
+          .getSuspectsPlayers(playerIndex);
+    });
+
     super.initState();
   }
 
@@ -43,51 +47,81 @@ class _VotingScreenState extends State<VotingScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                         onTap: () async {
-                          setState(() {
-                            tmpIndex++;
-                          });
-
-                          if (playerIndex <
-                              playersProv.playersList.length - 1) {
-                            print('tapped ');
-
+                          // to prevent voting after display of next button
+                          if (button_display_index !=
+                              playersProv.playersList.length) {
                             setState(() {
-                              playerIndex++;
+                              button_display_index++;
                             });
 
-                            await Provider.of<PlayersProvider>(context,
-                                    listen: false)
-                                .getSuspectsPlayers(playerIndex);
+                            if (button_display_index !=
+                                playersProv.playersList.length) {
+                              if (button_display_index !=
+                                  playersProv.playersList.length) {
+                                print('playerIndex before $playerIndex');
 
-                            if (playersProv
-                                    .playersList[playerIndex-1].playerName !=
-                                playersProv
-                                    .playersList[playersProv.whoIsOutIndex]
-                                    .playerName) {
+                                // 34an at2kd en elly by-vote msh hwa elly bara el salfa
+                                if (playersProv
+                                        .playersList[playerIndex].playerName !=
+                                    playersProv
+                                        .playersList[playersProv.whoIsOutIndex]
+                                        .playerName) {
+                                  // 34an at2kd en elly e5taro hwa hwa elly bara el salfa
+                                  if (playersProv
+                                          .suspectsPlayers[index].playerName ==
+                                      playersProv
+                                          .playersList[
+                                              playersProv.whoIsOutIndex]
+                                          .playerName) {
+                                    print('correct choice');
+                                    playersProv.playersList[playerIndex]
+                                        .playerScore += 100;
+                                  } else {
+                                    print('wrong choice');
+                                  }
+                                } else {
+                                  print('bara el salfa');
+                                }
+                              }
+                              print(
+                                  'score ${playersProv.playersList[playerIndex].playerScore}');
 
-                              if (playersProv.suspectsPlayers[index].playerName ==
+                              // zwdna el index 34an ygbly list na2sa el la3eb elly b3do
+                              setState(() {
+                                playerIndex++;
+                              });
+                              print('playerIndex after $playerIndex');
+                              await Provider.of<PlayersProvider>(context,
+                                      listen: false)
+                                  .getSuspectsPlayers(playerIndex);
+                            } else {
+                              // 34an at2kd en elly by-vote msh hwa elly bara el salfa
+                              if (playersProv
+                                      .playersList[playerIndex].playerName !=
                                   playersProv
                                       .playersList[playersProv.whoIsOutIndex]
                                       .playerName) {
-                                print('correct choice');
-                                playersProv
-                                    .playersList[playerIndex].playerScore += 100;
+                                // 34an at2kd en elly e5taro hwa hwa elly bara el salfa
+                                if (playersProv
+                                        .suspectsPlayers[index].playerName ==
+                                    playersProv
+                                        .playersList[playersProv.whoIsOutIndex]
+                                        .playerName) {
+                                  print('correct choice');
+                                  playersProv.playersList[playerIndex]
+                                      .playerScore += 100;
+                                } else {
+                                  print('wrong choice');
+                                }
                               } else {
-                                print('wrong choice');
-
-                            /*    playersProv.playersList[playerIndex].playerScore =
-                                    (playersProv.playersList[playerIndex]
-                                        .playerScore -
-                                        100)
-                                        .abs();*/
+                                print('bara el salfa');
                               }
+                              print(
+                                  'score ${playersProv.playersList[playerIndex].playerScore}');
                             }
-                            else{
-                              print('bara el salfa');
-                            }
-
+                          } else {
+                            return;
                           }
-                          print('score ${playersProv.playersList[playerIndex].playerScore}');
                         },
                         child: Container(
                           color: Colors.blue,
@@ -102,7 +136,7 @@ class _VotingScreenState extends State<VotingScreen> {
               },
               itemCount: playersProv.suspectsPlayers.length,
             ),
-            tmpIndex == playersProv.playersList.length
+            button_display_index == playersProv.playersList.length
                 ? RoundedButton(
                     title: "التالى",
                     onTapped: () {

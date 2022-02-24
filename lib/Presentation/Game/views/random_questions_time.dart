@@ -17,7 +17,12 @@ class RandomQuestionsTime extends StatefulWidget {
 class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
   @override
   void initState() {
-    Provider.of<PlayersProvider>(context, listen: false).getAskingPlayer();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+
+      // Add Your Code here.
+      Provider.of<PlayersProvider>(context, listen: false).getAskingPlayer();
+    });
+
     super.initState();
   }
 
