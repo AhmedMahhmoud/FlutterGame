@@ -27,6 +27,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   lottie: ^1.2.1
   scratcher: ^2.1.0
+  clay_containers: ^0.3.2
+  audioplayers: any
   google_fonts: ^1.1.2
 
   flutter:
@@ -56,6 +58,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lotties/
+    - assets/sounds/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
