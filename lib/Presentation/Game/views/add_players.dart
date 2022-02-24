@@ -203,7 +203,14 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                       height: 40,
                                       child: RoundedButton(
                                         title: "يلا بينا",
-                                        onTapped: () {},
+                                        onTapped: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    WhoIsOut(),
+                                              ));
+                                        },
                                       ),
                                     )),
                             Card(
