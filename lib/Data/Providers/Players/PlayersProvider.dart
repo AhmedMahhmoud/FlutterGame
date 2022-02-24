@@ -6,17 +6,22 @@ import 'package:flutter_game/Domain/Models/PlayersModel.dart';
 class PlayersProvider with ChangeNotifier {
   List<Players> playersList = [];
   List<Players> playersListCopy = [];
-
+  List<String> names = ["", "", "", "", "", "", "", ""];
   List<Players> randomPlayers = [];
   List<Players> suspectsPlayers = [];
   int whoIsOutIndex;
   int lastAskingPlayerIndex = -1;
   int askingPlayerIndex;
 
-  addPlayer(Players player) {
+  addPlayer(Players player, int index) {
     playersList.add(player);
     playersListCopy.add(player);
+    names[index] = player.playerName;
     notifyListeners();
+  }
+
+  resetPlayers() {
+    playersList.clear();
   }
 
   removePlayer(int index) {
@@ -50,14 +55,10 @@ class PlayersProvider with ChangeNotifier {
   }
 
   getRandomPlayers() {
-
-
-
     randomPlayers = [...playersList];
-  randomPlayers.removeAt(askingPlayerIndex);
+    randomPlayers.removeAt(askingPlayerIndex);
 
-
-    if(playersList.length>3){
+    if (playersList.length > 3) {
       if (lastAskingPlayerIndex == -1) {
         print('awel mara');
         randomPlayers.removeAt(Random().nextInt(randomPlayers.length));
@@ -67,7 +68,6 @@ class PlayersProvider with ChangeNotifier {
         randomPlayers.removeAt(lastAskingPlayerIndex);
       }
     }
-
 
     notifyListeners();
   }

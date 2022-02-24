@@ -25,7 +25,7 @@ dependencies:
   animations: ^2.0.2
   auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
-  lottie: ^1.2.1
+  lottie: ^1.0.0
   scratcher: ^2.1.0
   clay_containers: ^0.3.2
   audioplayers: any

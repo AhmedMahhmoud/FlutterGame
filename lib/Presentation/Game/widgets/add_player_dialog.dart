@@ -11,6 +11,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class AddPlayerDialog extends StatefulWidget {
+  final int index;
+  final Function callBackFun;
+  AddPlayerDialog({this.callBackFun, this.index});
   @override
   _AddPlayerDialogState createState() => _AddPlayerDialogState();
 }
@@ -101,12 +104,17 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                                       if (!_formKey.currentState.validate()) {
                                         return;
                                       }
+
                                       Provider.of<PlayersProvider>(context,
                                               listen: false)
-                                          .addPlayer(Players(
-                                              playerName:
-                                                  _textEditingController.text,
-                                              playerScore: 0));
+                                          .addPlayer(
+                                              Players(
+                                                playerName:
+                                                    _textEditingController.text,
+                                                playerScore: 0,
+                                              ),
+                                              widget.index);
+                                      widget.callBackFun();
                                       Navigator.pop(context);
                                     }
                                   },

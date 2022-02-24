@@ -4,17 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'ColorManager/ColorManager.dart';
 
-TextStyle boldStyle = TextStyle(
-    fontWeight: FontWeight.bold, fontSize: 17);
-
+TextStyle boldStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 17);
 
 TextStyle funckyStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 17,
     color: ColorManager.accentColor,
- fontFamily: GoogleFonts.getFont(
-    'Cairo')
-    .fontFamily );
+    fontFamily: GoogleFonts.getFont('Cairo').fontFamily);
 
 const kTextFieldDecorationWhite = InputDecoration(
   isDense: true,
@@ -22,7 +18,7 @@ const kTextFieldDecorationWhite = InputDecoration(
   contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
   hintText: 'Enter a value',
   hintStyle:
-  TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),
+      TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),
   fillColor: Colors.white,
   filled: true,
   disabledBorder: OutlineInputBorder(
@@ -63,12 +59,16 @@ class RoundedButton extends StatelessWidget {
         width: 100,
         decoration: BoxDecoration(
             color: btnColor,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: ColorManager.grey, width: 2)),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: ColorManager.primary, width: 2)),
         child: Center(
           child: AutoSizeText(
             title,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: ColorManager.primary,
+                fontFamily: GoogleFonts.getFont('Changa').fontFamily),
           ),
         ),
       ),
