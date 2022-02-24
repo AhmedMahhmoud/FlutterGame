@@ -1,7 +1,12 @@
 import 'dart:math';
 import 'dart:math' as math;
 
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clay_containers/constants.dart';
+import 'package:clay_containers/widgets/clay_container.dart';
+import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -32,13 +37,40 @@ class _WhoIsOutState extends State<WhoIsOut> {
   int _turnNumber = 0; // (number of players *2)
   String randomAnimalName;
 
+  AudioPlayer audioPlayer=AudioPlayer();
+  AudioPlayerState audioPlayerState=AudioPlayerState.PAUSED;
+  AudioCache audioCache;
+  String path='sounds/scratchSound.mp3';
+
   @override
   void initState() {
     _whoIsOutIndex = _getRandomIndex();
+    audioCache=AudioCache(fixedPlayer: audioPlayer);
+    audioPlayer.onPlayerStateChanged.listen((AudioPlayerState state) {
+      setState(() {
+        audioPlayerState=state;
+      });
+    });
     Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex =
         _whoIsOutIndex;
     _getRandomAnimal();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    audioPlayer.release();
+    audioPlayer.dispose();
+    audioCache.clearCache();
+  }
+
+  playMusic()async{
+    await audioCache.play(path);
+  }
+
+  pauseMusic()async{
+    await audioPlayer.pause();
   }
 
   goNextTurn() {
@@ -97,39 +129,49 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                   child: _switchToNewPlayer
                                       ? Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 12, vertical: 20),
-                                          child: AutoSizeText(
-                                            "ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف هو اللي برا اللعبة ولا لا !",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: GoogleFonts.getFont(
-                                                        'Changa')
-                                                    .fontFamily,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20),
-                                          ),
+                                              horizontal: 20, vertical: 20),
+                                          child: Container(
+                                            child: Center(
+                                              child: ClayContainer(
+                                                color: Colors.lightGreen,
+                                             //   height: 200,
+                                               // width: 200,
+
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(12.0),
+                                                  child: ClayText(
+                                                  "ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف هو اللي برا اللعبة ولا لا !",
+                                                  //  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontFamily: GoogleFonts.getFont(
+                                                          'Changa')
+                                                          .fontFamily,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20),
+                                              ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+
                                         )
                                       : Card(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.only(topLeft: Radius.elliptical(90, 90),bottomRight:Radius.elliptical(90, 90) ),
                                           ),
                                           elevation: 8,
                                           child: Padding(
                                             padding: const EdgeInsets.all(30.0),
                                             child: Column(
-                                              children: [
-                                                AutoSizeText(
+
+                                              children: [ SizedBox(
+                                                height: 12,
+                                              ),
+                                                ClayText(
                                                   'خربش يا ${value.playersList[_currentIndex].playerName} وشوف انت برا ولا جوا',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          GoogleFonts.getFont(
-                                                                  'Changa')
-                                                              .fontFamily,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16),
-                                                  textAlign: TextAlign.center,
+                                                  style: funckyStyle,color: Colors.amberAccent,
+                                                 // textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
                                                   height: 12,
@@ -139,9 +181,13 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                   threshold: 50,
                                                   color: Colors.grey,
                                                   onScratchStart: () {
+                                                    audioPlayerState==AudioPlayerState.PLAYING?
+                                                        pauseMusic():playMusic();
                                                     // play sound
                                                   },
                                                   onScratchEnd: () {
+                                                    audioPlayerState==AudioPlayerState.PLAYING?
+                                                    pauseMusic():playMusic();
                                                     // off sound
                                                   },
                                                   image: Image.asset(
@@ -154,15 +200,32 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                     padding:
                                                         const EdgeInsets.all(
                                                             20.0),
-                                                    child: Container(
-                                                        color: Colors.white,
+                                                    child:ClayContainer(
+                                                      color: Colors.amberAccent,
+                                                      height: 80,
+                                                      width: 80,
+                                                      borderRadius: 50,
+                                                      curveType: CurveType.concave,child: Center(
                                                         child: AutoSizeText(
-                                                          _currentIndex ==
-                                                                  _whoIsOutIndex
-                                                              ? "برا"
-                                                              : randomAnimalName,
-                                                          style: boldStyle,
-                                                        )),
+                                                        _currentIndex ==
+                                                            _whoIsOutIndex
+                                                            ? "برا"
+                                                            : randomAnimalName,
+                                                        style: TextStyle(
+                                                            fontFamily: GoogleFonts.getFont(
+                                                                'Cairo')
+                                                                .fontFamily,
+                                                            fontWeight: FontWeight.bold,color: Colors.white,
+                                                            fontSize: 20),
+                                                    ),
+                                                      ),
+                                                    ),
+
+
+
+                                                /*    Container(
+                                                        color: Colors.white,
+                                                        child: ),*/
                                                   ),
                                                 ),
                                               ],
@@ -170,7 +233,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                           ),
                                         ),
                                 ),
-                              /*  SizedBox(
+                                /*  SizedBox(
                                   height: 20,
                                 ),*/
                                 if (_currentIndex <
@@ -190,7 +253,6 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                     child: RotatedBox(
                                       quarterTurns: 2,
                                       child: Container(
-                             //          color: Colors.red,
                                         height: 200,
                                         width: 200,
                                         child: Lottie.asset(
@@ -200,26 +262,12 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                       ),
                                     ),
                                   )
-
-                                  /*  RoundedButton(
-                                    title: "التالى",
-                                    onTapped: () {
-                                      _switchToNewPlayer = !_switchToNewPlayer;
-
-                                      if (_switchToNewPlayer &&
-                                          _turnNumber % 2 != 0) {
-                                        incrementIndex();
-                                      }
-                                      goNextTurn();
-                                    },
-                                  ),*/
                                 ]
                               ],
                             )
                           : QuestionScreen(),
                     ),
                     Container(
-                     // color: Colors.red,
                       child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Lottie.asset('assets/lotties/bg_bottom.json',

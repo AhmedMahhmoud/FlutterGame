@@ -1,10 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'ColorManager/ColorManager.dart';
 
-TextStyle boldStyle = TextStyle(
-    fontWeight: FontWeight.bold, fontSize: 17, color: ColorManager.accentColor);
+TextStyle boldStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 17);
+
+TextStyle funckyStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 17,
+    color: ColorManager.accentColor,
+    fontFamily: GoogleFonts.getFont('Cairo').fontFamily);
+
 const kTextFieldDecorationWhite = InputDecoration(
   isDense: true,
 
@@ -36,6 +43,7 @@ class RoundedButton extends StatelessWidget {
   final String title;
   final Color btnColor;
   final Function onTapped;
+
   const RoundedButton({
     this.title,
     this.onTapped,
@@ -57,9 +65,10 @@ class RoundedButton extends StatelessWidget {
           child: AutoSizeText(
             title,
             style: TextStyle(
-                fontSize: 20,
+                fontSize: 17,
                 fontWeight: FontWeight.bold,
-                color: ColorManager.primary),
+                color: ColorManager.primary,
+                fontFamily: GoogleFonts.getFont('Changa').fontFamily),
           ),
         ),
       ),

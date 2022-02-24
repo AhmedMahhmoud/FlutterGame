@@ -40,7 +40,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
     Provider.of<PlayersProvider>(context, listen: false).resetPlayers();
     fillCOntrollers();
     _animationList.add(
-        Tween<Offset>(begin: Offset(0, 0.5), end: Offset(0.0, 0.9)).animate(
+        Tween<Offset>(begin: Offset(0, 0.5), end: Offset(0.0, 0.1)).animate(
             CurvedAnimation(
                 parent: _animationControllerList[0],
                 curve: Curves.easeOutExpo)));
@@ -112,19 +112,25 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                   children: [
                     Lottie.asset('assets/lotties/bg_top.json',
                         repeat: true, fit: BoxFit.fill),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: AutoSizeText(
-                          "اضف على الأقل 3 لاعبين ثم اضغط ابدأ",
-                          style: TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.bold,
-                              color: ColorManager.primary),
-                        ),
-                      ),
-                    ),
+                    currentIndex == 0
+                        ? Align(
+                            child: Container(
+                              height: WidgetsBinding
+                                          .instance.window.viewInsets.bottom >
+                                      0.0
+                                  ? 90
+                                  : 350,
+                              padding: EdgeInsets.only(top: 10),
+                              child: AutoSizeText(
+                                "اضف على الأقل 3 لاعبين ثم اضغط ابدأ",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorManager.primary),
+                              ),
+                            ),
+                          )
+                        : Container(),
                     SizedBox(
                       height: 30,
                     ),
@@ -178,13 +184,6 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                         child: Center(child: CloudName(value.names[5])),
                       ),
                     ),
-                    Container(
-                      // color: Colors.red,
-                      child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Lottie.asset('assets/lotties/bg_bottom.json',
-                              repeat: true, fit: BoxFit.fill)),
-                    ),
                     Align(
                         alignment: Alignment.bottomCenter,
                         child: Row(
@@ -203,9 +202,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                       width: 90,
                                       height: 40,
                                       child: RoundedButton(
-                                        title: "ابدأ",
+                                        title: "يلا بينا",
                                         onTapped: () {},
-                                        btnColor: ColorManager.accentColor,
                                       ),
                                     )),
                             Card(
@@ -233,35 +231,40 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                             child: Padding(
                                           padding: const EdgeInsets.only(
                                               left: 10, bottom: 5),
-                                          child: TextFormField(
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                            validator: (text) {
-                                              if (Provider.of<PlayersProvider>(
-                                                      context,
-                                                      listen: false)
-                                                  .checkPlayerExist(text)) {
-                                                return "اسم اللاعب موجود قبل كدة";
-                                              }
-                                              return null;
-                                            },
-                                            controller: _textEditingController,
-                                            decoration: InputDecoration(
-                                              hintText: "اسم اللاعب",
-                                              errorStyle: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                              hintStyle: TextStyle(
+                                          child: Directionality(
+                                            textDirection: TextDirection.rtl,
+                                            child: TextFormField(
+                                              style: TextStyle(
                                                   color: Colors.white),
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
+                                              validator: (text) {
+                                                if (Provider.of<
+                                                            PlayersProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .checkPlayerExist(text)) {
+                                                  return "اسم اللاعب موجود قبل كدة";
+                                                }
+                                                return null;
+                                              },
+                                              controller:
+                                                  _textEditingController,
+                                              decoration: InputDecoration(
+                                                hintText: "اسم اللاعب",
+                                                errorStyle: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                                hintStyle: TextStyle(
                                                     color: Colors.white),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.white),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -369,6 +372,13 @@ class CloudName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Container(width: 100,h
+    //   child: RoundedButton(
+    //     title: name,
+    //     btnColor: ColorManager.primary,
+    //     onTapped: () {},
+    //   ),
+    // );
     return Stack(
       alignment: Alignment.center,
       children: [
