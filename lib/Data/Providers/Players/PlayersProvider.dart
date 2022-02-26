@@ -2,21 +2,22 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_game/Domain/Models/PlayersModel.dart';
+import 'package:flutter_game/core/Shared/constantData.dart';
 
 class PlayersProvider with ChangeNotifier {
   List<Players> playersList = [];
   List<Players> playersListCopy = [];
-  List<String> names = ["", "", "", "", "", "", "", ""];
+  List<String> charactersImages = playersImages;
   List<Players> randomPlayers = [];
   List<Players> suspectsPlayers = [];
   int whoIsOutIndex;
   int lastAskingPlayerIndex = -1;
   int askingPlayerIndex;
 
-  addPlayer(Players player, int index) {
+  addPlayer(Players player, int index, int imageIndex) {
     playersList.add(player);
     playersListCopy.add(player);
-    names[index] = player.playerName;
+    charactersImages.removeAt(imageIndex);
     notifyListeners();
   }
 
@@ -25,6 +26,7 @@ class PlayersProvider with ChangeNotifier {
   }
 
   removePlayer(int index) {
+    charactersImages.add(playersList[index].playerImage);
     playersList.removeAt(index);
     playersListCopy.removeAt(index);
     notifyListeners();

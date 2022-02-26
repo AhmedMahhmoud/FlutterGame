@@ -4,7 +4,7 @@ import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
 import 'package:flutter_game/Presentation/Game/views/add_players.dart';
-import 'package:flutter_game/core/Shared/animalData.dart';
+import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/main.dart';
 
 class Home extends StatefulWidget {

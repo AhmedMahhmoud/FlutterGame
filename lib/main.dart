@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
-import 'package:flutter_game/Domain/Models/AnimalModel.dart';
+
 import 'package:provider/provider.dart';
 import 'Data/Providers/Animal/AnimalProvider.dart';
-import 'Database/AnimalDatabase.dart';
-import 'Database/initalize.dart';
+
 import 'Presentation/Home/views/home.dart';
 import 'core/GetItLocator/locator.dart';
 import 'package:get_it/get_it.dart';
-
-import 'core/Shared/animalData.dart';
-import 'core/sharedPrefrences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +31,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          theme: ThemeData(fontFamily: "Cairo"),
           debugShowCheckedModeBanner: false,
           home: Home(),
         ));

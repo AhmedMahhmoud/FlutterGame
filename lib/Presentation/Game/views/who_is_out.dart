@@ -17,7 +17,7 @@ import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Presentation/Game/views/questions_time.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/animalData.dart';
+import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';

@@ -11,7 +11,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
-import 'package:flutter_game/core/Shared/animalData.dart';
+import 'package:flutter_game/core/Shared/constantData.dart';
 
 class AnimalProvider with ChangeNotifier {
   String currentAnimal;
