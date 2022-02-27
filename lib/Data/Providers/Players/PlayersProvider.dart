@@ -23,6 +23,7 @@ class PlayersProvider with ChangeNotifier {
 
   resetPlayers() {
     playersList.clear();
+    charactersImages = playersImages;
   }
 
   removePlayer(int index) {
