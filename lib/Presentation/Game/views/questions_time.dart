@@ -69,7 +69,8 @@ Future.delayed(Duration(milliseconds: 1500)).whenComplete(() {
             ? Container()
             : Container(
 
-              child:Container(
+              child:AnimatedContainer(
+                duration: Duration(seconds:1 ),
                 child: SlideInDown(
                     duration: Duration(milliseconds:500 ),
                     child: AnimatedOpacity(
