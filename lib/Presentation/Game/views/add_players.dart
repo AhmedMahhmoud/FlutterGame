@@ -6,13 +6,16 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Domain/Models/PlayersModel.dart';
+import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
 import 'package:flutter_game/Presentation/Game/widgets/add_player_container.dart';
 import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class AddPlayerScreen extends StatefulWidget {
@@ -286,19 +289,32 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                       ColorManager.successColor,
                                                   title: "إضافة",
                                                   btnFunc: () {
-                                                    Navigator.pop(context);
                                                     if (value.checkPlayerExist(
                                                         _textEditingController
                                                             .text)) {
-                                                      Fluttertoast.showToast(
-                                                          msg:
-                                                              "اسم اللاعب موجود قبل كدة",
-                                                          backgroundColor:
-                                                              ColorManager
-                                                                  .failColor,
-                                                          gravity: ToastGravity
-                                                              .CENTER);
+                                                      showToast(
+                                                        'اسم اللاعب موجود قبل كدة',
+                                                        context: context,
+                                                        animation:
+                                                            StyledToastAnimation
+                                                                .scale,
+                                                        reverseAnimation:
+                                                            StyledToastAnimation
+                                                                .fade,
+                                                        position:
+                                                            StyledToastPosition
+                                                                .center,
+                                                        animDuration: Duration(
+                                                            seconds: 1),
+                                                        duration: Duration(
+                                                            seconds: 4),
+                                                        curve:
+                                                            Curves.elasticOut,
+                                                        reverseCurve:
+                                                            Curves.linear,
+                                                      );
                                                     } else {
+                                                      Navigator.pop(context);
                                                       value.addPlayer(
                                                           Players(
                                                             playerImage:
@@ -340,7 +356,17 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                           : RoundedActionButton(
                               btnColor: ColorManager.successColor,
                               title: "يلا بينا",
-                              btnFunc: () {},
+                              btnFunc: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.rightToLeft,
+                                      child: WhoIsOut(),
+                                      curve: Curves.bounceInOut,
+                                      inheritTheme: true,
+                                      ctx: context),
+                                );
+                              },
                             )
                     ],
                   ),

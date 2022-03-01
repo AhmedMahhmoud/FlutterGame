@@ -10,6 +10,11 @@ class ColorManager {
     HexColor.fromHex("6B4470"),
     HexColor.fromHex("FFAD1F")
   ];
+  static List<Color> categoriesCardsColors = [
+    HexColor.fromHex("FD88C8"),
+    HexColor.fromHex("FCB572"),
+    HexColor.fromHex("AC86FF"),
+  ];
   static Color primary = HexColor.fromHex("#BE0F24");
   static Color backGroundColor = HexColor.fromHex("#FAFAFA");
   static Color accentColor = HexColor.fromHex("#CAE8F0");

@@ -8,6 +8,7 @@ import 'package:flutter_game/Domain/Models/PlayersModel.dart';
 import 'package:flutter_game/Presentation/Game/views/choices_page.dart';
 import 'package:flutter_game/Presentation/Game/views/random_questions_time.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
+import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -54,8 +55,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Lottie.asset('assets/lotties/bg_top.json',
-            repeat: true, fit: BoxFit.fill),
         SizedBox(
           height: 70,
         ),
@@ -63,21 +62,24 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ? Container()
             : AutoSizeText(
                 "وقت الأسئلة",
-                style: boldStyle.copyWith(
-                    color: ColorManager.primary, fontSize: 20),
+                style: boldStyle.copyWith(color: Colors.white, fontSize: 20),
               ),
         if (!_showQuestion) ...[
           Container(
             width: 200,
             child: AutoSizeText(
               "كل واحد هيسأل شخص تانى سؤال اضغط التالى عشان تعرف مين هيسأل مين",
-              style: boldStyle.copyWith(fontSize: 15),
+              style: boldStyle.copyWith(
+                fontSize: 15,
+                color: Colors.white,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
-          RoundedButton(
+          RoundedActionButton(
             title: "التالى",
-            onTapped: () {
+            btnColor: ColorManager.successColor,
+            btnFunc: () {
               setState(() {
                 _showQuestion = true;
               });
@@ -100,7 +102,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
               },
             )
           ] else ...[
-
             RoundedButton(
               title: "التالى",
               onTapped: () {

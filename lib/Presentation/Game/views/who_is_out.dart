@@ -18,6 +18,7 @@ import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Presentation/Game/views/questions_time.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
+import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -49,9 +50,11 @@ class _WhoIsOutState extends State<WhoIsOut> {
     _whoIsOutIndex = _getRandomIndex();
     audioCache = AudioCache(fixedPlayer: audioPlayer);
     audioPlayer.onPlayerStateChanged.listen((AudioPlayerState state) {
-      setState(() {
-        audioPlayerState = state;
-      });
+      if (mounted) {
+        setState(() {
+          audioPlayerState = state;
+        });
+      }
     });
     Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex =
         _whoIsOutIndex;
@@ -110,188 +113,174 @@ class _WhoIsOutState extends State<WhoIsOut> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Consumer<PlayersProvider>(
-          builder: (context, value, child) {
-            return Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    Container(
-                      child: _turnNumber < value.playersList.length * 2
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Lottie.asset('assets/lotties/bg_top.json',
-                                    repeat: true, fit: BoxFit.fill),
-                                Directionality(
-                                  textDirection: TextDirection.rtl,
-                                  child: _switchToNewPlayer
-                                      ? Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 20),
-                                          child: Container(
-                                            child: Center(
-                                              child: Container(
-                                                //   height: 200,
-                                                // width: 200,
-                                                color: ColorManager.accentColor,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      12.0),
+      body: Consumer<PlayersProvider>(
+        builder: (context, value, child) {
+          return Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/gameBackground.jpg",
+                      ),
+                      fit: BoxFit.cover)),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Container(
+                child: _turnNumber < value.playersList.length * 2
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: _switchToNewPlayer
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20),
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Container(
+                                          child: Center(
+                                            child: Image(
+                                              image: AssetImage(
+                                                  "assets/images/dialogframe.png"),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          //   height: 200,
+                                          // width: 200,
+
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: AutoSizeText(
+                                              "ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف هو اللي برا اللعبة ولا لا !",
+                                              //  textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      GoogleFonts.getFont(
+                                                              'Changa')
+                                                          .fontFamily,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontSize: 17),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ))
+                                : Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.elliptical(90, 90),
+                                          bottomRight:
+                                              Radius.elliptical(90, 90)),
+                                    ),
+                                    elevation: 8,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(30.0),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 12,
+                                          ),
+                                          ClayText(
+                                            'خربش يا ${value.playersList[_currentIndex].playerName} وشوف انت برا ولا جوا',
+                                            style: funckyStyle,
+                                            color: ColorManager.primary,
+                                            // textAlign: TextAlign.center,
+                                          ),
+                                          SizedBox(
+                                            height: 12,
+                                          ),
+                                          Scratcher(
+                                            brushSize: 11,
+                                            threshold: 50,
+                                            color: Colors.grey,
+                                            onScratchStart: () {
+                                              audioPlayerState ==
+                                                      AudioPlayerState.PLAYING
+                                                  ? pauseMusic()
+                                                  : playMusic();
+                                              // play sound
+                                            },
+                                            onScratchEnd: () {
+                                              audioPlayerState ==
+                                                      AudioPlayerState.PLAYING
+                                                  ? pauseMusic()
+                                                  : playMusic();
+                                              // off sound
+                                            },
+                                            image: Image.asset(
+                                                'assets/images/scratch.PNG'),
+                                            onChange: (value) => print(
+                                                "Scratch progress: $value%"),
+                                            onThreshold: () => print(
+                                                "Threshold reached, you won!"),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(20.0),
+                                              child: ClayContainer(
+                                                color: Colors.amberAccent,
+                                                height: 80,
+                                                width: 80,
+                                                borderRadius: 50,
+                                                curveType: CurveType.concave,
+                                                child: Center(
                                                   child: AutoSizeText(
-                                                    "ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف هو اللي برا اللعبة ولا لا !",
-                                                    //  textAlign: TextAlign.center,
+                                                    _currentIndex ==
+                                                            _whoIsOutIndex
+                                                        ? "برا"
+                                                        : randomAnimalName,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             GoogleFonts.getFont(
-                                                                    'Changa')
+                                                                    'Cairo')
                                                                 .fontFamily,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: ColorManager
-                                                            .primary,
+                                                        color: Colors.white,
                                                         fontSize: 20),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ))
-                                      : Card(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft:
-                                                    Radius.elliptical(90, 90),
-                                                bottomRight:
-                                                    Radius.elliptical(90, 90)),
-                                          ),
-                                          elevation: 8,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(30.0),
-                                            child: Column(
-                                              children: [
-                                                SizedBox(
-                                                  height: 12,
-                                                ),
-                                                ClayText(
-                                                  'خربش يا ${value.playersList[_currentIndex].playerName} وشوف انت برا ولا جوا',
-                                                  style: funckyStyle,
-                                                  color: ColorManager.primary,
-                                                  // textAlign: TextAlign.center,
-                                                ),
-                                                SizedBox(
-                                                  height: 12,
-                                                ),
-                                                Scratcher(
-                                                  brushSize: 11,
-                                                  threshold: 50,
-                                                  color: Colors.grey,
-                                                  onScratchStart: () {
-                                                    audioPlayerState ==
-                                                            AudioPlayerState
-                                                                .PLAYING
-                                                        ? pauseMusic()
-                                                        : playMusic();
-                                                    // play sound
-                                                  },
-                                                  onScratchEnd: () {
-                                                    audioPlayerState ==
-                                                            AudioPlayerState
-                                                                .PLAYING
-                                                        ? pauseMusic()
-                                                        : playMusic();
-                                                    // off sound
-                                                  },
-                                                  image: Image.asset(
-                                                      'assets/images/scratch.PNG'),
-                                                  onChange: (value) => print(
-                                                      "Scratch progress: $value%"),
-                                                  onThreshold: () => print(
-                                                      "Threshold reached, you won!"),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    child: ClayContainer(
-                                                      color: Colors.amberAccent,
-                                                      height: 80,
-                                                      width: 80,
-                                                      borderRadius: 50,
-                                                      curveType:
-                                                          CurveType.concave,
-                                                      child: Center(
-                                                        child: AutoSizeText(
-                                                          _currentIndex ==
-                                                                  _whoIsOutIndex
-                                                              ? "برا"
-                                                              : randomAnimalName,
-                                                          style: TextStyle(
-                                                              fontFamily: GoogleFonts
-                                                                      .getFont(
-                                                                          'Cairo')
-                                                                  .fontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 20),
-                                                        ),
-                                                      ),
-                                                    ),
 
-                                                    /*    Container(
-                                                        color: Colors.white,
-                                                        child: ),*/
-                                                  ),
-                                                ),
-                                              ],
+                                              /*    Container(
+                                                  color: Colors.white,
+                                                  child: ),*/
                                             ),
                                           ),
-                                        ),
-                                ),
-                                /*  SizedBox(
-                                  height: 20,
-                                ),*/
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                if (_currentIndex <
-                                        (value.playersList.length) &&
-                                    _turnNumber <
-                                        value.playersList.length * 2) ...[
-                                  RoundedButton(
-                                    title: "التالى",
-                                    onTapped: () {
-                                      _switchToNewPlayer = !_switchToNewPlayer;
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                          ),
+                          /*  SizedBox(
+                            height: 20,
+                          ),*/
+                          SizedBox(
+                            height: 20,
+                          ),
+                          if (_currentIndex < (value.playersList.length) &&
+                              _turnNumber < value.playersList.length * 2) ...[
+                            RoundedActionButton(
+                              title: "التالى",
+                              btnColor: ColorManager.successColor,
+                              btnFunc: () {
+                                _switchToNewPlayer = !_switchToNewPlayer;
 
-                                      if (_switchToNewPlayer &&
-                                          _turnNumber % 2 != 0) {
-                                        incrementIndex();
-                                      }
-                                      goNextTurn();
-                                    },
-                                  )
-                                ]
-                              ],
+                                if (_switchToNewPlayer &&
+                                    _turnNumber % 2 != 0) {
+                                  incrementIndex();
+                                }
+                                goNextTurn();
+                              },
                             )
-                          : QuestionScreen(),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Lottie.asset('assets/lotties/bg_bottom.json',
-                                repeat: true, fit: BoxFit.fill)),
-                      ),
-                    )
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                ));
-          },
-        ),
+                          ]
+                        ],
+                      )
+                    : QuestionScreen(),
+              ));
+        },
       ),
     );
   }
