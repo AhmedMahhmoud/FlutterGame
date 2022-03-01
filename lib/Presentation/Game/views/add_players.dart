@@ -11,6 +11,7 @@ import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -286,29 +287,38 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                   title: "إضافة",
                                                   btnFunc: () {
                                                     Navigator.pop(context);
-
-                                                    Provider.of<PlayersProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .addPlayer(
-                                                            Players(
-                                                              playerImage:
-                                                                  playersImages[
-                                                                      characterIndex],
-                                                              playerName:
-                                                                  _textEditingController
-                                                                      .text,
-                                                              playerScore: 0,
-                                                            ),
-                                                            currentIndex,
-                                                            characterIndex);
-                                                    player.play(
-                                                        "sounds/addPlayerSuccess.mp3");
-                                                    setState(() {
-                                                      currentIndex++;
-                                                      _textEditingController
-                                                          .clear();
-                                                    });
+                                                    if (value.checkPlayerExist(
+                                                        _textEditingController
+                                                            .text)) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "اسم اللاعب موجود قبل كدة",
+                                                          backgroundColor:
+                                                              ColorManager
+                                                                  .failColor,
+                                                          gravity: ToastGravity
+                                                              .CENTER);
+                                                    } else {
+                                                      value.addPlayer(
+                                                          Players(
+                                                            playerImage:
+                                                                playersImages[
+                                                                    characterIndex],
+                                                            playerName:
+                                                                _textEditingController
+                                                                    .text,
+                                                            playerScore: 0,
+                                                          ),
+                                                          currentIndex,
+                                                          characterIndex);
+                                                      player.play(
+                                                          "sounds/addPlayerSuccess.mp3");
+                                                      setState(() {
+                                                        currentIndex++;
+                                                        _textEditingController
+                                                            .clear();
+                                                      });
+                                                    }
                                                   },
                                                 )
                                               ],

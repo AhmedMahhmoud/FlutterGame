@@ -27,7 +27,7 @@ class PlayersProvider with ChangeNotifier {
   }
 
   removePlayer(int index) {
-    charactersImages.add(playersList[index].playerImage);
+    charactersImages.insert(0, playersList[index].playerImage);
     playersList.removeAt(index);
     playersListCopy.removeAt(index);
     notifyListeners();
