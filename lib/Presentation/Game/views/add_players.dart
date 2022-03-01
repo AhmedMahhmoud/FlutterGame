@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Domain/Models/PlayersModel.dart';
+import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
 import 'package:flutter_game/Presentation/Game/widgets/add_player_container.dart';
 import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
@@ -340,7 +341,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                           : RoundedActionButton(
                               btnColor: ColorManager.successColor,
                               title: "يلا بينا",
-                              btnFunc: () {},
+                              btnFunc: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => WhoIsOut(),
+                                    ));
+                              },
                             )
                     ],
                   ),
