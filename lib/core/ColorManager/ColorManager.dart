@@ -20,7 +20,7 @@ class ColorManager {
   static Color accentColor = HexColor.fromHex("#CAE8F0");
   static Color successColor = Colors.green[500];
   static Color failColor = HexColor.fromHex('EB5757');
-  static Color darkGrey = HexColor.fromHex("#525252");
+  static Color darkGrey = HexColor.fromHex("#390E74");
   static Color grey = HexColor.fromHex("#737477");
   static Color lightGrey = HexColor.fromHex("#9E9E9E");
   static Color primaryOpacity70 = HexColor.fromHex("#B3ED9728");

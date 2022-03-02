@@ -17,6 +17,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   @override
@@ -117,7 +118,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                   int characterIndex = 0;
                                   return StatefulBuilder(
                                       builder: (context, setstate) {
-                                    return ZoomIn(
+                                    return FadeInDown(
                                       child: Dialog(
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -127,8 +128,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                             FocusScope.of(context).unfocus();
                                           },
                                           child: Container(
-                                            width: 400,
-                                            height: 450,
+                                            width: 400.w,
+                                            height: 450.h,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
@@ -141,22 +142,22 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                             child: Column(
                                               children: [
                                                 SizedBox(
-                                                  height: 20,
+                                                  height: 20.h,
                                                 ),
                                                 AutoSizeText(
-                                                  'اختر شحصيتك و سجل اسمك',
+                                                  'اختر شخصيتك و سجل اسمك',
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 18,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 20,
                                                 ),
                                                 Container(
                                                     width: double.infinity,
-                                                    height: 180,
+                                                    height: 180.h,
                                                     child: ListView.builder(
                                                       scrollDirection:
                                                           Axis.horizontal,
