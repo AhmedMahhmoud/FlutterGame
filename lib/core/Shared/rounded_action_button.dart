@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game/core/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RoundedActionButton extends StatelessWidget {
   final Color btnColor;
@@ -18,8 +20,8 @@ class RoundedActionButton extends StatelessWidget {
     return InkWell(
       onTap: btnFunc,
       child: Container(
-        height: 45,
-        width: 200,
+        height: 45.h,
+        width: 200.w,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
@@ -27,7 +29,7 @@ class RoundedActionButton extends StatelessWidget {
               title,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: setResponsiveFontSize(18),
                   color: Colors.white),
             ),
           ),

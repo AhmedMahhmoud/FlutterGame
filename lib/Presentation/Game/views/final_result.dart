@@ -21,12 +21,18 @@ class FinalResult extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                    top: 0,bottom: 0,left: 0,right: 0,
-                    child: RotatedBox( quarterTurns: 1,child: Lottie.asset('assets/lotties/score.json', repeat: true,fit: BoxFit.fill))),
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Lottie.asset('assets/lotties/score.json',
+                            repeat: true, fit: BoxFit.fill))),
                 AutoSizeText(
                   "النتائج",
                   style: boldStyle.copyWith(
-                      fontSize: 20,
+                      fontSize: setResponsiveFontSize(20),
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -37,16 +43,21 @@ class FinalResult extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Container(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 90),
-                              child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                              Text(playersProv.playersList[index].playerName,textAlign: TextAlign.start,),
-                              Text(playersProv.playersList[index].playerScore
-                                  .toString(),textAlign: TextAlign.start),
-                          ],
-                        ),
-                            ));
+                          padding: const EdgeInsets.symmetric(horizontal: 90),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                playersProv.playersList[index].playerName,
+                                textAlign: TextAlign.start,
+                              ),
+                              Text(
+                                  playersProv.playersList[index].playerScore
+                                      .toString(),
+                                  textAlign: TextAlign.start),
+                            ],
+                          ),
+                        ));
                       },
                       itemCount: playersProv.playersList.length,
                     ),

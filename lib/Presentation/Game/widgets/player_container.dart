@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
+import 'package:flutter_game/core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PLayerContainer extends StatelessWidget {
   final int playerIndex;
@@ -20,15 +22,15 @@ class PLayerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
-      width: 360,
+      height: 75.h,
+      width: 360.w,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
             Container(
-              width: 50,
-              height: 50,
+              width: 50.w,
+              height: 50.h,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
@@ -45,7 +47,7 @@ class PLayerContainer extends StatelessWidget {
               playerName,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: setResponsiveFontSize(18),
                   fontWeight: FontWeight.bold),
             ),
             Expanded(child: Container()),

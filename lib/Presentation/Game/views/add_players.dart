@@ -12,6 +12,7 @@ import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
+import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -73,7 +74,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                       AutoSizeText(
                         "اللاعبين",
                         style: TextStyle(
-                            fontSize: 25,
+                            fontSize: setResponsiveFontSize(25),
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
@@ -148,7 +149,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                   'اختر شخصيتك و سجل اسمك',
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 18,
+                                                      fontSize:
+                                                          setResponsiveFontSize(
+                                                              18),
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
@@ -187,13 +190,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                                 width:
                                                                     characterIndex ==
                                                                             index
-                                                                        ? 100
-                                                                        : 70,
+                                                                        ? 100.w
+                                                                        : 70.w,
                                                                 height:
                                                                     characterIndex ==
                                                                             index
-                                                                        ? 100
-                                                                        : 70,
+                                                                        ? 100.h
+                                                                        : 70.h,
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   shape: BoxShape
@@ -239,8 +242,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                   textDirection:
                                                       TextDirection.rtl,
                                                   child: Container(
-                                                    width: 300,
-                                                    height: 60,
+                                                    width: 300.w,
+                                                    height: 60.h,
                                                     child: TextField(
                                                       controller:
                                                           _textEditingController,
@@ -282,7 +285,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 30,
                                                 ),
                                                 RoundedActionButton(
@@ -318,9 +321,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                       Navigator.pop(context);
                                                       value.addPlayer(
                                                           Players(
-                                                            playerImage:
-                                                                playersImages[
-                                                                    characterIndex],
+                                                            playerImage: value
+                                                                    .charactersImages[
+                                                                characterIndex],
                                                             playerName:
                                                                 _textEditingController
                                                                     .text,
@@ -349,7 +352,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               );
                             })
                           : Container(),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       value.playersList.length < 3
@@ -358,15 +361,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               btnColor: ColorManager.successColor,
                               title: "يلا بينا",
                               btnFunc: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.rightToLeft,
-                                      child: WhoIsOut(),
-                                      curve: Curves.bounceInOut,
-                                      inheritTheme: true,
-                                      ctx: context),
-                                );
+                                navigateToPage(context, WhoIsOut());
                               },
                             )
                     ],

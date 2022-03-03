@@ -53,8 +53,10 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         Provider.of<AnimalProvider>(context, listen: false).currentAnimal) {
       setState(() {
         _choiceResult = true;
-        Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore+=100;
-
+        Provider.of<PlayersProvider>(context, listen: false)
+            .playersList[Provider.of<PlayersProvider>(context, listen: false)
+                .whoIsOutIndex]
+            .playerScore += 100;
       });
     } else {
 //      Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore=(Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore-100).abs();
@@ -77,7 +79,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               AutoSizeText(
                 "مين تتوقع يكون الحيوان ؟",
                 style: boldStyle.copyWith(
-                    fontSize: 20,
+                    fontSize: setResponsiveFontSize(20),
                     fontWeight: FontWeight.bold,
                     color: ColorManager.primary),
               ),
@@ -103,16 +105,14 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   ),
                 ),
               ),
-              _choiceResult!=null?    RoundedButton(
-                title: "التالى",
-                onTapped: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FinalResult(),
-                      ));
-                },
-              ):Container()
+              _choiceResult != null
+                  ? RoundedButton(
+                      title: "التالى",
+                      onTapped: () {
+                        navigateToPage(context, FinalResult());
+                      },
+                    )
+                  : Container()
             ],
           ),
         ),

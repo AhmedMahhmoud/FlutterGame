@@ -5,9 +5,11 @@ import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
 import 'package:flutter_game/Presentation/Game/views/add_players.dart';
+import 'package:flutter_game/Presentation/Game/views/findout_page.dart';
 import 'package:flutter_game/Presentation/Game/widgets/categories_container.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
+import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_game/main.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,7 +46,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           AutoSizeText(
             "تلعب ايه",
             style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: setResponsiveFontSize(20),
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: 15,
@@ -54,17 +58,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: CategoriesCard(
               catColor: ColorManager.playersCardsColor[0],
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddPlayerScreen(),
-                    ));
+                navigateToPage(context, AddPlayerScreen());
               },
               catTitle: "حيوانات",
               catImage: "assets/images/animals.jpg",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           FadeInLeft(
@@ -88,7 +88,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           FadeInRight(
