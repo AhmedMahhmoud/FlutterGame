@@ -57,6 +57,7 @@ class _FindOutScreenState extends State<FindOutScreen> {
     _timer.cancel();*/
   }
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -74,6 +75,7 @@ class _FindOutScreenState extends State<FindOutScreen> {
           Center(
               child: Text(
             '${Provider.of<PlayersProvider>(context, listen: true).playersList[Provider.of<PlayersProvider>(context, listen: true).whoIsOutIndex].playerName}',
+
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: setResponsiveFontSize(25)),
           )),
@@ -83,11 +85,12 @@ class _FindOutScreenState extends State<FindOutScreen> {
           RoundedButton(
             title: "التالى",
             onTapped: () {
-         //     navigateReplacmentToPage(context, ChoiceScreen());
+
+              navigateReplacmentToPage(context, ChoiceScreen());
+
             },
           )
         ],
-
       ),
     );
   }

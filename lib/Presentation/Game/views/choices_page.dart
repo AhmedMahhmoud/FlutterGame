@@ -4,10 +4,12 @@ import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
 import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
+import 'package:flutter_game/Presentation/Game/widgets/choices_display.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
+import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'final_result.dart';
 
 class ChoiceScreen extends StatefulWidget {
@@ -34,7 +36,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
 
   Color setButtonColor(int index) {
     if (_choiceResult == null) {
-      return ColorManager.backGroundColor;
+      return ColorManager.darkGrey;
     } else {
       if (_cuurentIndex == index) {
         if (_choiceResult) {
@@ -43,7 +45,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
           return ColorManager.failColor;
         }
       } else {
-        return ColorManager.backGroundColor;
+        return ColorManager.darkGrey;
       }
     }
   }
@@ -53,8 +55,10 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         Provider.of<AnimalProvider>(context, listen: false).currentAnimal) {
       setState(() {
         _choiceResult = true;
-        Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore+=100;
-
+        Provider.of<PlayersProvider>(context, listen: false)
+            .playersList[Provider.of<PlayersProvider>(context, listen: false)
+                .whoIsOutIndex]
+            .playerScore += 100;
       });
     } else {
 //      Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore=(Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerScore-100).abs();
@@ -67,53 +71,100 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var playersProv = Provider.of<PlayersProvider>(context, listen: true);
     return Scaffold(
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/gameBackground.jpg"),
+                  fit: BoxFit.cover)),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              AutoSizeText(
-                "مين تتوقع يكون الحيوان ؟",
-                style: boldStyle.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: ColorManager.primary),
-              ),
-              Container(
-                child: Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RoundedButton(
-                          btnColor: setButtonColor(index),
-                          title: choicesList[index],
-                          onTapped: _choiceResult == null
-                              ? () {
-                                  setCurrentIndex(index);
-                                  isCorrectAnswer(choicesList[index]);
-                                }
-                              : null,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10.h,
+                ),
+                AutoSizeText(
+                  "مين تتوقع يكون الحيوان ؟",
+                  style: boldStyle.copyWith(
+                      fontSize: setResponsiveFontSize(20),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                DisplayChoices(
+                  headerImage: playersProv
+                      .playersList[playersProv.whoIsOutIndex].playerImage,
+                  content: Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        child: Expanded(
+                          child: ListView.builder(
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    onTap: _choiceResult == null
+                                        ? () {
+                                            setCurrentIndex(index);
+                                            isCorrectAnswer(choicesList[index]);
+                                          }
+                                        : null,
+                                    child: Container(
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 10),
+                                      decoration: BoxDecoration(
+                                          color: setButtonColor(index),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          choicesList[index],
+                                          style: TextStyle(
+                                              color:
+                                                  Colors.white.withOpacity(0.9),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize:
+                                                  setResponsiveFontSize(16)),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      alignment: Alignment.center,
+                                      height: 70.h,
+                                      width: 250.w,
+                                    ),
+                                  ));
+                            },
+                            itemCount: choicesList.length,
+                          ),
                         ),
-                      );
-                    },
-                    itemCount: choicesList.length,
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              _choiceResult!=null?    RoundedButton(
-                title: "التالى",
-                onTapped: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FinalResult(),
-                      ));
-                },
-              ):Container()
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+                _choiceResult != null
+                    ? RoundedActionButton(
+                        btnColor: ColorManager.successColor,
+                        title: "التالى",
+                        btnFunc: () async {
+                          await playersProv.sortList();
+                          navigateReplacmentToPage(context, FinalResult());
+                        },
+                      )
+                    : Container()
+              ],
+            ),
           ),
         ),
       ),

@@ -10,9 +10,14 @@ import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Domain/Models/AnimalModel.dart';
 import 'package:flutter_game/Presentation/Game/views/add_players.dart';
+import 'package:flutter_game/Presentation/Game/views/findout_page.dart';
+import 'package:flutter_game/Presentation/Game/widgets/categories_container.dart';
+import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_game/main.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -22,7 +27,6 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-
 // Animal _animal = Animal();
 // AnimalDatabase _animalDatabase = AnimalDatabase();
 // Future animalFuture;
@@ -30,6 +34,7 @@ class Home extends StatefulWidget {
 //   _animal = await _animalDatabase.getAnimal(1);
 //   locator.locator<AnimalProvider>().getAnimalFromDb(_animal);
 // }
+
 
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
@@ -48,6 +53,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
     super.initState();
   }
+
 
   @override
   void dispose() {
@@ -112,7 +118,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             SizedBox(
               height: 25,
             ),
-      /*      FadeInRight(
+            FadeInRight(
               duration: Duration(seconds: 1),
               child: CategoriesCard(
                 catColor: ColorManager.playersCardsColor[0],
@@ -123,11 +129,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 catTitle: "حيوانات",
                 catImage: "assets/images/animals.jpg",
               ),
-            ),*/
+            ),
             const SizedBox(
               height: 15,
             ),
-        /*    FadeInLeft(
+            FadeInLeft(
               delay: Duration(milliseconds: 1500),
               child: CategoriesCard(
                 catColor: ColorManager.playersCardsColor[1],
@@ -147,11 +153,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 },
               ),
-            ),*/
+            ),
             const SizedBox(
               height: 15,
             ),
-        /*    FadeInRight(
+            FadeInRight(
               delay: Duration(milliseconds: 2200),
               child: CategoriesCard(
                 catColor: ColorManager.playersCardsColor[4],
@@ -171,11 +177,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 },
               ),
-            ),*/
+            ),
             SizedBox(
               height: 15,
             ),
-      /*      FadeInLeft(
+            FadeInLeft(
               delay: Duration(milliseconds: 2900),
               child: CategoriesCard(
                 catColor: ColorManager.playersCardsColor[3],
@@ -195,7 +201,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 },
                 catTitle: "ملابس",
               ),
-            ),*/
+            ),
 
             /* SizedBox(
               height: 50,

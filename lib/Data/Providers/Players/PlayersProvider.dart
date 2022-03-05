@@ -38,7 +38,15 @@ class PlayersProvider with ChangeNotifier {
 
   resetPlayers() {
     playersList.clear();
-    charactersImages = playersImages;
+    charactersImages = [
+      "assets/images/p1.png",
+      "assets/images/p2.png",
+      "assets/images/p3.png",
+      "assets/images/p4.png",
+      "assets/images/p5.png",
+      "assets/images/p6.png",
+      "assets/images/p7.png",
+    ];
   }
 
   removePlayer(int index) {
@@ -51,6 +59,12 @@ class PlayersProvider with ChangeNotifier {
   removeCopyPlayer(int index) {
     playersListCopy.removeAt(index);
     notifyListeners();
+  }
+
+  sortList() {
+    playersList.sort((a, b) => a.playerScore.compareTo(b.playerScore));
+    playersList = playersList.reversed.toList();
+    print("list sorted");
   }
 
   bool checkPlayerExist(String playerName) {
