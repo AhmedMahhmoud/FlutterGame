@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -11,8 +12,22 @@ class PlayersProvider with ChangeNotifier {
   List<Players> randomPlayers = [];
   List<Players> suspectsPlayers = [];
   int whoIsOutIndex;
+  int tmpWhoIsOutIndex;
   int lastAskingPlayerIndex = -1;
   int askingPlayerIndex;
+
+  String finalBara;
+
+ void switchWhoIsBara() {
+    tmpWhoIsOutIndex = whoIsOutIndex;
+
+    for (int i = 0; i < playersList.length; i++) {
+      whoIsOutIndex = i;
+      Future.delayed(Duration(milliseconds: 500));
+      print('player is ${i}');
+      notifyListeners();
+    }
+    }
 
   addPlayer(Players player, int index, int imageIndex) {
     playersList.add(player);
