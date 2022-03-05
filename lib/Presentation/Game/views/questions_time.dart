@@ -77,12 +77,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     child: AnimatedOpacity(
                       opacity: test ? 0.0 : 1.0,
                       duration: const Duration(seconds: 1),
-                      child: AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        child: Image.asset(
-                          'assets/images/questionsTime.png',
-                          height: 300.h,
-                        ),
+                      child: Image.asset(
+                        'assets/images/questionsTime.png',
+                        height: 300.h,
                       ),
                     )),
               )),
