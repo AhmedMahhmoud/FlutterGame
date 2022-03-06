@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -28,6 +29,32 @@ navigateToPage(BuildContext context, page) {
         curve: Curves.bounceInOut,
         inheritTheme: true,
         ctx: context),
+  );
+}
+
+navigateReplacmentToPage(BuildContext context, page) {
+  Navigator.pushReplacement(
+    context,
+    PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: page,
+        curve: Curves.bounceInOut,
+        inheritTheme: true,
+        ctx: context),
+  );
+}
+
+showAnimatedToast(BuildContext context, String content) {
+  showToast(
+    content,
+    context: context,
+    animation: StyledToastAnimation.scale,
+    reverseAnimation: StyledToastAnimation.fade,
+    position: StyledToastPosition.center,
+    animDuration: Duration(seconds: 1),
+    duration: Duration(seconds: 4),
+    curve: Curves.elasticOut,
+    reverseCurve: Curves.linear,
   );
 }
 

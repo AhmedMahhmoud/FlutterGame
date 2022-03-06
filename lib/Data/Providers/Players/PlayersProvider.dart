@@ -46,6 +46,12 @@ class PlayersProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  sortList() {
+    playersList.sort((a, b) => a.playerScore.compareTo(b.playerScore));
+    playersList = playersList.reversed.toList();
+    print("list sorted");
+  }
+
   bool checkPlayerExist(String playerName) {
     for (int i = 0; i < playersList.length; i++) {
       if (playersList[i].playerName == playerName) {

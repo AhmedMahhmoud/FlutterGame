@@ -21,6 +21,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPlayerScreen extends StatefulWidget {
+  final bool resetPlayers;
+  AddPlayerScreen(this.resetPlayers);
   @override
   _AddPlayerScreenState createState() => _AddPlayerScreenState();
 }
@@ -33,7 +35,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   @override
   void initState() {
     super.initState();
-    Provider.of<PlayersProvider>(context, listen: false).resetPlayers();
+    if (widget.resetPlayers) {
+      Provider.of<PlayersProvider>(context, listen: false).resetPlayers();
+    }
   }
 
   int currentIndex = 0;
@@ -296,27 +300,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                     if (value.checkPlayerExist(
                                                         _textEditingController
                                                             .text)) {
-                                                      showToast(
-                                                        'اسم اللاعب موجود قبل كدة',
-                                                        context: context,
-                                                        animation:
-                                                            StyledToastAnimation
-                                                                .scale,
-                                                        reverseAnimation:
-                                                            StyledToastAnimation
-                                                                .fade,
-                                                        position:
-                                                            StyledToastPosition
-                                                                .center,
-                                                        animDuration: Duration(
-                                                            seconds: 1),
-                                                        duration: Duration(
-                                                            seconds: 4),
-                                                        curve:
-                                                            Curves.elasticOut,
-                                                        reverseCurve:
-                                                            Curves.linear,
-                                                      );
+                                                      showAnimatedToast(context,
+                                                          'اسم اللاعب موجود قبل كدة');
+                                                    } else if (_textEditingController
+                                                            .text ==
+                                                        "") {
+                                                      showAnimatedToast(context,
+                                                          "اسم اللاعب فاضي");
                                                     } else {
                                                       Navigator.pop(context);
                                                       value.addPlayer(

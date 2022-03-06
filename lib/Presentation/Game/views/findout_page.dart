@@ -24,7 +24,7 @@ class FindOutScreen extends StatelessWidget {
           RoundedButton(
             title: "التالى",
             onTapped: () {
-              navigateToPage(context, ChoiceScreen());
+              navigateReplacmentToPage(context, ChoiceScreen());
             },
           )
         ],

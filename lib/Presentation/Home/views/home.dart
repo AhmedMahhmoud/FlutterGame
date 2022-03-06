@@ -51,7 +51,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: CategoriesCard(
               catColor: ColorManager.playersCardsColor[0],
               onTap: () {
-                navigateToPage(context, AddPlayerScreen());
+                navigateToPage(context, AddPlayerScreen(true));
               },
               catTitle: "حيوانات",
               catImage: "assets/images/animals.jpg",
