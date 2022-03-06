@@ -3,7 +3,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
+import 'package:flutter_game/core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPLayerContainer extends StatelessWidget {
   final Function ontaaped;
@@ -29,8 +31,8 @@ class AddPLayerContainer extends StatelessWidget {
                 strokeWidth: 1,
                 dashPattern: [3, 3],
                 child: Container(
-                  width: 45,
-                  height: 45,
+                  width: 45.w,
+                  height: 45.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                   ),
@@ -43,15 +45,15 @@ class AddPLayerContainer extends StatelessWidget {
                 "لاعب جديد",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: setResponsiveFontSize(18),
                     fontWeight: FontWeight.bold),
               ),
               Expanded(child: Container()),
               InkWell(
                 onTap: ontaaped,
                 child: Container(
-                  width: 50,
-                  height: 50,
+                  width: 50.w,
+                  height: 50.h,
                   decoration: BoxDecoration(
                     color: ColorManager.successColor.withAlpha(200),
                     boxShadow: [

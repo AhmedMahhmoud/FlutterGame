@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game/core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesCard extends StatelessWidget {
   final Color catColor;
@@ -30,13 +32,13 @@ class CategoriesCard extends StatelessWidget {
             InkWell(
               onTap: onTap,
               child: Container(
-                padding: EdgeInsets.only(right: 20),
-                width: 350,
-                height: 90,
+                padding: EdgeInsets.only(right: 20.w),
+                width: 350.w,
+                height: 90.h,
                 alignment: Alignment.centerRight,
                 child: Container(
-                  width: 180,
-                  height: 90,
+                  width: 180.w,
+                  height: 90.h,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -44,7 +46,7 @@ class CategoriesCard extends StatelessWidget {
                         catTitle,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: setResponsiveFontSize(18),
                             fontWeight: FontWeight.bold),
                       ),
                       Expanded(child: Container()),
@@ -80,8 +82,8 @@ class CategoriesCard extends StatelessWidget {
         Positioned(
           left: 20,
           child: Container(
-            width: 100,
-            height: 100,
+            width: 100.w,
+            height: 100.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(width: 2, color: Colors.white),

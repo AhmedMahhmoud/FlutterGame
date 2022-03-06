@@ -31,21 +31,17 @@ dependencies:
   dotted_border: ^2.0.0+2
   flutter:
     sdk: flutter
+  flutter_screenutil: any
   flutter_styled_toast: ^2.0.0
-  shape_of_view: ^1.0.2
-  pimp_my_button: ^1.0.0
-
   fluttertoast: ^8.0.8
   font_awesome_flutter: ^9.2.0
+  confetti: ^0.6.0
   google_fonts: ^1.1.2
   lottie: ^1.0.0
   page_transition: ^2.0.5
-  confetti: ^0.5.4+1
-
-  flutter_screenutil: any
-
   provider: ^6.0.2
   scratcher: ^2.1.0
+  shape_of_view: ^1.0.2
   shared_preferences: ^2.0.0
 
 dev_dependencies:

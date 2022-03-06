@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -11,8 +12,22 @@ class PlayersProvider with ChangeNotifier {
   List<Players> randomPlayers = [];
   List<Players> suspectsPlayers = [];
   int whoIsOutIndex;
+  int tmpWhoIsOutIndex;
   int lastAskingPlayerIndex = -1;
   int askingPlayerIndex;
+
+  String finalBara;
+
+ void switchWhoIsBara() {
+    tmpWhoIsOutIndex = whoIsOutIndex;
+
+    for (int i = 0; i < playersList.length; i++) {
+      whoIsOutIndex = i;
+      Future.delayed(Duration(milliseconds: 500));
+      print('player is ${i}');
+      notifyListeners();
+    }
+    }
 
   addPlayer(Players player, int index, int imageIndex) {
     playersList.add(player);
@@ -23,7 +38,15 @@ class PlayersProvider with ChangeNotifier {
 
   resetPlayers() {
     playersList.clear();
-    charactersImages = playersImages;
+    charactersImages = [
+      "assets/images/p1.png",
+      "assets/images/p2.png",
+      "assets/images/p3.png",
+      "assets/images/p4.png",
+      "assets/images/p5.png",
+      "assets/images/p6.png",
+      "assets/images/p7.png",
+    ];
   }
 
   removePlayer(int index) {
@@ -36,6 +59,12 @@ class PlayersProvider with ChangeNotifier {
   removeCopyPlayer(int index) {
     playersListCopy.removeAt(index);
     notifyListeners();
+  }
+
+  sortList() {
+    playersList.sort((a, b) => a.playerScore.compareTo(b.playerScore));
+    playersList = playersList.reversed.toList();
+    print("list sorted");
   }
 
   bool checkPlayerExist(String playerName) {

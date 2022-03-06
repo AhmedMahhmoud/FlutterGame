@@ -72,7 +72,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ? Container()
             : Container(
 
-
               child:AnimatedContainer(
                 duration: Duration(seconds:1 ),
 
@@ -81,12 +80,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     child: AnimatedOpacity(
                       opacity: test ? 0.0 : 1.0,
                       duration: const Duration(seconds: 1),
-                      child: AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        child: Image.asset(
-                          'assets/images/questionsTime.png',
-                          height: 300.h,
-                        ),
+                      child: Image.asset(
+                        'assets/images/questionsTime.png',
+                        height: 300.h,
                       ),
                     )),
               )),
@@ -149,11 +145,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           RoundedActionButton(
             btnFunc: () {
               if (counter == _playerList.length - 1) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RandomQuestionsTime(),
-                    ));
+                navigateToPage(context, RandomQuestionsTime());
               } else if (_currentIndex != _playerList.length) {
                 counter++;
                 checkPlayersSimilarity();
