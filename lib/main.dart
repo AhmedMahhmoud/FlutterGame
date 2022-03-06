@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'Data/Providers/Animal/AnimalProvider.dart';
 
+import 'Presentation/Game/views/splash_screen.dart';
 import 'Presentation/Home/views/home.dart';
 import 'core/GetItLocator/locator.dart';
 import 'package:get_it/get_it.dart';
@@ -25,8 +26,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(411.42857, 899.42857),
         builder: () {
-
-         return MultiProvider(
+          return MultiProvider(
               providers: [
                 ChangeNotifierProvider(
                   create: (context) => PlayersProvider(),

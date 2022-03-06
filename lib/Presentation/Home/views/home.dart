@@ -18,13 +18,6 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-// Animal _animal = Animal();
-// AnimalDatabase _animalDatabase = AnimalDatabase();
-// Future animalFuture;
-// Future<void> getAnimal() async {
-//   _animal = await _animalDatabase.getAnimal(1);
-//   locator.locator<AnimalProvider>().getAnimalFromDb(_animal);
-// }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
