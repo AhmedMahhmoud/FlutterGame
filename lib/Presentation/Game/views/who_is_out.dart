@@ -139,7 +139,6 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                 SizedBox(
                                   height: 200.h,
                                 ),
-
                                 Padding(
                                   padding: const EdgeInsets.only(right: 12),
                                   child: Container(
@@ -190,108 +189,110 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                   ),
                                                 ))
                                             : Padding(
-                                              padding: const EdgeInsets.only(left: 16),
-                                              child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  AutoSizeText(
-                                                    'خـــرربــش',
-                                                    textAlign:
-                                                    TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontFamily: GoogleFonts
-                                                            .getFont(
-                                                            'Changa')
-                                                            .fontFamily,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .bold,
-                                                        color:
-                                                        Colors.white,
-                                                        fontSize:
-                                                        setResponsiveFontSize(
-                                                            16)),
-                                                  ),
-
-                                                  Dance(
-                                                    child: ShapeOfView(
-                                                      elevation: 8,height: 140.h,width: 140.w
-                                                      ,
-                                                      shape: StarShape(
-                                                        noOfPoints: 8,
-                                                      ),
-                                                      child:Scratcher(
-                                                        brushSize: 14,
-                                                        threshold: 50,
-                                                        color: Colors.grey,
-                                                        onScratchStart: () {
-                                                          audioPlayerState ==
-                                                              AudioPlayerState
-                                                                  .PLAYING
-                                                              ? pauseMusic()
-                                                              : playMusic();
-                                                          // play sound
-                                                        },
-                                                        onScratchEnd: () {
-                                                          audioPlayerState ==
-                                                              AudioPlayerState
-                                                                  .PLAYING
-                                                              ? pauseMusic()
-                                                              : playMusic();
-                                                          // off sound
-                                                        },
-                                                        image: Image.asset(
-                                                          'assets/images/scratch.PNG',fit: BoxFit.cover,),
-                                                        onChange: (value) => print(
-                                                            "Scratch progress: $value%"),
-                                                        onThreshold: () => print(
-                                                            "Threshold reached, you won!"),
-                                                        child: Padding(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .all(20.0),
-                                                          child: ClayContainer(
-                                                            color: Colors
-                                                                .amberAccent,
-                                                            height: 60.h,
-                                                            width: 60.w,
-                                                            borderRadius: 50,
-                                                            curveType: CurveType
-                                                                .concave,
-                                                            child: Center(
-                                                              child:
-                                                              AutoSizeText(
-                                                                _currentIndex ==
-                                                                    _whoIsOutIndex
-                                                                    ? "برا"
-                                                                    : randomAnimalName,
-                                                                style: TextStyle(
-                                                                    fontFamily:
-                                                                    GoogleFonts.getFont('Cairo')
-                                                                        .fontFamily,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                    setResponsiveFontSize(16)),
+                                                padding: const EdgeInsets.only(
+                                                    left: 16),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    AutoSizeText(
+                                                      'خـــرربــش',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily: GoogleFonts
+                                                                  .getFont(
+                                                                      'Changa')
+                                                              .fontFamily,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              setResponsiveFontSize(
+                                                                  16)),
+                                                    ),
+                                                    Dance(
+                                                      child: ShapeOfView(
+                                                        elevation: 8,
+                                                        height: 140.h,
+                                                        width: 140.w,
+                                                        shape: StarShape(
+                                                          noOfPoints: 8,
+                                                        ),
+                                                        child: Scratcher(
+                                                          brushSize: 14,
+                                                          threshold: 50,
+                                                          color: Colors.grey,
+                                                          onScratchStart: () {
+                                                            audioPlayerState ==
+                                                                    AudioPlayerState
+                                                                        .PLAYING
+                                                                ? pauseMusic()
+                                                                : playMusic();
+                                                            // play sound
+                                                          },
+                                                          onScratchEnd: () {
+                                                            audioPlayerState ==
+                                                                    AudioPlayerState
+                                                                        .PLAYING
+                                                                ? pauseMusic()
+                                                                : playMusic();
+                                                            // off sound
+                                                          },
+                                                          image: Image.asset(
+                                                            'assets/images/scratch.PNG',
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          onChange: (value) =>
+                                                              print(
+                                                                  "Scratch progress: $value%"),
+                                                          onThreshold: () => print(
+                                                              "Threshold reached, you won!"),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(20.0),
+                                                            child:
+                                                                ClayContainer(
+                                                              color: Colors
+                                                                  .amberAccent,
+                                                              height: 60.h,
+                                                              width: 60.w,
+                                                              borderRadius: 50,
+                                                              curveType:
+                                                                  CurveType
+                                                                      .concave,
+                                                              child: Center(
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  _currentIndex ==
+                                                                          _whoIsOutIndex
+                                                                      ? "برا"
+                                                                      : randomAnimalName,
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          GoogleFonts.getFont('Cairo')
+                                                                              .fontFamily,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          setResponsiveFontSize(
+                                                                              16)),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  )
-                                                ],
+                                                    )
+                                                  ],
+                                                ),
                                               ),
-                                            ),
                                       )),
                                 ),
-
-
-
-
                                 SizedBox(
                                   height: 20.h,
                                 ),

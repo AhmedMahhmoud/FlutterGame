@@ -12,9 +12,12 @@ import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/constantData.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   @override
@@ -115,7 +118,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                   int characterIndex = 0;
                                   return StatefulBuilder(
                                       builder: (context, setstate) {
-                                    return ZoomIn(
+                                    return FadeInDown(
                                       child: Dialog(
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -125,8 +128,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                             FocusScope.of(context).unfocus();
                                           },
                                           child: Container(
-                                            width: 400,
-                                            height: 450,
+                                            width: 400.w,
+                                            height: 450.h,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
@@ -139,22 +142,22 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                             child: Column(
                                               children: [
                                                 SizedBox(
-                                                  height: 20,
+                                                  height: 20.h,
                                                 ),
                                                 AutoSizeText(
-                                                  'اختر شحصيتك و سجل اسمك',
+                                                  'اختر شخصيتك و سجل اسمك',
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 18,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 20,
                                                 ),
                                                 Container(
                                                     width: double.infinity,
-                                                    height: 180,
+                                                    height: 180.h,
                                                     child: ListView.builder(
                                                       scrollDirection:
                                                           Axis.horizontal,
@@ -287,19 +290,32 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                       ColorManager.successColor,
                                                   title: "إضافة",
                                                   btnFunc: () {
-                                                    Navigator.pop(context);
                                                     if (value.checkPlayerExist(
                                                         _textEditingController
                                                             .text)) {
-                                                      Fluttertoast.showToast(
-                                                          msg:
-                                                              "اسم اللاعب موجود قبل كدة",
-                                                          backgroundColor:
-                                                              ColorManager
-                                                                  .failColor,
-                                                          gravity: ToastGravity
-                                                              .CENTER);
+                                                      showToast(
+                                                        'اسم اللاعب موجود قبل كدة',
+                                                        context: context,
+                                                        animation:
+                                                            StyledToastAnimation
+                                                                .scale,
+                                                        reverseAnimation:
+                                                            StyledToastAnimation
+                                                                .fade,
+                                                        position:
+                                                            StyledToastPosition
+                                                                .center,
+                                                        animDuration: Duration(
+                                                            seconds: 1),
+                                                        duration: Duration(
+                                                            seconds: 4),
+                                                        curve:
+                                                            Curves.elasticOut,
+                                                        reverseCurve:
+                                                            Curves.linear,
+                                                      );
                                                     } else {
+                                                      Navigator.pop(context);
                                                       value.addPlayer(
                                                           Players(
                                                             playerImage:
@@ -343,10 +359,14 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               title: "يلا بينا",
                               btnFunc: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => WhoIsOut(),
-                                    ));
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.rightToLeft,
+                                      child: WhoIsOut(),
+                                      curve: Curves.bounceInOut,
+                                      inheritTheme: true,
+                                      ctx: context),
+                                );
                               },
                             )
                     ],
