@@ -71,7 +71,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
         _currentIndex == _playerList.length
             ? Container()
             : Container(
-                child: Container(
+
+              child:AnimatedContainer(
+                duration: Duration(seconds:1 ),
+
                 child: SlideInDown(
                     duration: Duration(milliseconds: 500),
                     child: AnimatedOpacity(

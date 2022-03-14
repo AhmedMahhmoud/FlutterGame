@@ -16,13 +16,14 @@ import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   final bool resetPlayers;
+
   AddPlayerScreen(this.resetPlayers);
+
   @override
   _AddPlayerScreenState createState() => _AddPlayerScreenState();
 }
@@ -41,6 +42,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   }
 
   int currentIndex = 0;
+
   setCurrentIndex() {
     setState(() {
       currentIndex++;
@@ -48,6 +50,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   }
 
   double listHeight = 90;
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);

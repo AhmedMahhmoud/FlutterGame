@@ -26,6 +26,8 @@ class ColorManager {
   static Color primaryOpacity70 = HexColor.fromHex("#B3ED9728");
 }
 
+
+
 extension HexColor on Color {
   static Color fromHex(String hexColorString) {
     hexColorString = hexColorString.replaceAll('#', '');
