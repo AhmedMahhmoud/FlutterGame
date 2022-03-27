@@ -77,7 +77,7 @@ class FinalResult extends StatelessWidget {
                     ),
                   ),
                   RoundedActionButton(
-                    btnColor: ColorManager.failColor,
+                    btnColor: ColorManager.successColor,
                     title: 'دور جديد',
                     btnFunc: () {
                       navigateReplacmentToPage(context, AddPlayerScreen(false));

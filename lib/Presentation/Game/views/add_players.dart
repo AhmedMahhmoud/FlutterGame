@@ -16,14 +16,13 @@ import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   final bool resetPlayers;
-
   AddPlayerScreen(this.resetPlayers);
-
   @override
   _AddPlayerScreenState createState() => _AddPlayerScreenState();
 }
@@ -42,15 +41,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   }
 
   int currentIndex = 0;
-
   setCurrentIndex() {
     setState(() {
       currentIndex++;
     });
   }
 
-  double listHeight = 90;
-
+  double listHeight = 90.h;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
@@ -76,7 +73,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 5,
+                        height: 5.h,
                       ),
                       AutoSizeText(
                         "اللاعبين",
@@ -86,12 +83,12 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5.h,
                       ),
                       AnimatedContainer(
                         duration: Duration(milliseconds: 500),
                         height: listHeight * value.playersList.length,
-                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        margin: EdgeInsets.symmetric(horizontal: 15.w),
                         child: ListView.builder(
                           itemCount: value.playersList.length == 0
                               ? 1
@@ -162,8 +159,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                const SizedBox(
-                                                  height: 20,
+                                                 SizedBox(
+                                                  height: 20.h,
                                                 ),
                                                 Container(
                                                     width: double.infinity,
@@ -193,7 +190,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                                 margin: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
-                                                                            10),
+                                                                            10.w),
                                                                 width:
                                                                     characterIndex ==
                                                                             index
@@ -210,7 +207,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                                       .circle,
                                                                   border: Border
                                                                       .all(
-                                                                    width: 2,
+                                                                    width: 2.w,
                                                                     color: characterIndex ==
                                                                             index
                                                                         ? ColorManager
@@ -230,7 +227,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                               ),
                                                             ),
                                                             SizedBox(
-                                                              height: 5,
+                                                              height: 5.h,
                                                             ),
                                                             characterIndex ==
                                                                     index
@@ -292,8 +289,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(
-                                                  height: 30,
+                                                 SizedBox(
+                                                  height: 30.h,
                                                 ),
                                                 RoundedActionButton(
                                                   btnColor:
@@ -345,8 +342,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               );
                             })
                           : Container(),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       value.playersList.length < 3
                           ? Container()
