@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,29 +67,35 @@ class _FindOutScreenState extends State<FindOutScreen> {
               SizedBox(height: 90.h,),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Card(     color: Colors.white,
+                child: Card(
+                    //color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   elevation: 4,
-                  child: Row(
-                    children: [
-                      Container(
-                          height: 200.h,
-                          width: 200.w,
-                          child: Lottie.asset(
-                              'assets/lotties/whoisout.json')),
-                      Text(
-                        '${Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerName}',
-                        style: TextStyle(
-                            color: Colors.pink,
-                            fontWeight: FontWeight.bold,
-                            fontSize: setResponsiveFontSize(22)),
-                      )
-                    ],
-                  ),
+                  child:ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: BackdropFilter(
+                        filter:
+                        ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                        child:Row(
+                          children: [
+                            Container(
+                                height: 200.h,
+                                width: 200.w,
+                                child: Lottie.asset(
+                                    'assets/lotties/whoisout.json')),
+                            Text(
+                              '${Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerName}',
+                              style: TextStyle(
+                                  color: Colors.pink,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: setResponsiveFontSize(22)),
+                            )
+                          ],
+                        ),
                 ),
-              ),
+              ))),
 
               SizedBox(height: 200.h,),
               RoundedActionButton(

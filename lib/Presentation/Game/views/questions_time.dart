@@ -117,14 +117,17 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   duration: Duration(
                     seconds: 1,
                   ),
-                  child: RoundedActionButton(
-                    btnColor: ColorManager.playersCardsColor[3],
-                    title: "التالى",
-                    btnFunc: () {
-                      setState(() {
-                        _showQuestion = true;
-                      });
-                    },
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20.h),
+                    child: RoundedActionButton(
+                      btnColor: ColorManager.playersCardsColor[3],
+                      title: "التالى",
+                      btnFunc: () {
+                        setState(() {
+                          _showQuestion = true;
+                        });
+                      },
+                    ),
                   ),
                 )
               : Container()
@@ -142,17 +145,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
             text:
                 " ${_askingPlayers[_pointer1].playerName} اسأل ${_askingPlayers[_pointer2].playerName} و حاول توقعة ",
           ),
-          RoundedActionButton(
-            btnFunc: () {
-              if (counter == _playerList.length - 1) {
-                navigateToPage(context, RandomQuestionsTime());
-              } else if (_currentIndex != _playerList.length) {
-                counter++;
-                checkPlayersSimilarity();
-              }
-            },
-            btnColor: ColorManager.successColor,
-            title: "التالى",
+          Padding(
+            padding:  EdgeInsets.only(top: 20.h),
+            child: RoundedActionButton(
+              btnFunc: () {
+                if (counter == _playerList.length - 1) {
+                  navigateToPage(context, RandomQuestionsTime());
+                } else if (_currentIndex != _playerList.length) {
+                  counter++;
+                  checkPlayersSimilarity();
+                }
+              },
+              btnColor: ColorManager.successColor,
+              title: "التالى",
+            ),
           )
           // ] else ...[
           //   Container(
