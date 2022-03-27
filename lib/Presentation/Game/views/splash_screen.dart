@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Presentation/Home/views/home.dart';
 import 'package:flutter_game/core/constants.dart';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
               transitionBuilder: (child, animation) {
                 return ScaleTransition(scale: animation, child: child);
               },
-              child: Text(
+              child: AutoSizeText(
                 "count is $counter",
                 key: ValueKey<int>(counter),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -50,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
             AnimatedOpacity(
               opacity: opacityLevel,
               duration: Duration(milliseconds: 2),
-              child: Text(
+              child: AutoSizeText(
                 "count is $counter",
                 key: ValueKey<int>(counter),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

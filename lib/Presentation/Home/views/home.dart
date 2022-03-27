@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
@@ -28,8 +27,6 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-
-
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   ConfettiController confettiLeftController;
   ConfettiController confettiRightController;
@@ -37,7 +34,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     confettiLeftController = ConfettiController(duration: Duration(seconds: 2));
-    confettiRightController = ConfettiController(duration: Duration(seconds: 2));
+    confettiRightController =
+        ConfettiController(duration: Duration(seconds: 2));
     confettiLeftController.play();
     confettiRightController.play();
     Future.delayed(Duration(seconds: 2)).whenComplete(() {
@@ -46,7 +44,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
     super.initState();
   }
-
 
   @override
   void dispose() {
@@ -60,7 +57,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     // final _animalProv = locator.locator<AnimalProvider>();
     return Scaffold(
         body: Container(
-
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/images/gameBackground.jpg"),
@@ -75,29 +71,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                ConfettiWidget(  blastDirection: pi,
-                  emissionFrequency: 0.05,
-                  maxBlastForce: 5,minBlastForce: 2,
-                  numberOfParticles: 10,
-                  shouldLoop: false,
-                  displayTarget: true, confettiController: confettiRightController,),
-
-                ConfettiWidget(
-                  blastDirection: -pi,
-                  emissionFrequency: 0.05,
-
-                  numberOfParticles: 30,
-                  shouldLoop: false,
-                  displayTarget: true,
-
-                  maxBlastForce: 5,minBlastForce: 2,
-                  confettiController: confettiLeftController,)
-              ],),
-            )
-           ,
-
-
-
+                  ConfettiWidget(
+                    blastDirection: pi,
+                    emissionFrequency: 0.05,
+                    maxBlastForce: 5,
+                    minBlastForce: 2,
+                    numberOfParticles: 10,
+                    shouldLoop: false,
+                    displayTarget: true,
+                    confettiController: confettiRightController,
+                  ),
+                  ConfettiWidget(
+                    blastDirection: -pi,
+                    emissionFrequency: 0.05,
+                    numberOfParticles: 30,
+                    shouldLoop: false,
+                    displayTarget: true,
+                    maxBlastForce: 5,
+                    minBlastForce: 2,
+                    confettiController: confettiLeftController,
+                  )
+                ],
+              ),
+            ),
             SizedBox(
               height: 60.h,
             ),
