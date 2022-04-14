@@ -102,9 +102,9 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       .playersList[playersProv.whoIsOutIndex].playerImage,
                   content: Column(
                     children: [
-                      SizedBox(
-                        height: 50,
-                      ),
+                      /*SizedBox(
+                        height: 30.h,
+                      ),*/
                       Container(
                         child: Expanded(
                           child: ListView.builder(
