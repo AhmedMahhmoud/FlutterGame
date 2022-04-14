@@ -139,13 +139,16 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                 SizedBox(
                                   height: 200.h,
                                 ),
-                                AutoSizeText(
-                                  "خربش الصورة عشان تعرف انت جوة ولا برا اللعبة",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: setResponsiveFontSize(17)),
-                                ),
+                                !_switchToNewPlayer
+                                    ? AutoSizeText(
+                                        "خربش الصورة عشان تعرف انت جوة ولا برا اللعبة",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                setResponsiveFontSize(17)),
+                                      )
+                                    : Container(),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 12),
                                   child: Container(
