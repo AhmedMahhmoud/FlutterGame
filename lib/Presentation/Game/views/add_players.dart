@@ -17,7 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   final bool resetPlayers;
-  AddPlayerScreen(this.resetPlayers);
+  const AddPlayerScreen(this.resetPlayers);
   @override
   _AddPlayerScreenState createState() => _AddPlayerScreenState();
 }
@@ -25,7 +25,7 @@ class AddPlayerScreen extends StatefulWidget {
 class _AddPlayerScreenState extends State<AddPlayerScreen>
     with TickerProviderStateMixin {
   AudioCache player = AudioCache();
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   }
 
   int currentIndex = 0;
-  setCurrentIndex() {
+  void setCurrentIndex() {
     setState(() {
       currentIndex++;
     });
@@ -63,7 +63,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Consumer<PlayersProvider>(
-              builder: (context, value, child) {
+              builder: (BuildContext context, PlayersProvider value, _) {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -88,7 +88,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                           itemCount: value.playersList.isEmpty
                               ? 1
                               : value.playersList.length,
-                          itemBuilder: (context, index) {
+                          itemBuilder: (BuildContext context, int index) {
                             return BounceInRight(
                               child: Visibility(
                                 visible: value.playersList.isNotEmpty,
@@ -114,10 +114,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                           ? AddPLayerContainer(() {
                               return showDialog(
                                 context: context,
-                                builder: (context) {
+                                builder: (BuildContext context) {
                                   int characterIndex = 0;
-                                  return StatefulBuilder(
-                                      builder: (context, setstate) {
+                                  return StatefulBuilder(builder:
+                                      (BuildContext context, setstate) {
                                     return FadeInDown(
                                       child: Dialog(
                                         shape: const RoundedRectangleBorder(
@@ -154,7 +154,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                 SizedBox(
+                                                SizedBox(
                                                   height: 20.h,
                                                 ),
                                                 SizedBox(
@@ -167,7 +167,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                           .charactersImages
                                                           .length,
                                                       itemBuilder:
-                                                          (context, index) {
+                                                          (BuildContext context,
+                                                              int index) {
                                                         return Column(
                                                           children: [
                                                             InkWell(
@@ -179,9 +180,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                               },
                                                               child:
                                                                   AnimatedContainer(
-                                                                duration: const Duration(
-                                                                    milliseconds:
-                                                                        300),
+                                                                duration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            300),
                                                                 margin: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -245,7 +247,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                     height: 100.h,
                                                     child: TextField(
                                                       controller:
-                                                          _textEditingController, maxLength: 10,
+                                                          _textEditingController,
+                                                      maxLength: 10,
                                                       style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -260,10 +263,12 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                               ),
                                                               focusedBorder:
                                                                   OutlineInputBorder(
-                                                                borderSide: const BorderSide(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    width: 2),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        width:
+                                                                            2),
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
@@ -284,7 +289,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                 SizedBox(
+                                                SizedBox(
                                                   height: 30.h,
                                                 ),
                                                 RoundedActionButton(
@@ -337,7 +342,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               );
                             })
                           : Container(),
-                       SizedBox(
+                      SizedBox(
                         height: 20.h,
                       ),
                       value.playersList.length < 3
