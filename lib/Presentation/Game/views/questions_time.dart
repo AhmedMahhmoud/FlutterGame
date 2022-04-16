@@ -71,19 +71,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
         _currentIndex == _playerList.length
             ? Container()
             : AnimatedContainer(
-              duration: const Duration(seconds:1 ),
-
-              child: SlideInDown(
-                  duration: const Duration(milliseconds: 500),
-                  child: AnimatedOpacity(
-                    opacity: test ? 0.0 : 1.0,
-                    duration: const Duration(seconds: 1),
-                    child: Image.asset(
-                      'assets/images/questionsTime.png',
-                      height: 300.h,
-                    ),
-                  )),
-            ),
+                duration: const Duration(seconds: 1),
+                child: SlideInDown(
+                    duration: const Duration(milliseconds: 500),
+                    child: AnimatedOpacity(
+                      opacity: test ? 0.0 : 1.0,
+                      duration: const Duration(seconds: 1),
+                      child: Image.asset(
+                        'assets/images/questionsTime.png',
+                        height: 300.h,
+                      ),
+                    )),
+              ),
         if (!_showQuestion) ...[
           test == true
               ? ZoomIn(
@@ -144,11 +143,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 ' ${_askingPlayers[_pointer1].playerName} اسأل ${_askingPlayers[_pointer2].playerName} و حاول توقعة ',
           ),
           Padding(
-            padding:  EdgeInsets.only(top: 20.h),
+            padding: EdgeInsets.only(top: 20.h),
             child: RoundedActionButton(
               btnFunc: () {
                 if (counter == _playerList.length - 1) {
-                  navigateToPage(context, RandomQuestionsTime());
+                  navigateReplacmentToPage(context, RandomQuestionsTime());
                 } else if (_currentIndex != _playerList.length) {
                   counter++;
                   checkPlayersSimilarity();
@@ -205,10 +204,10 @@ class DisplayTextInFrame extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: Padding(
                   padding:
-                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                   child: Center(
                     child: Padding(
-                      padding:  EdgeInsets.only(left: 16.w),
+                      padding: EdgeInsets.only(left: 16.w),
                       child: AutoSizeText(
                         text,
                         textAlign: TextAlign.center,

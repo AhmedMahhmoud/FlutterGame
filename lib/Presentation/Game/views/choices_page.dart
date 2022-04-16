@@ -1,18 +1,21 @@
+import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
-import 'package:flutter_game/Domain/Models/AnimalModel.dart';
-import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
-import 'package:flutter_game/Presentation/Game/widgets/choices_display.dart';
-import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/rounded_action_button.dart';
-import 'package:flutter_game/core/constants.dart';
+import '../../../Data/Providers/Animal/AnimalProvider.dart';
+import '../../../Data/Providers/Players/PlayersProvider.dart';
+import '../../../Domain/Models/AnimalModel.dart';
+import 'who_is_out.dart';
+import '../widgets/choices_display.dart';
+import '../../../core/ColorManager/ColorManager.dart';
+import '../../../core/Shared/rounded_action_button.dart';
+import '../../../core/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'final_result.dart';
 
 class ChoiceScreen extends StatefulWidget {
+  const ChoiceScreen({Key key}) : super(key: key);
+
   @override
   _ChoiceScreenState createState() => _ChoiceScreenState();
 }
@@ -21,6 +24,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   List<String> choicesList = [];
   int _cuurentIndex = 0;
   bool _choiceResult;
+  AudioCache player = AudioCache();
   @override
   void initState() {
     super.initState();
@@ -28,7 +32,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         .generateRandomAnimalsForChoices();
   }
 
-  setCurrentIndex(int newIndex) {
+  void setCurrentIndex(int newIndex) {
     setState(() {
       _cuurentIndex = newIndex;
     });
@@ -40,8 +44,10 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     } else {
       if (_cuurentIndex == index) {
         if (_choiceResult) {
+          player.play('sounds/CorrectAnswer.mp3');
           return ColorManager.successColor;
         } else {
+          player.play('sounds/WrongAnswer.mp3');
           return ColorManager.failColor;
         }
       } else {
@@ -107,7 +113,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemBuilder: (context, index) {
+                          itemBuilder: (BuildContext context, int index) {
                             return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
@@ -118,8 +124,8 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                                         }
                                       : null,
                                   child: Container(
-                                    margin:
-                                        const EdgeInsets.symmetric(horizontal: 10),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     decoration: BoxDecoration(
                                         color: setButtonColor(index),
                                         borderRadius:
@@ -148,7 +154,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                     ],
                   ),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 5.h,
                 ),
                 _choiceResult != null
