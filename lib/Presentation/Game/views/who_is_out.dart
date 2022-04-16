@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:math' as math;
-
+import 'dart:developer' as lg;
 import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -8,11 +8,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clay_containers/widgets/clay_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
@@ -123,10 +119,10 @@ class _WhoIsOutState extends State<WhoIsOut> {
             return Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          "assets/images/gamebg.jpg",
+                          'assets/images/gamebg.jpg',
                         ),
                         fit: BoxFit.fill)),
                 child: Column(
@@ -141,7 +137,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                 ),
                                 !_switchToNewPlayer
                                     ? AutoSizeText(
-                                        "خربش الصورة عشان تعرف انت جوة ولا برا اللعبة",
+                                        'خربش الصورة عشان تعرف انت جوة ولا برا اللعبة',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -150,15 +146,15 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                       )
                                     : Container(),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 12),
+                                  padding:  EdgeInsets.only(right: 12.w),
                                   child: Container(
                                       width: MediaQuery.of(context).size.width -
                                           20.w,
                                       height: 330.h,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                "assets/images/frame.png",
+                                                'assets/images/frame.png',
                                               ),
                                               fit: BoxFit.cover)),
                                       child: Directionality(
@@ -166,41 +162,37 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                         child: _switchToNewPlayer
                                             ? Padding(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 20),
-                                                child: Container(
-                                                  child: Center(
-                                                    child: Container(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 16),
-                                                        child: AutoSizeText(
-                                                          "ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف \n هو اللي برا اللعبة ولا لا !",
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                              fontFamily: GoogleFonts
-                                                                      .getFont(
-                                                                          'Changa')
-                                                                  .fontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  setResponsiveFontSize(
-                                                                      18)),
-                                                        ),
-                                                      ),
+                                                     EdgeInsets.symmetric(
+                                                        horizontal: 20.w,
+                                                        vertical: 20.h),
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding:
+                                                         EdgeInsets
+                                                            .only(left: 16.w),
+                                                    child: AutoSizeText(
+                                                      'ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف \n هو اللي برا اللعبة ولا لا !',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily: GoogleFonts
+                                                                  .getFont(
+                                                                      'Changa')
+                                                              .fontFamily,
+                                                          fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                          color:
+                                                              Colors.white,
+                                                          fontSize:
+                                                              setResponsiveFontSize(
+                                                                  18)),
                                                     ),
                                                   ),
                                                 ))
                                             : Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 16),
+                                                padding:  EdgeInsets.only(
+                                                    left: 16.w),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
@@ -246,9 +238,9 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                           ),
                                                           onChange: (value) =>
                                                               print(
-                                                                  "Scratch progress: $value%"),
-                                                          onThreshold: () => print(
-                                                              "Threshold reached, you won!"),
+                                                                  'Scratch progress: $value%'),
+                                                          onThreshold: () => lg.log(
+                                                              'Threshold reached, you won!'),
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
@@ -266,7 +258,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                     AutoSizeText(
                                                                   _currentIndex ==
                                                                           _whoIsOutIndex
-                                                                      ? "برا"
+                                                                      ? 'برا'
                                                                       : randomAnimalName,
                                                                   style: TextStyle(
                                                                       fontWeight:
@@ -296,7 +288,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                         value.playersList.length * 2) ...[
                                   RoundedActionButton(
                                     btnColor: ColorManager.successColor,
-                                    title: "التالى",
+                                    title: 'التالى',
                                     btnFunc: () {
                                       _switchToNewPlayer = !_switchToNewPlayer;
 

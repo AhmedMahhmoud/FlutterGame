@@ -1,9 +1,15 @@
 import 'dart:async';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Presentation/Home/views/home.dart';
-import 'package:flutter_game/core/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../../../core/constants.dart';
+import '../../Home/views/home.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,52 +17,91 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Timer _timer;
+
+  _startDelay() {
+    _timer = Timer(const Duration(milliseconds: 4500), _goNext);
+  }
+
+  _goNext() {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder:
+            (BuildContext c, Animation<double> a1, Animation<double> a2) =>
+                Home(),
+        transitionsBuilder: (BuildContext c, Animation<double> anim,
+                Animation<double> a2, Widget child) =>
+            FadeTransition(opacity: anim, child: child),
+        transitionDuration: const Duration(milliseconds: 1000),
+      ),
+    );
+
+    /* navigateReplacmentToPage(
+        context, Home());*/
+  }
+
   @override
   void initState() {
-    // Future.delayed(Duration(seconds: 3), () {
-    //   navigateToPage(context, Home());
-    // });
-
+    _startDelay();
     super.initState();
   }
 
-  double opacityLevel = 1.0;
-  int counter = 0;
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            counter++;
-            opacityLevel = opacityLevel == 0 ? 1.0 : 0.0;
-          });
-        },
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: Stack(
           children: [
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 500),
-              transitionBuilder: (child, animation) {
-                return ScaleTransition(scale: animation, child: child);
-              },
-              child: AutoSizeText(
-                "count is $counter",
-                key: ValueKey<int>(counter),
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Lottie.asset(
+                'assets/lotties/bg_splash2.json',
+                repeat: false,
+                fit: BoxFit.cover,
               ),
             ),
-            AnimatedOpacity(
-              opacity: opacityLevel,
-              duration: Duration(milliseconds: 2),
-              child: AutoSizeText(
-                "count is $counter",
-                key: ValueKey<int>(counter),
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Padding(
+              padding: EdgeInsets.only(left: 12.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 3.4,
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: ZoomIn(
+                        child: const Image(
+                          image: AssetImage(
+                            'assets/images/bakasa.png',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 23.h,
+                  ),
+                  ElasticInRight(
+                    child: AutoSizeText('بـكـاسـة',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: setResponsiveFontSize(28),
+                            fontWeight: FontWeight.bold,
+                            fontFamily:
+                                GoogleFonts.getFont('Cairo').fontFamily)),
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -34,14 +34,14 @@ class PLayerContainer extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    width: 2,
+                    width: 2.w,
                     color: Colors.white,
                   ),
                   image: DecorationImage(
                       image: AssetImage(playerImage), fit: BoxFit.cover)),
             ),
             SizedBox(
-              width: 15,
+              width: 15.w,
             ),
             AutoSizeText(
               playerName,
@@ -56,7 +56,7 @@ class PLayerContainer extends StatelessWidget {
                 Provider.of<PlayersProvider>(context, listen: false)
                     .removePlayer(playerIndex);
               },
-              child: Icon(
+              child: const Icon(
                 FontAwesomeIcons.times,
                 color: Colors.white,
               ),
@@ -72,7 +72,7 @@ class PLayerContainer extends StatelessWidget {
             color: ColorManager.playersCardsColor[playerIndex].withOpacity(0.5),
             spreadRadius: 1,
             blurRadius: 1,
-            offset: Offset(0, 2), // changes position of shadow
+            offset: const Offset(0, 2), // changes position of shadow
           ),
         ],
       ),
@@ -110,7 +110,7 @@ class PlayerRanking extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        width: 2,
+                        width: 2.w,
                         color: Colors.white,
                       ),
                       image: DecorationImage(
@@ -121,12 +121,12 @@ class PlayerRanking extends StatelessWidget {
                         bottom: 0,
                         right: 0,
                         child: Container(
-                          width: 25,
-                          height: 25,
+                          width: 25.w,
+                          height: 25.h,
                           child: Center(
                             child: AutoSizeText(
                               (playerIndex + 1).toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -134,18 +134,18 @@ class PlayerRanking extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: playerIndex == 0
-                                ? Color(0xffF1CB4D)
+                                ? const Color(0xffF1CB4D)
                                 : playerIndex == 1
-                                    ? Color(0xffAAC0CD)
-                                    : Color(0xffEB9F49),
+                                    ? const Color(0xffAAC0CD)
+                                    : const Color(0xffEB9F49),
                             shape: BoxShape.circle,
                           ),
                         ))
                     : Container()
               ],
             ),
-            const SizedBox(
-              width: 15,
+             SizedBox(
+              width: 15.w,
             ),
             AutoSizeText(
               playerName,
@@ -176,7 +176,7 @@ class PlayerRanking extends StatelessWidget {
             color: ColorManager.playersCardsColor[playerIndex].withOpacity(0.5),
             spreadRadius: 1,
             blurRadius: 1,
-            offset: Offset(0, 2), // changes position of shadow
+            offset: const Offset(0, 2), // changes position of shadow
           ),
         ],
       ),

@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HoverButton extends StatefulWidget {
   const HoverButton({
@@ -34,12 +35,12 @@ class _HoverButtonState extends State<HoverButton> {
         child: MouseRegion(
           onHover: (_) => setState(() => hover = true),
           onExit: (_) => setState(() => hover = false),
-          child: Container(
-            width: 78,
-            height: 96,
+          child: SizedBox(
+            width: 78.w,
+            height: 96.h,
             child: Center(
               child: Container(
-                margin: EdgeInsets.only(top: 4),
+                margin: const EdgeInsets.only(top: 4),
                 child: Stack(
                   overflow: Overflow.visible,
                   alignment: Alignment.center,

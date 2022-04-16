@@ -25,9 +25,9 @@ class CategoriesCard extends StatelessWidget {
       children: [
         Column(
           children: [
-            Container(
-              width: 350,
-              height: 30,
+            SizedBox(
+              width: 350.w,
+              height: 30.h,
             ),
             InkWell(
               onTap: onTap,
@@ -36,7 +36,7 @@ class CategoriesCard extends StatelessWidget {
                 width: 350.w,
                 height: 90.h,
                 alignment: Alignment.centerRight,
-                child: Container(
+                child: SizedBox(
                   width: 180.w,
                   height: 90.h,
                   child: Row(
@@ -50,7 +50,7 @@ class CategoriesCard extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Expanded(child: Container()),
-                      Icon(
+                    const  Icon(
                         FontAwesomeIcons.angleRight,
                         color: Colors.white,
                       )
@@ -70,7 +70,7 @@ class CategoriesCard extends StatelessWidget {
                       color: catColor.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 1,
-                      offset: Offset(0, 2), // changes position of shadow
+                      offset: const Offset(0, 2), // changes position of shadow
                     ),
                   ],
                   borderRadius: BorderRadius.circular(10),
@@ -80,13 +80,13 @@ class CategoriesCard extends StatelessWidget {
           ],
         ),
         Positioned(
-          left: 20,
+          left: 20.w,
           child: Container(
             width: 100.w,
             height: 100.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 2, color: Colors.white),
+                border: Border.all(width: 2.w, color: Colors.white),
                 color: Colors.red,
                 image: DecorationImage(
                     image: AssetImage(catImage), fit: BoxFit.cover)),

@@ -36,9 +36,9 @@ class MyApp extends StatelessWidget {
                 ),
               ],
               child: MaterialApp(
-                theme: ThemeData(fontFamily: "Cairo"),
+                theme: ThemeData(fontFamily: 'Cairo'),
                 debugShowCheckedModeBanner: false,
-                home: Home(),
+                home: SplashScreen(),
                 title: 'بكاسة',
               ));
         });

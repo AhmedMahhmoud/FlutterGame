@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 
 abstract class ExampleStateBase {
@@ -26,7 +28,7 @@ class SingeltonExampleState extends ExampleStateBase {
   SingeltonExampleState._internal() {
     intitialStringValue = "Example State instance is created";
     currentStringValue = intitialStringValue;
-    print(currentStringValue);
+    log(currentStringValue);
   }
 }
 
@@ -34,6 +36,6 @@ class ExampleStateWithoutSingleton extends ExampleStateBase {
   ExampleStateWithoutSingleton() {
     intitialStringValue = "Example State with out singleton been created";
     currentStringValue = intitialStringValue;
-    print(currentStringValue);
+    log(currentStringValue);
   }
 }

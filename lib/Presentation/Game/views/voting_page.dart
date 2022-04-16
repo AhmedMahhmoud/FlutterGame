@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
@@ -35,9 +37,9 @@ class _VotingScreenState extends State<VotingScreen> {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/gameBackground.jpg"),
+                image: AssetImage('assets/images/gameBackground.jpg'),
                 fit: BoxFit.cover)),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -48,7 +50,7 @@ class _VotingScreenState extends State<VotingScreen> {
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: AutoSizeText(
-                  "مرحلة التصويت",
+                  'مرحلة التصويت',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -93,7 +95,7 @@ class _VotingScreenState extends State<VotingScreen> {
                                       playersProv.playersList.length) {
                                     if (button_display_index !=
                                         playersProv.playersList.length) {
-                                      print('playerIndex before $playerIndex');
+                                      log('playerIndex before $playerIndex');
 
                                       // 34an at2kd en elly by-vote msh hwa elly bara el salfa
                                       if (playersProv.playersList[playerIndex]
@@ -109,24 +111,24 @@ class _VotingScreenState extends State<VotingScreen> {
                                                 .playersList[
                                                     playersProv.whoIsOutIndex]
                                                 .playerName) {
-                                          print('correct choice');
+                                          log('correct choice');
                                           playersProv.playersList[playerIndex]
                                               .playerScore += 100;
                                         } else {
-                                          print('wrong choice');
+                                          log('wrong choice');
                                         }
                                       } else {
-                                        print('bara el salfa');
+                                        log('bara el salfa');
                                       }
                                     }
-                                    print(
+                                    log(
                                         'score ${playersProv.playersList[playerIndex].playerScore}');
 
                                     // zwdna el index 34an ygbly list na2sa el la3eb elly b3do
                                     setState(() {
                                       playerIndex++;
                                     });
-                                    print('playerIndex after $playerIndex');
+                                    log('playerIndex after $playerIndex');
                                     await Provider.of<PlayersProvider>(context,
                                             listen: false)
                                         .getSuspectsPlayers(playerIndex);
@@ -145,16 +147,16 @@ class _VotingScreenState extends State<VotingScreen> {
                                               .playersList[
                                                   playersProv.whoIsOutIndex]
                                               .playerName) {
-                                        print('correct choice');
+                                        log('correct choice');
                                         playersProv.playersList[playerIndex]
                                             .playerScore += 100;
                                       } else {
-                                        print('wrong choice');
+                                        log('wrong choice');
                                       }
                                     } else {
-                                      print('bara el salfa');
+                                      log('bara el salfa');
                                     }
-                                    print(
+                                    log(
                                         'score ${playersProv.playersList[playerIndex].playerScore}');
                                   }
                                 } else {
@@ -162,7 +164,7 @@ class _VotingScreenState extends State<VotingScreen> {
                                 }
                               },
                               child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                     color: ColorManager.darkGrey,
                                     borderRadius: BorderRadius.circular(10)),
@@ -183,12 +185,12 @@ class _VotingScreenState extends State<VotingScreen> {
                     },
                     itemCount: playersProv.suspectsPlayers.length,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   button_display_index == playersProv.playersList.length
                       ? Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: RoundedActionButton(
-                            title: "التالى",
+                            title: 'التالى',
                             btnColor: ColorManager.successColor,
                             btnFunc: () {
                               navigateReplacmentToPage(

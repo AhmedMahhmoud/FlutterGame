@@ -34,7 +34,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   void initState() {
     askingGame();
-    Future.delayed(Duration(milliseconds: 1500)).whenComplete(() {
+    Future.delayed(const Duration(milliseconds: 1500)).whenComplete(() {
       setState(() {
         test = true;
       });
@@ -70,13 +70,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
       children: [
         _currentIndex == _playerList.length
             ? Container()
-            : Container(
-
-              child:AnimatedContainer(
-                duration: Duration(seconds:1 ),
-
+            : AnimatedContainer(
+                duration: const Duration(seconds: 1),
                 child: SlideInDown(
-                    duration: Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 500),
                     child: AnimatedOpacity(
                       opacity: test ? 0.0 : 1.0,
                       duration: const Duration(seconds: 1),
@@ -85,15 +82,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         height: 300.h,
                       ),
                     )),
-              )),
+              ),
         if (!_showQuestion) ...[
           test == true
               ? ZoomIn(
-                  delay: Duration(milliseconds: 500),
-                  duration: Duration(
+                  delay: const Duration(milliseconds: 500),
+                  duration: const Duration(
                     seconds: 1,
                   ),
-                  child: DisplayTextInFrame(
+                  child: const DisplayTextInFrame(
                     text:
                         'كل واحد هيسأل شخص تانى سؤال \n اضغط التالى عشان تعرف \n مين هيسأل مين',
                   ),
@@ -113,15 +110,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
           test == true
               ? ZoomIn(
-                  delay: Duration(milliseconds: 500),
-                  duration: Duration(
+                  delay: const Duration(milliseconds: 500),
+                  duration: const Duration(
                     seconds: 1,
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: RoundedActionButton(
                       btnColor: ColorManager.playersCardsColor[3],
-                      title: "التالى",
+                      title: 'التالى',
                       btnFunc: () {
                         setState(() {
                           _showQuestion = true;
@@ -143,21 +140,21 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ] else ...[
           DisplayTextInFrame(
             text:
-                " ${_askingPlayers[_pointer1].playerName} اسأل ${_askingPlayers[_pointer2].playerName} و حاول توقعة ",
+                ' ${_askingPlayers[_pointer1].playerName} اسأل ${_askingPlayers[_pointer2].playerName} و حاول توقعة ',
           ),
           Padding(
-            padding:  EdgeInsets.only(top: 20.h),
+            padding: EdgeInsets.only(top: 20.h),
             child: RoundedActionButton(
               btnFunc: () {
                 if (counter == _playerList.length - 1) {
-                  navigateToPage(context, RandomQuestionsTime());
+                  navigateReplacmentToPage(context, RandomQuestionsTime());
                 } else if (_currentIndex != _playerList.length) {
                   counter++;
                   checkPlayersSimilarity();
                 }
               },
               btnColor: ColorManager.successColor,
-              title: "التالى",
+              title: 'التالى',
             ),
           )
           // ] else ...[
@@ -197,31 +194,27 @@ class DisplayTextInFrame extends StatelessWidget {
       child: Container(
           width: MediaQuery.of(context).size.width - 20.w,
           height: 300.h,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                    "assets/images/frame.png",
+                    'assets/images/frame.png',
                   ),
                   fit: BoxFit.cover)),
           child: Directionality(
               textDirection: TextDirection.rtl,
               child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Container(
-                    child: Center(
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16),
-                          child: AutoSizeText(
-                            text,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: setResponsiveFontSize(16)),
-                          ),
-                        ),
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.w),
+                      child: AutoSizeText(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: setResponsiveFontSize(16)),
                       ),
                     ),
                   )))),
