@@ -1,5 +1,6 @@
 class Players {
-  final String playerName;
-   int playerScore;
-  Players({this.playerName, this.playerScore});
+   String playerName, playerImage;
+  int playerScore;
+
+  Players({this.playerName, this.playerScore, this.playerImage});
 }

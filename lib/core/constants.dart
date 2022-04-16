@@ -1,10 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'ColorManager/ColorManager.dart';
 
-TextStyle boldStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 17);
+TextStyle boldStyle =
+    TextStyle(fontWeight: FontWeight.bold, fontSize: setResponsiveFontSize(17));
 
 TextStyle funckyStyle = TextStyle(
     fontWeight: FontWeight.bold,
@@ -12,10 +16,52 @@ TextStyle funckyStyle = TextStyle(
     color: ColorManager.accentColor,
     fontFamily: GoogleFonts.getFont('Cairo').fontFamily);
 
+setResponsiveFontSize(size) {
+  return ScreenUtil().setSp(size);
+}
+
+navigateToPage(BuildContext context, page) {
+  Navigator.push(
+    context,
+    PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: page,
+        curve: Curves.bounceInOut,
+        inheritTheme: true,
+        ctx: context),
+  );
+}
+
+navigateReplacmentToPage(BuildContext context, page) {
+  Navigator.pushReplacement(
+    context,
+    PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: page,
+        curve: Curves.bounceInOut,
+        inheritTheme: true,duration: const Duration(milliseconds: 500),
+        ctx: context),
+  );
+}
+
+showAnimatedToast(BuildContext context, String content) {
+  showToast(
+    content,
+    context: context,
+    animation: StyledToastAnimation.scale,
+    reverseAnimation: StyledToastAnimation.fade,
+    position: StyledToastPosition.center,
+    animDuration: const Duration(seconds: 1),
+    duration: const Duration(seconds: 4),
+    curve: Curves.elasticOut,
+    reverseCurve: Curves.linear,
+  );
+}
+
 const kTextFieldDecorationWhite = InputDecoration(
   isDense: true,
 
-  contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+  contentPadding:  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
   hintText: 'Enter a value',
   hintStyle:
       TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),
@@ -65,7 +111,7 @@ class RoundedButton extends StatelessWidget {
           child: AutoSizeText(
             title,
             style: TextStyle(
-                fontSize: 17,
+                fontSize: setResponsiveFontSize(17),
                 fontWeight: FontWeight.bold,
                 color: ColorManager.primary,
                 fontFamily: GoogleFonts.getFont('Changa').fontFamily),

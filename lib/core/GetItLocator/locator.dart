@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
 import 'package:flutter_game/core/sharedPrefrences.dart';
 import 'package:get_it/get_it.dart';
@@ -9,7 +11,7 @@ class InitLocator {
   GetIt locator = GetIt.I;
   void intalizeLocator() {
     _setUpLocator();
-    print("initialized locators");
+    log("initialized locators");
   }
 
   Future<void> _setUpLocator() async {

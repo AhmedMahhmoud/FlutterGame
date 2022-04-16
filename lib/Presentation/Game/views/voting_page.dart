@@ -1,8 +1,14 @@
+import 'dart:developer';
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Presentation/Game/widgets/choices_display.dart';
+import 'package:flutter_game/core/ColorManager/ColorManager.dart';
+import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'findout_page.dart';
 
 class VotingScreen extends StatefulWidget {
@@ -30,124 +36,172 @@ class _VotingScreenState extends State<VotingScreen> {
     var playersProv = Provider.of<PlayersProvider>(context, listen: true);
 
     return Scaffold(
-      body: SafeArea(
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/gameBackground.jpg'),
+                fit: BoxFit.cover)),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Text(
-                '${playersProv.playersList[playerIndex].playerName} اختار الشخص اللي شاكك فيه ',
-                textAlign: TextAlign.center,
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: AutoSizeText(
+                  'مرحلة التصويت',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: setResponsiveFontSize(20)),
+                ),
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                        onTap: () async {
-                          // to prevent voting after display of next button
-                          if (button_display_index !=
-                              playersProv.playersList.length) {
-                            setState(() {
-                              button_display_index++;
-                            });
+            DisplayChoices(
+              headerImage: playersProv.playersList[playerIndex].playerImage,
+              content: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50.w),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: AutoSizeText(
+                        '${playersProv.playersList[playerIndex].playerName} اختار الشخص اللي شاكك فيه ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: setResponsiveFontSize(18)),
+                      ),
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                              onTap: () async {
+                                // to prevent voting after display of next button
+                                if (button_display_index !=
+                                    playersProv.playersList.length) {
+                                  setState(() {
+                                    button_display_index++;
+                                  });
 
-                            if (button_display_index !=
-                                playersProv.playersList.length) {
-                              if (button_display_index !=
-                                  playersProv.playersList.length) {
-                                print('playerIndex before $playerIndex');
+                                  if (button_display_index !=
+                                      playersProv.playersList.length) {
+                                    if (button_display_index !=
+                                        playersProv.playersList.length) {
+                                      log('playerIndex before $playerIndex');
 
-                                // 34an at2kd en elly by-vote msh hwa elly bara el salfa
-                                if (playersProv
-                                        .playersList[playerIndex].playerName !=
-                                    playersProv
-                                        .playersList[playersProv.whoIsOutIndex]
-                                        .playerName) {
-                                  // 34an at2kd en elly e5taro hwa hwa elly bara el salfa
-                                  if (playersProv
-                                          .suspectsPlayers[index].playerName ==
-                                      playersProv
-                                          .playersList[
-                                              playersProv.whoIsOutIndex]
-                                          .playerName) {
-                                    print('correct choice');
-                                    playersProv.playersList[playerIndex]
-                                        .playerScore += 100;
+                                      // 34an at2kd en elly by-vote msh hwa elly bara el salfa
+                                      if (playersProv.playersList[playerIndex]
+                                              .playerName !=
+                                          playersProv
+                                              .playersList[
+                                                  playersProv.whoIsOutIndex]
+                                              .playerName) {
+                                        // 34an at2kd en elly e5taro hwa hwa elly bara el salfa
+                                        if (playersProv.suspectsPlayers[index]
+                                                .playerName ==
+                                            playersProv
+                                                .playersList[
+                                                    playersProv.whoIsOutIndex]
+                                                .playerName) {
+                                          log('correct choice');
+                                          playersProv.playersList[playerIndex]
+                                              .playerScore += 100;
+                                        } else {
+                                          log('wrong choice');
+                                        }
+                                      } else {
+                                        log('bara el salfa');
+                                      }
+                                    }
+                                    log(
+                                        'score ${playersProv.playersList[playerIndex].playerScore}');
+
+                                    // zwdna el index 34an ygbly list na2sa el la3eb elly b3do
+                                    setState(() {
+                                      playerIndex++;
+                                    });
+                                    log('playerIndex after $playerIndex');
+                                    await Provider.of<PlayersProvider>(context,
+                                            listen: false)
+                                        .getSuspectsPlayers(playerIndex);
                                   } else {
-                                    print('wrong choice');
+                                    // 34an at2kd en elly by-vote msh hwa elly bara el salfa
+                                    if (playersProv.playersList[playerIndex]
+                                            .playerName !=
+                                        playersProv
+                                            .playersList[
+                                                playersProv.whoIsOutIndex]
+                                            .playerName) {
+                                      // 34an at2kd en elly e5taro hwa hwa elly bara el salfa
+                                      if (playersProv.suspectsPlayers[index]
+                                              .playerName ==
+                                          playersProv
+                                              .playersList[
+                                                  playersProv.whoIsOutIndex]
+                                              .playerName) {
+                                        log('correct choice');
+                                        playersProv.playersList[playerIndex]
+                                            .playerScore += 100;
+                                      } else {
+                                        log('wrong choice');
+                                      }
+                                    } else {
+                                      log('bara el salfa');
+                                    }
+                                    log(
+                                        'score ${playersProv.playersList[playerIndex].playerScore}');
                                   }
                                 } else {
-                                  print('bara el salfa');
+                                  return;
                                 }
-                              }
-                              print(
-                                  'score ${playersProv.playersList[playerIndex].playerScore}');
-
-                              // zwdna el index 34an ygbly list na2sa el la3eb elly b3do
-                              setState(() {
-                                playerIndex++;
-                              });
-                              print('playerIndex after $playerIndex');
-                              await Provider.of<PlayersProvider>(context,
-                                      listen: false)
-                                  .getSuspectsPlayers(playerIndex);
-                            } else {
-                              // 34an at2kd en elly by-vote msh hwa elly bara el salfa
-                              if (playersProv
-                                      .playersList[playerIndex].playerName !=
-                                  playersProv
-                                      .playersList[playersProv.whoIsOutIndex]
-                                      .playerName) {
-                                // 34an at2kd en elly e5taro hwa hwa elly bara el salfa
-                                if (playersProv
-                                        .suspectsPlayers[index].playerName ==
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                    color: ColorManager.darkGrey,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: AutoSizeText(
                                     playersProv
-                                        .playersList[playersProv.whoIsOutIndex]
-                                        .playerName) {
-                                  print('correct choice');
-                                  playersProv.playersList[playerIndex]
-                                      .playerScore += 100;
-                                } else {
-                                  print('wrong choice');
-                                }
-                              } else {
-                                print('bara el salfa');
-                              }
-                              print(
-                                  'score ${playersProv.playersList[playerIndex].playerScore}');
-                            }
-                          } else {
-                            return;
-                          }
-                        },
-                        child: Container(
-                          color: Colors.blue,
-                          child: Text(
-                            playersProv.suspectsPlayers[index].playerName,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          alignment: Alignment.center,
-                          height: 70,
-                          width: 250,
-                        )));
-              },
-              itemCount: playersProv.suspectsPlayers.length,
-            ),
-            button_display_index == playersProv.playersList.length
-                ? RoundedButton(
-                    title: "التالى",
-                    onTapped: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FindOutScreen(),
-                          ));
+                                        .suspectsPlayers[index].playerName,
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.9),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: setResponsiveFontSize(16)),
+                                  ),
+                                ),
+                                alignment: Alignment.center,
+                                height: 70.h,
+                                width: 250.w,
+                              )));
                     },
-                  )
-                : Container()
+                    itemCount: playersProv.suspectsPlayers.length,
+                  ),
+                  const Spacer(),
+                  button_display_index == playersProv.playersList.length
+                      ? Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: RoundedActionButton(
+                            title: 'التالى',
+                            btnColor: ColorManager.successColor,
+                            btnFunc: () {
+                              navigateReplacmentToPage(
+                                  context, FindOutScreen());
+                            },
+                          ),
+                        )
+                      : Container()
+                ],
+              ),
+            ),
           ],
         ),
       ),

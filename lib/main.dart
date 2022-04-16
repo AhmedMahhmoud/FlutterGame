@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
-import 'package:flutter_game/Domain/Models/AnimalModel.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:provider/provider.dart';
 import 'Data/Providers/Animal/AnimalProvider.dart';
-import 'Database/AnimalDatabase.dart';
-import 'Database/initalize.dart';
+
+import 'Presentation/Game/views/splash_screen.dart';
 import 'Presentation/Home/views/home.dart';
 import 'core/GetItLocator/locator.dart';
 import 'package:get_it/get_it.dart';
-
-import 'core/Shared/animalData.dart';
-import 'core/sharedPrefrences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,19 +23,25 @@ GetIt getIt = GetIt.instance;
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => PlayersProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => AnimalProvider(),
-          ),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Home(),
-        ));
+    return ScreenUtilInit(
+        designSize: const Size(411.42857, 899.42857),
+        builder: () {
+          return MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => PlayersProvider(),
+                ),
+                ChangeNotifierProvider(
+                  create: (context) => AnimalProvider(),
+                ),
+              ],
+              child: MaterialApp(
+                theme: ThemeData(fontFamily: 'Cairo'),
+                debugShowCheckedModeBanner: false,
+                home: SplashScreen(),
+                title: 'بكاسة',
+              ));
+        });
   }
 }
 
