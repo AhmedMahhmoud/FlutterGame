@@ -2,21 +2,16 @@ import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
-import 'package:flutter_game/Domain/Models/PlayersModel.dart';
-import 'package:flutter_game/Presentation/Game/views/who_is_out.dart';
-import 'package:flutter_game/Presentation/Game/widgets/add_player_container.dart';
-import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
-import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/constantData.dart';
-import 'package:flutter_game/core/Shared/rounded_action_button.dart';
-import 'package:flutter_game/core/constants.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import '../../../Data/Providers/Players/PlayersProvider.dart';
+import '../../../Domain/Models/PlayersModel.dart';
+import 'who_is_out.dart';
+import '../widgets/add_player_container.dart';
+import '../widgets/player_container.dart';
+import '../../../core/ColorManager/ColorManager.dart';
+import '../../../core/Shared/rounded_action_button.dart';
+import '../../../core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -59,10 +54,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
-                      "assets/images/gameBackground.jpg",
+                      'assets/images/gameBackground.jpg',
                     ),
                     fit: BoxFit.fill)),
             width: MediaQuery.of(context).size.width,
@@ -73,40 +68,40 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 5.h,
+                        height: 15.h,
                       ),
                       AutoSizeText(
-                        "اللاعبين",
+                        'اللاعبين',
                         style: TextStyle(
                             fontSize: setResponsiveFontSize(25),
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 5.h,
+                        height: 10.h,
                       ),
                       AnimatedContainer(
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         height: listHeight * value.playersList.length,
                         margin: EdgeInsets.symmetric(horizontal: 15.w),
                         child: ListView.builder(
-                          itemCount: value.playersList.length == 0
+                          itemCount: value.playersList.isEmpty
                               ? 1
                               : value.playersList.length,
                           itemBuilder: (context, index) {
                             return BounceInRight(
                               child: Visibility(
-                                visible: value.playersList.length != 0,
+                                visible: value.playersList.isNotEmpty,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 6),
                                   child: PLayerContainer(
                                     playerIndex: index,
-                                    playerImage: value.playersList.length == 0
-                                        ? ""
+                                    playerImage: value.playersList.isEmpty
+                                        ? ''
                                         : value.playersList[index].playerImage,
-                                    playerName: value.playersList.length == 0
-                                        ? " "
+                                    playerName: value.playersList.isEmpty
+                                        ? ' '
                                         : value.playersList[index].playerName,
                                   ),
                                 ),
@@ -125,7 +120,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                       builder: (context, setstate) {
                                     return FadeInDown(
                                       child: Dialog(
-                                        shape: RoundedRectangleBorder(
+                                        shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(15.0))),
                                         child: GestureDetector(
@@ -138,9 +133,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
-                                                image: DecorationImage(
+                                                image: const DecorationImage(
                                                   image: AssetImage(
-                                                    "assets/images/gameBackground.jpg",
+                                                    'assets/images/gameBackground.jpg',
                                                   ),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -162,7 +157,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                  SizedBox(
                                                   height: 20.h,
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                     width: double.infinity,
                                                     height: 180.h,
                                                     child: ListView.builder(
@@ -184,7 +179,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                               },
                                                               child:
                                                                   AnimatedContainer(
-                                                                duration: Duration(
+                                                                duration: const Duration(
                                                                     milliseconds:
                                                                         300),
                                                                 margin: EdgeInsets
@@ -231,7 +226,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                             ),
                                                             characterIndex ==
                                                                     index
-                                                                ? Icon(
+                                                                ? const Icon(
                                                                     FontAwesomeIcons
                                                                         .handPointUp,
                                                                     color: Colors
@@ -245,13 +240,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                 Directionality(
                                                   textDirection:
                                                       TextDirection.rtl,
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     width: 300.w,
-                                                    height: 60.h,
+                                                    height: 100.h,
                                                     child: TextField(
                                                       controller:
-                                                          _textEditingController,
-                                                      style: TextStyle(
+                                                          _textEditingController, maxLength: 10,
+                                                      style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold),
                                                       decoration:
@@ -265,7 +260,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                               ),
                                                               focusedBorder:
                                                                   OutlineInputBorder(
-                                                                borderSide: BorderSide(
+                                                                borderSide: const BorderSide(
                                                                     color: Colors
                                                                         .black,
                                                                     width: 2),
@@ -283,7 +278,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                                       FontWeight
                                                                           .bold),
                                                               hintText:
-                                                                  "اسم اللاعب",
+                                                                  'اسم اللاعب',
                                                               fillColor: Colors
                                                                   .white70),
                                                     ),
@@ -295,7 +290,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                 RoundedActionButton(
                                                   btnColor:
                                                       ColorManager.successColor,
-                                                  title: "إضافة",
+                                                  title: 'إضافة',
                                                   btnFunc: () {
                                                     if (value.checkPlayerExist(
                                                         _textEditingController
@@ -304,9 +299,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                           'اسم اللاعب موجود قبل كدة');
                                                     } else if (_textEditingController
                                                             .text ==
-                                                        "") {
+                                                        '') {
                                                       showAnimatedToast(context,
-                                                          "اسم اللاعب فاضي");
+                                                          'اسم اللاعب فاضي');
                                                     } else {
                                                       Navigator.pop(context);
                                                       value.addPlayer(
@@ -322,7 +317,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                           currentIndex,
                                                           characterIndex);
                                                       player.play(
-                                                          "sounds/addPlayerSuccess.mp3");
+                                                          'sounds/addPlayerSuccess.mp3');
                                                       setState(() {
                                                         currentIndex++;
                                                         _textEditingController
@@ -349,7 +344,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                           ? Container()
                           : RoundedActionButton(
                               btnColor: ColorManager.successColor,
-                              title: "يلا بينا",
+                              title: 'يلا بينا',
                               btnFunc: () {
                                 navigateToPage(context, WhoIsOut());
                               },

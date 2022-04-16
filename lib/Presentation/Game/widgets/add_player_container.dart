@@ -16,13 +16,13 @@ class AddPLayerContainer extends StatelessWidget {
       strokeWidth: 1,
       dashPattern: [3, 3],
       borderType: BorderType.RRect,
-      radius: Radius.circular(10),
+      radius: const Radius.circular(10),
       color: Colors.white,
       child: Container(
-        height: 75,
-        width: 360,
+        height: 75.h,
+        width: 360.w,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(
             children: [
               DottedBorder(
@@ -33,16 +33,16 @@ class AddPLayerContainer extends StatelessWidget {
                 child: Container(
                   width: 45.w,
                   height: 45.h,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
                 ),
               ),
               SizedBox(
-                width: 15,
+                width: 15.w,
               ),
               AutoSizeText(
-                "لاعب جديد",
+                'لاعب جديد',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: setResponsiveFontSize(18),
@@ -61,12 +61,12 @@ class AddPLayerContainer extends StatelessWidget {
                         color: ColorManager.successColor.withOpacity(0.5),
                         spreadRadius: 1,
                         blurRadius: 1,
-                        offset: Offset(0, 2), // changes position of shadow
+                        offset: const Offset(0, 2), // changes position of shadow
                       ),
                     ],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       FontAwesomeIcons.plus,
                       color: Colors.white,
@@ -85,7 +85,7 @@ class AddPLayerContainer extends StatelessWidget {
               color: Colors.transparent.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
         ),

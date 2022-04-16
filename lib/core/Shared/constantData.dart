@@ -16,6 +16,7 @@ Animal animalData = Animal(
     ],
     categoryImage: "assets/images/animals.jpg",
     categoryName: "حيوانات");
+
 List<String> playersImages = [
   "assets/images/p1.png",
   "assets/images/p2.png",

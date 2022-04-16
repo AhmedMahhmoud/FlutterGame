@@ -35,9 +35,9 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/gameBackground.jpg"),
+                image: AssetImage('assets/images/gameBackground.jpg'),
                 fit: BoxFit.cover)),
         child: Column(
           children: [
@@ -45,14 +45,14 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
               height: 20.h,
             ),
             AutoSizeText(
-              "اسألة عشوائية",
+              'اسألة عشوائية',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: setResponsiveFontSize(20),
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             DisplayChoices(
               headerImage: playersProv
@@ -95,7 +95,7 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
                                       .getAskingPlayer();
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                   decoration: BoxDecoration(
                                       color: ColorManager.darkGrey,
                                       borderRadius: BorderRadius.circular(10)),
@@ -120,7 +120,7 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: RoundedActionButton(
-                      title: "صوت",
+                      title: 'صوت',
                       btnColor: ColorManager.successColor,
                       btnFunc: () {
                         navigateReplacmentToPage(context, VotingScreen());

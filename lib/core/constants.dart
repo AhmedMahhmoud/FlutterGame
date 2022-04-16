@@ -39,7 +39,7 @@ navigateReplacmentToPage(BuildContext context, page) {
         type: PageTransitionType.rightToLeft,
         child: page,
         curve: Curves.bounceInOut,
-        inheritTheme: true,
+        inheritTheme: true,duration: const Duration(milliseconds: 500),
         ctx: context),
   );
 }
@@ -51,8 +51,8 @@ showAnimatedToast(BuildContext context, String content) {
     animation: StyledToastAnimation.scale,
     reverseAnimation: StyledToastAnimation.fade,
     position: StyledToastPosition.center,
-    animDuration: Duration(seconds: 1),
-    duration: Duration(seconds: 4),
+    animDuration: const Duration(seconds: 1),
+    duration: const Duration(seconds: 4),
     curve: Curves.elasticOut,
     reverseCurve: Curves.linear,
   );
@@ -61,7 +61,7 @@ showAnimatedToast(BuildContext context, String content) {
 const kTextFieldDecorationWhite = InputDecoration(
   isDense: true,
 
-  contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+  contentPadding:  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
   hintText: 'Enter a value',
   hintStyle:
       TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),

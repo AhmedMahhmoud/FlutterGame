@@ -8,95 +8,98 @@ import 'package:flutter_game/Presentation/Home/views/home.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-double listHeight = 90;
+double listHeight = 90.h;
 
 class FinalResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/gameBackground.jpg",
-                ),
-                fit: BoxFit.fill)),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Consumer<PlayersProvider>(
-          builder: (context, value, child) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 5,
+    return WillPopScope(onWillPop: ()=>   navigateReplacmentToPage(context, AddPlayerScreen(false)) ,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/gameBackground.jpg',
                   ),
-                  AutoSizeText(
-                    "النتيجة",
-                    style: TextStyle(
-                        fontSize: setResponsiveFontSize(25),
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    height: listHeight * value.playersList.length,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                    child: ListView.builder(
-                      itemCount: value.playersList.length == 0
-                          ? 1
-                          : value.playersList.length,
-                      itemBuilder: (context, index) {
-                        return BounceInRight(
-                          child: Visibility(
-                            visible: value.playersList.length != 0,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
-                              child: PlayerRanking(
-                                playerScore:
-                                    value.playersList[index].playerScore,
-                                playerIndex: index,
-                                playerImage: value.playersList.length == 0
-                                    ? ""
-                                    : value.playersList[index].playerImage,
-                                playerName: value.playersList.length == 0
-                                    ? " "
-                                    : value.playersList[index].playerName,
+                  fit: BoxFit.fill)),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Consumer<PlayersProvider>(
+            builder: (context, value, child) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    AutoSizeText(
+                      'النتيجة',
+                      style: TextStyle(
+                          fontSize: setResponsiveFontSize(25),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      height: listHeight * value.playersList.length,
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      child: ListView.builder(
+                        itemCount: value.playersList.isEmpty
+                            ? 1
+                            : value.playersList.length,
+                        itemBuilder: (context, index) {
+                          return BounceInRight(
+                            child: Visibility(
+                              visible: value.playersList.isNotEmpty,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                child: PlayerRanking(
+                                  playerScore:
+                                      value.playersList[index].playerScore,
+                                  playerIndex: index,
+                                  playerImage: value.playersList.isEmpty
+                                      ? ''
+                                      : value.playersList[index].playerImage,
+                                  playerName: value.playersList.isEmpty
+                                      ? ' '
+                                      : value.playersList[index].playerName,
+                                ),
                               ),
                             ),
-                          ),
-                        );
+                          );
+                        },
+                      ),
+                    ),
+                    RoundedActionButton(
+                      btnColor: ColorManager.successColor,
+                      title: 'دور جديد',
+                      btnFunc: () {
+                        navigateReplacmentToPage(context, AddPlayerScreen(false));
                       },
                     ),
-                  ),
-                  RoundedActionButton(
-                    btnColor: ColorManager.successColor,
-                    title: 'دور جديد',
-                    btnFunc: () {
-                      navigateReplacmentToPage(context, AddPlayerScreen(false));
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  RoundedActionButton(
-                    btnColor: ColorManager.failColor,
-                    title: 'إنهاء اللعبة',
-                    btnFunc: () {
-                      navigateReplacmentToPage(context, Home());
-                    },
-                  )
-                ],
-              ),
-            );
-          },
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    RoundedActionButton(
+                      btnColor: ColorManager.failColor,
+                      title: 'إنهاء اللعبة',
+                      btnFunc: () {
+                        navigateReplacmentToPage(context, Home());
+                      },
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

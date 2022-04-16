@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as lg;
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -18,16 +19,16 @@ class PlayersProvider with ChangeNotifier {
 
   String finalBara;
 
- void switchWhoIsBara() {
+  void switchWhoIsBara() {
     tmpWhoIsOutIndex = whoIsOutIndex;
 
     for (int i = 0; i < playersList.length; i++) {
       whoIsOutIndex = i;
-      Future.delayed(Duration(milliseconds: 500));
-      print('player is ${i}');
+      Future.delayed(const Duration(milliseconds: 500));
+lg.log('player is ${i}');
       notifyListeners();
     }
-    }
+  }
 
   addPlayer(Players player, int index, int imageIndex) {
     playersList.add(player);
@@ -39,13 +40,13 @@ class PlayersProvider with ChangeNotifier {
   resetPlayers() {
     playersList.clear();
     charactersImages = [
-      "assets/images/p1.png",
-      "assets/images/p2.png",
-      "assets/images/p3.png",
-      "assets/images/p4.png",
-      "assets/images/p5.png",
-      "assets/images/p6.png",
-      "assets/images/p7.png",
+      'assets/images/p1.png',
+      'assets/images/p2.png',
+      'assets/images/p3.png',
+      'assets/images/p4.png',
+      'assets/images/p5.png',
+      'assets/images/p6.png',
+      'assets/images/p7.png',
     ];
   }
 
@@ -62,9 +63,10 @@ class PlayersProvider with ChangeNotifier {
   }
 
   sortList() {
-    playersList.sort((a, b) => a.playerScore.compareTo(b.playerScore));
+    playersList
+        .sort((Players a, Players b) => a.playerScore.compareTo(b.playerScore));
     playersList = playersList.reversed.toList();
-    print("list sorted");
+lg.log('list sorted');
   }
 
   bool checkPlayerExist(String playerName) {
@@ -79,11 +81,11 @@ class PlayersProvider with ChangeNotifier {
   String getPlayerByname(String name) {
     if (playersList.isNotEmpty) {
       return playersList
-          .where((element) => element.playerName == name)
+          .where((Players element) => element.playerName == name)
           .first
           .playerName;
     }
-    return "";
+    return '';
   }
 
   getRandomPlayers() {
@@ -92,12 +94,12 @@ class PlayersProvider with ChangeNotifier {
 
     if (playersList.length > 3) {
       if (lastAskingPlayerIndex == -1) {
-        print('awel mara');
+lg.log('awel mara');
         randomPlayers.removeAt(Random().nextInt(randomPlayers.length));
       } else {
-        print('lastAskingPlayerIndex $lastAskingPlayerIndex');
+lg.log('lastAskingPlayerIndex $lastAskingPlayerIndex');
 
-        randomPlayers.removeAt(lastAskingPlayerIndex);
+        randomPlayers.removeAt(lastAskingPlayerIndex==0?0:lastAskingPlayerIndex-1);
       }
     }
 
@@ -116,12 +118,13 @@ class PlayersProvider with ChangeNotifier {
   }
 
   getAskingPlayer() {
-    final random = Random().nextInt(playersList.length - 1);
+    int random = Random().nextInt(playersList.length);
+lg.log('random is $random');
     if (random == lastAskingPlayerIndex) {
-      print('wrong random');
+lg.log('wrong random');
       getAskingPlayer();
     } else {
-      print(
+lg.log(
           'random index is $random  last player index is $lastAskingPlayerIndex');
       askingPlayerIndex = random;
 

@@ -20,7 +20,7 @@ class DisplayChoices extends StatelessWidget {
       children: [
         Column(
           children: [
-            Container(
+            SizedBox(
               width: 350.w,
               height: 60.h,
             ),
@@ -34,8 +34,8 @@ class DisplayChoices extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        Color(0xff8435DE),
-                        Color(0xff8435DE).withOpacity(0.8)
+                        const Color(0xff8435DE),
+                        const Color(0xff8435DE).withOpacity(0.8)
                       ])),
             ),
           ],
@@ -44,14 +44,14 @@ class DisplayChoices extends StatelessWidget {
           top: 0,
           child: Container(
             width: 100.w,
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: 100.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Color(0xff8435DE),
             ),
             child: CircleAvatar(
-              backgroundColor: Color(0xff8435DE),
+              backgroundColor: const Color(0xff8435DE),
               backgroundImage: AssetImage(
                 headerImage,
               ),
