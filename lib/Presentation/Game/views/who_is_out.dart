@@ -9,12 +9,12 @@ import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Data/Providers/Animal/animal_provider.dart';
+import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_game/Database/AnimalDatabase.dart';
 import 'package:flutter_game/Presentation/Game/views/questions_time.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/constantData.dart';
+import 'package:flutter_game/core/Shared/constant_data.dart';
 import 'package:flutter_game/core/Shared/hoverButton.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
@@ -38,7 +38,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
   bool _switchToNewPlayer = true;
   int _playersLength;
   int _turnNumber = 0; // (number of players *2)
-  String randomAnimalName;
+  String randomGameName;
 
   AudioPlayer audioPlayer = AudioPlayer();
   AudioPlayerState audioPlayerState = AudioPlayerState.PAUSED;
@@ -70,7 +70,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
     audioCache.clearCache();
   }
 
-  playMusic() async {
+  Future<void> playMusic() async {
     await audioCache.play(path);
   }
 
@@ -78,13 +78,13 @@ class _WhoIsOutState extends State<WhoIsOut> {
     await audioPlayer.pause();
   }
 
-  goNextTurn() {
+  void goNextTurn() {
     setState(() {
       _turnNumber++;
     });
   }
 
-  incrementIndex() {
+  void incrementIndex() {
     if (_currentIndex < _playersLength - 1) {
       setState(() {
         _currentIndex++;
@@ -95,10 +95,12 @@ class _WhoIsOutState extends State<WhoIsOut> {
   String _getRandomAnimal() {
     int animalsTableLength = animalData.itemsName.length;
     final random = Random().nextInt(animalsTableLength);
-    randomAnimalName = animalData.itemsName[random];
-    Provider.of<AnimalProvider>(context, listen: false)
-        .setCurrentAnimal(randomAnimalName);
-    return randomAnimalName;
+    randomGameName = Provider.of<GameProvider>(context, listen: false)
+        .game
+        .itemsName[random];
+    Provider.of<GameProvider>(context, listen: false)
+        .setCurrentGame(randomGameName);
+    return randomGameName;
   }
 
   int _getRandomIndex() {
@@ -146,7 +148,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                       )
                                     : Container(),
                                 Padding(
-                                  padding:  EdgeInsets.only(right: 12.w),
+                                  padding: EdgeInsets.only(right: 12.w),
                                   child: Container(
                                       width: MediaQuery.of(context).size.width -
                                           20.w,
@@ -161,15 +163,13 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                         textDirection: TextDirection.rtl,
                                         child: _switchToNewPlayer
                                             ? Padding(
-                                                padding:
-                                                     EdgeInsets.symmetric(
-                                                        horizontal: 20.w,
-                                                        vertical: 20.h),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 20.w,
+                                                    vertical: 20.h),
                                                 child: Center(
                                                   child: Padding(
-                                                    padding:
-                                                         EdgeInsets
-                                                            .only(left: 16.w),
+                                                    padding: EdgeInsets.only(
+                                                        left: 16.w),
                                                     child: AutoSizeText(
                                                       'ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف \n هو اللي برا اللعبة ولا لا !',
                                                       textAlign:
@@ -180,10 +180,8 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                       'Changa')
                                                               .fontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold,
-                                                          color:
-                                                              Colors.white,
+                                                              FontWeight.bold,
+                                                          color: Colors.white,
                                                           fontSize:
                                                               setResponsiveFontSize(
                                                                   18)),
@@ -191,8 +189,8 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                   ),
                                                 ))
                                             : Padding(
-                                                padding:  EdgeInsets.only(
-                                                    left: 16.w),
+                                                padding:
+                                                    EdgeInsets.only(left: 16.w),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
@@ -259,7 +257,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                   _currentIndex ==
                                                                           _whoIsOutIndex
                                                                       ? 'برا'
-                                                                      : randomAnimalName,
+                                                                      : randomGameName,
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight

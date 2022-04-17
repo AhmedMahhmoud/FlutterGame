@@ -2,20 +2,17 @@ import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
-import 'package:flutter_game/Database/AnimalDatabase.dart';
-import 'package:flutter_game/Domain/Models/AnimalModel.dart';
-import 'package:flutter_game/Presentation/Game/views/add_players.dart';
-import 'package:flutter_game/Presentation/Game/views/findout_page.dart';
-import 'package:flutter_game/Presentation/Game/widgets/categories_container.dart';
-import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/constantData.dart';
-import 'package:flutter_game/core/constants.dart';
-import 'package:flutter_game/main.dart';
+import 'package:flutter_game/Data/Providers/Animal/animal_provider.dart';
+import 'package:flutter_game/core/Shared/constant_data.dart';
+import 'package:provider/provider.dart';
+import '../../Game/views/add_players.dart';
+import '../../Game/widgets/categories_container.dart';
+import '../../../core/ColorManager/ColorManager.dart';
+import '../../../core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// ignore: use_key_in_widget_constructors
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -31,9 +28,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    final gameProv = Provider.of<GameProvider>(context, listen: false);
     // final _animalProv = locator.locator<AnimalProvider>();
     return WillPopScope(
-      onWillPop: ()=> SystemNavigator.pop(),
+      onWillPop: () => SystemNavigator.pop(),
       child: Scaffold(
           body: Container(
         decoration: const BoxDecoration(
@@ -62,13 +60,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child: CategoriesCard(
                 catColor: ColorManager.playersCardsColor[0],
                 onTap: () {
-                  navigateToPage(context, AddPlayerScreen(true));
+                  gameProv.setGameCategory(animalData);
+                  navigateToPage(context, const AddPlayerScreen(true));
                 },
                 catTitle: 'حيوانات',
                 catImage: 'assets/images/animals.jpg',
               ),
             ),
-             SizedBox(
+            SizedBox(
               height: 15.h,
             ),
             FadeInLeft(
@@ -84,32 +83,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     animation: StyledToastAnimation.slideFromTop,
                     reverseAnimation: StyledToastAnimation.fade,
                     position: StyledToastPosition.center,
-                    animDuration:const Duration(seconds: 1),
-                    duration:const Duration(seconds: 4),
-                    curve: Curves.elasticOut,
-                    reverseCurve: Curves.linear,
-                  );
-                },
-              ),
-            ),
-             SizedBox(
-              height: 15.h,
-            ),
-            FadeInRight(
-              delay: const Duration(milliseconds: 2200),
-              child: CategoriesCard(
-                catColor: ColorManager.playersCardsColor[4],
-                catImage: 'assets/images/food.jpg',
-                catTitle: 'اكلات مصرية',
-                onTap: () {
-                  showToast(
-                    'مش متوفرة دلوقتي',
-                    context: context,
-                    animation: StyledToastAnimation.slideFromTop,
-                    reverseAnimation: StyledToastAnimation.fade,
-                    position: StyledToastPosition.center,
-                    animDuration:const Duration(seconds: 1),
-                    duration:const Duration(seconds: 4),
+                    animDuration: const Duration(seconds: 1),
+                    duration: const Duration(seconds: 4),
                     curve: Curves.elasticOut,
                     reverseCurve: Curves.linear,
                   );
@@ -119,8 +94,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             SizedBox(
               height: 15.h,
             ),
+            FadeInRight(
+              delay: const Duration(milliseconds: 2200),
+              child: CategoriesCard(
+                catColor: ColorManager.playersCardsColor[4],
+                catImage: 'assets/images/food.jpg',
+                catTitle: 'اكلات مصرية',
+                onTap: () {
+                  gameProv.setGameCategory(foodData);
+                  navigateToPage(context, const AddPlayerScreen(true));
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
             FadeInLeft(
-              delay:const Duration(milliseconds: 2900),
+              delay: const Duration(milliseconds: 2900),
               child: CategoriesCard(
                 catColor: ColorManager.playersCardsColor[3],
                 catImage: 'assets/images/clothes.jpg',

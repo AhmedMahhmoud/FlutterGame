@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -144,7 +144,7 @@ class PlayerRanking extends StatelessWidget {
                     : Container()
               ],
             ),
-             SizedBox(
+            SizedBox(
               width: 15.w,
             ),
             AutoSizeText(

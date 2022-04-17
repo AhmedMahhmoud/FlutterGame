@@ -1,6 +1,6 @@
-import 'package:flutter_game/Domain/Models/AnimalModel.dart';
+import 'package:flutter_game/Domain/Models/animal_model.dart';
 
-Animal animalData = Animal(
+Game animalData = Game(
     id: 1,
     itemsName: [
       'الأسد',
@@ -38,7 +38,37 @@ Animal animalData = Animal(
     ],
     categoryImage: 'assets/images/animals.jpg',
     categoryName: 'حيوانات');
-
+Game foodData = Game(
+    id: 2,
+    itemsName: [
+      'كشري',
+      'محشي',
+      'بليله',
+      'مكرونه',
+      'كبده',
+      'جمبري',
+      'سجق',
+      'سوسيس',
+      'حمام',
+      'بانية',
+      'بسلة',
+      'ملوخية',
+      'رز بلبن',
+      'شاورما',
+      'كوسة',
+      'كوارع',
+      'كنافة',
+      'قطايف',
+      'فراخ مشوية',
+      'لوبيا',
+      'سبانخ',
+      'ورق عنب',
+      'محشي كرنب',
+      'فاصوليا',
+      'جلاش',
+    ],
+    categoryImage: 'assets/images/food.jpg',
+    categoryName: 'اكلات مصرية');
 List<String> playersImages = [
   'assets/images/p1.png',
   'assets/images/p2.png',

@@ -1,9 +1,9 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import '../../../Data/Providers/Animal/AnimalProvider.dart';
-import '../../../Data/Providers/Players/PlayersProvider.dart';
-import '../../../Domain/Models/AnimalModel.dart';
+import '../../../Data/Providers/Animal/animal_provider.dart';
+import '../../../Data/Providers/Players/players_provider.dart';
+import '../../../Domain/Models/animal_model.dart';
 import 'who_is_out.dart';
 import '../widgets/choices_display.dart';
 import '../../../core/ColorManager/ColorManager.dart';
@@ -28,7 +28,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   void initState() {
     super.initState();
-    choicesList = Provider.of<AnimalProvider>(context, listen: false)
+    choicesList = Provider.of<GameProvider>(context, listen: false)
         .generateRandomAnimalsForChoices();
   }
 
@@ -58,7 +58,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
 
   isCorrectAnswer(String choosenAnimal) {
     if (choosenAnimal ==
-        Provider.of<AnimalProvider>(context, listen: false).currentAnimal) {
+        Provider.of<GameProvider>(context, listen: false).currentGame) {
       setState(() {
         _choiceResult = true;
         Provider.of<PlayersProvider>(context, listen: false)

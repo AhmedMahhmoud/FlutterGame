@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter_game/Data/Providers/Animal/AnimalProvider.dart';
+import 'package:flutter_game/Data/Providers/Animal/animal_provider.dart';
 import 'package:flutter_game/core/sharedPrefrences.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:provider/provider.dart';
-import 'Data/Providers/Animal/AnimalProvider.dart';
+import 'Data/Providers/Animal/animal_provider.dart';
 
 import 'Presentation/Game/views/splash_screen.dart';
 import 'Presentation/Home/views/home.dart';
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
           return MultiProvider(
               providers: [
                 ChangeNotifierProvider(
-                  create: (context) => PlayersProvider(),
+                  create: (BuildContext context) => PlayersProvider(),
                 ),
                 ChangeNotifierProvider(
-                  create: (context) => AnimalProvider(),
+                  create: (BuildContext context) => GameProvider(),
                 ),
               ],
               child: MaterialApp(

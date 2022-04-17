@@ -3,8 +3,8 @@ import 'dart:developer' as lg;
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game/Domain/Models/PlayersModel.dart';
-import 'package:flutter_game/core/Shared/constantData.dart';
+import 'package:flutter_game/Domain/Models/player_model.dart';
+import 'package:flutter_game/core/Shared/constant_data.dart';
 
 class PlayersProvider with ChangeNotifier {
   List<Players> playersList = [];
@@ -25,7 +25,7 @@ class PlayersProvider with ChangeNotifier {
     for (int i = 0; i < playersList.length; i++) {
       whoIsOutIndex = i;
       Future.delayed(const Duration(milliseconds: 500));
-lg.log('player is ${i}');
+      lg.log('player is ${i}');
       notifyListeners();
     }
   }
@@ -66,7 +66,7 @@ lg.log('player is ${i}');
     playersList
         .sort((Players a, Players b) => a.playerScore.compareTo(b.playerScore));
     playersList = playersList.reversed.toList();
-lg.log('list sorted');
+    lg.log('list sorted');
   }
 
   bool checkPlayerExist(String playerName) {
@@ -94,12 +94,13 @@ lg.log('list sorted');
 
     if (playersList.length > 3) {
       if (lastAskingPlayerIndex == -1) {
-lg.log('awel mara');
+        lg.log('awel mara');
         randomPlayers.removeAt(Random().nextInt(randomPlayers.length));
       } else {
-lg.log('lastAskingPlayerIndex $lastAskingPlayerIndex');
+        lg.log('lastAskingPlayerIndex $lastAskingPlayerIndex');
 
-        randomPlayers.removeAt(lastAskingPlayerIndex==0?0:lastAskingPlayerIndex-1);
+        randomPlayers.removeAt(
+            lastAskingPlayerIndex == 0 ? 0 : lastAskingPlayerIndex - 1);
       }
     }
 
@@ -119,12 +120,12 @@ lg.log('lastAskingPlayerIndex $lastAskingPlayerIndex');
 
   getAskingPlayer() {
     int random = Random().nextInt(playersList.length);
-lg.log('random is $random');
+    lg.log('random is $random');
     if (random == lastAskingPlayerIndex) {
-lg.log('wrong random');
+      lg.log('wrong random');
       getAskingPlayer();
     } else {
-lg.log(
+      lg.log(
           'random index is $random  last player index is $lastAskingPlayerIndex');
       askingPlayerIndex = random;
 

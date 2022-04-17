@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_game/Presentation/Game/views/add_players.dart';
 import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
 import 'package:flutter_game/Presentation/Home/views/home.dart';
@@ -17,7 +17,9 @@ double listHeight = 90.h;
 class FinalResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(onWillPop: ()=>   navigateReplacmentToPage(context, AddPlayerScreen(false)) ,
+    return WillPopScope(
+      onWillPop: () =>
+          navigateReplacmentToPage(context, AddPlayerScreen(false)),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -60,7 +62,8 @@ class FinalResult extends StatelessWidget {
                             child: Visibility(
                               visible: value.playersList.isNotEmpty,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 6),
                                 child: PlayerRanking(
                                   playerScore:
                                       value.playersList[index].playerScore,
@@ -82,7 +85,8 @@ class FinalResult extends StatelessWidget {
                       btnColor: ColorManager.successColor,
                       title: 'دور جديد',
                       btnFunc: () {
-                        navigateReplacmentToPage(context, AddPlayerScreen(false));
+                        navigateReplacmentToPage(
+                            context, AddPlayerScreen(false));
                       },
                     ),
                     SizedBox(

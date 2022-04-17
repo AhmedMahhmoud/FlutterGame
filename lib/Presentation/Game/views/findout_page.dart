@@ -4,7 +4,7 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
@@ -50,64 +50,71 @@ class _FindOutScreenState extends State<FindOutScreen> {
                 ),
                 fit: BoxFit.fill)),
         child: countDown == false
-            ?
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 100.h,
-              ),
-              AutoSizeText(
-                'البـِــكـِـس هو ',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: setResponsiveFontSize(24)),
-              ),
-              SizedBox(height: 90.h,),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Card(
-                    //color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 100.h,
                   ),
-                  elevation: 4,
-                  child:ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: BackdropFilter(
-                        filter:
-                        ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                        child:Row(
-                          children: [
-                            SizedBox(
-                                height: 200.h,
-                                width: 200.w,
-                                child: Lottie.asset(
-                                    'assets/lotties/whoisout.json')),
-                            AutoSizeText(
-                              Provider.of<PlayersProvider>(context, listen: false).playersList[Provider.of<PlayersProvider>(context, listen: false).whoIsOutIndex].playerName,
-                              style: TextStyle(
-                                  color: Colors.pink,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: setResponsiveFontSize(22)),
-                            )
-                          ],
-                        ),
-                ),
-              ))),
-
-              SizedBox(height: 200.h,),
-              RoundedActionButton(
-                btnColor: ColorManager.successColor,
-                title: 'التالى',
-                btnFunc: () {
-                  navigateReplacmentToPage(
-                      context, ChoiceScreen());
-                },
-              ),
-            ],
-          )
+                  AutoSizeText(
+                    'البـِــكـِـس هو ',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: setResponsiveFontSize(24)),
+                  ),
+                  SizedBox(
+                    height: 90.h,
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Card(
+                          //color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          elevation: 4,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                      height: 200.h,
+                                      width: 200.w,
+                                      child: Lottie.asset(
+                                          'assets/lotties/whoisout.json')),
+                                  AutoSizeText(
+                                    Provider.of<PlayersProvider>(context,
+                                            listen: false)
+                                        .playersList[
+                                            Provider.of<PlayersProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .whoIsOutIndex]
+                                        .playerName,
+                                    style: TextStyle(
+                                        color: Colors.pink,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: setResponsiveFontSize(22)),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ))),
+                  SizedBox(
+                    height: 200.h,
+                  ),
+                  RoundedActionButton(
+                    btnColor: ColorManager.successColor,
+                    title: 'التالى',
+                    btnFunc: () {
+                      navigateReplacmentToPage(context, ChoiceScreen());
+                    },
+                  ),
+                ],
+              )
             : Center(
                 child: Lottie.asset(
                   'assets/lotties/countdown.json',

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/PlayersProvider.dart';
+import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_game/Presentation/Game/widgets/choices_display.dart';
 import 'package:flutter_game/core/ColorManager/ColorManager.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
@@ -121,8 +121,7 @@ class _VotingScreenState extends State<VotingScreen> {
                                         log('bara el salfa');
                                       }
                                     }
-                                    log(
-                                        'score ${playersProv.playersList[playerIndex].playerScore}');
+                                    log('score ${playersProv.playersList[playerIndex].playerScore}');
 
                                     // zwdna el index 34an ygbly list na2sa el la3eb elly b3do
                                     setState(() {
@@ -156,15 +155,15 @@ class _VotingScreenState extends State<VotingScreen> {
                                     } else {
                                       log('bara el salfa');
                                     }
-                                    log(
-                                        'score ${playersProv.playersList[playerIndex].playerScore}');
+                                    log('score ${playersProv.playersList[playerIndex].playerScore}');
                                   }
                                 } else {
                                   return;
                                 }
                               },
                               child: Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                     color: ColorManager.darkGrey,
                                     borderRadius: BorderRadius.circular(10)),
