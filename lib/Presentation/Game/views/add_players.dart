@@ -299,11 +299,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                   btnFunc: () {
                                                     if (value.checkPlayerExist(
                                                         _textEditingController
-                                                            .text)) {
+                                                            .text
+                                                            .trim())) {
                                                       showAnimatedToast(context,
                                                           'اسم اللاعب موجود قبل كدة');
                                                     } else if (_textEditingController
-                                                            .text ==
+                                                            .text
+                                                            .trim() ==
                                                         '') {
                                                       showAnimatedToast(context,
                                                           'اسم اللاعب فاضي');
@@ -316,7 +318,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                                 characterIndex],
                                                             playerName:
                                                                 _textEditingController
-                                                                    .text,
+                                                                    .text
+                                                                    .trim(),
                                                             playerScore: 0,
                                                           ),
                                                           currentIndex,

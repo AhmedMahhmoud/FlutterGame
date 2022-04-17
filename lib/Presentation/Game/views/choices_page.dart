@@ -109,7 +109,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   content: Column(
                     children: [
                       SizedBox(
-                        height: 35.h,
+                        height: 15.h,
                       ),
                       Expanded(
                         child: ListView.builder(
