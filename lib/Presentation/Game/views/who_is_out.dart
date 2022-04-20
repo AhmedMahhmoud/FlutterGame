@@ -258,6 +258,9 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                           _whoIsOutIndex
                                                                       ? 'برا'
                                                                       : randomGameName,
+
+                                                                      textAlign:
+                                                                      TextAlign.center,
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight

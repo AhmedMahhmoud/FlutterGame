@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game/Data/Providers/Animal/animal_provider.dart';
-import 'package:flutter_game/core/Shared/constant_data.dart';
+import '../../../Data/Providers/Animal/animal_provider.dart';
+import '../../../core/Shared/constant_data.dart';
 import 'package:provider/provider.dart';
 import '../../Game/views/add_players.dart';
 import '../../Game/widgets/categories_container.dart';
@@ -77,17 +77,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 catImage: 'assets/images/movies.jpg',
                 catTitle: 'افلام',
                 onTap: () {
-                  showToast(
-                    'مش متوفرة دلوقتي',
-                    context: context,
-                    animation: StyledToastAnimation.slideFromTop,
-                    reverseAnimation: StyledToastAnimation.fade,
-                    position: StyledToastPosition.center,
-                    animDuration: const Duration(seconds: 1),
-                    duration: const Duration(seconds: 4),
-                    curve: Curves.elasticOut,
-                    reverseCurve: Curves.linear,
-                  );
+                gameProv.setGameCategory(moviesData);
+                navigateToPage(context, const AddPlayerScreen(true));
                 },
               ),
             ),
@@ -115,19 +106,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 catColor: ColorManager.playersCardsColor[3],
                 catImage: 'assets/images/clothes.jpg',
                 onTap: () {
-                  showToast(
-                    'مش متوفرة دلوقتي',
-                    context: context,
-                    animation: StyledToastAnimation.slideFromTop,
-                    reverseAnimation: StyledToastAnimation.fade,
-                    position: StyledToastPosition.center,
-                    animDuration: const Duration(seconds: 1),
-                    duration: const Duration(seconds: 4),
-                    curve: Curves.elasticOut,
-                    reverseCurve: Curves.linear,
-                  );
+                  gameProv.setGameCategory(clothesData);
+                  navigateToPage(context, const AddPlayerScreen(true));
+
                 },
                 catTitle: 'ملابس',
+              ),
+            ), SizedBox(
+              height: 15.h,
+            ),
+            FadeInRight(
+              delay: const Duration(milliseconds: 3600),
+              child: CategoriesCard(
+                catColor: ColorManager.playersCardsColor[6],
+                catImage: 'assets/images/makeup.jpg',
+                onTap: () {
+                  gameProv.setGameCategory(makeupData);
+                  navigateToPage(context, const AddPlayerScreen(true));
+
+                },
+                catTitle: 'قعدة بنات',
               ),
             ),
           ],

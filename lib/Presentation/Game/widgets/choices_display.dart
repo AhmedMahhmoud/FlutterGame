@@ -14,7 +14,6 @@ class DisplayChoices extends StatelessWidget {
   final String headerImage;
   @override
   Widget build(BuildContext context) {
-    var playersProv = Provider.of<PlayersProvider>(context, listen: true);
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -22,11 +21,11 @@ class DisplayChoices extends StatelessWidget {
           children: [
             SizedBox(
               width: 350.w,
-              height: 60.h,
+              height: 90.h,
             ),
             Container(
               width: 350.w,
-              height: 700.h,
+              height: 650.h,
               child: content,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
@@ -41,7 +40,7 @@ class DisplayChoices extends StatelessWidget {
           ],
         ),
         Positioned(
-          top: 0,
+          top: 10.h,
           child: Container(
             width: 100.w,
             padding: const EdgeInsets.all(10),

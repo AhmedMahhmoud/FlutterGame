@@ -143,7 +143,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                                       ),
                                     ),
                                     alignment: Alignment.center,
-                                    height: 70.h,
+                                    height: 55.h,
                                     width: 250.w,
                                   ),
                                 ));
@@ -155,7 +155,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 5.h,
+                  height: 10.h,
                 ),
                 _choiceResult != null
                     ? RoundedActionButton(
