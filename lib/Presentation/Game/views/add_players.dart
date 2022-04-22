@@ -3,7 +3,9 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sembast/sembast.dart';
 import '../../../Data/Providers/Players/players_provider.dart';
+import '../../../Database/players_db.dart';
 import '../../../Domain/Models/player_model.dart';
 import 'who_is_out.dart';
 import '../widgets/add_player_container.dart';
@@ -26,13 +28,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
     with TickerProviderStateMixin {
   AudioCache player = AudioCache();
   final TextEditingController _textEditingController = TextEditingController();
-
+  final PlayersDB _playersDB = PlayersDB();
   @override
   void initState() {
     super.initState();
-    if (widget.resetPlayers) {
-      Provider.of<PlayersProvider>(context, listen: false).resetPlayers();
-    }
+    // if (widget.resetPlayers) {
+    //   Provider.of<PlayersProvider>(context, listen: false).resetPlayers();
+    // }
   }
 
   int currentIndex = 0;
@@ -47,7 +49,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
@@ -311,21 +313,25 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                                           'اسم اللاعب فاضي');
                                                     } else {
                                                       Navigator.pop(context);
-                                                      value.addPlayer(
+                                                      Players currentPlayer =
                                                           Players(
-                                                            playerImage: value
-                                                                    .charactersImages[
-                                                                characterIndex],
-                                                            playerName:
-                                                                _textEditingController
-                                                                    .text
-                                                                    .trim(),
-                                                            playerScore: 0,
-                                                          ),
+                                                        playerImage: value
+                                                                .charactersImages[
+                                                            characterIndex],
+                                                        playerName:
+                                                            _textEditingController
+                                                                .text
+                                                                .trim(),
+                                                        playerScore: 0,
+                                                      );
+                                                      value.addPlayer(
+                                                          currentPlayer,
                                                           currentIndex,
                                                           characterIndex);
                                                       player.play(
                                                           'sounds/addPlayerSuccess.mp3');
+                                                      _playersDB.insertPlayer(
+                                                          currentPlayer);
                                                       setState(() {
                                                         currentIndex++;
                                                         _textEditingController

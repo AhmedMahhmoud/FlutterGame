@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_game/Domain/Models/player_model.dart';
 import 'package:flutter_game/core/Shared/constant_data.dart';
 
+import '../../../Database/players_db.dart';
+
 class PlayersProvider with ChangeNotifier {
   List<Players> playersList = [];
   List<Players> playersListCopy = [];
@@ -30,14 +32,26 @@ class PlayersProvider with ChangeNotifier {
     }
   }
 
-  addPlayer(Players player, int index, int imageIndex) {
+  void addPlayer(Players player, int index, int imageIndex) {
     playersList.add(player);
     playersListCopy.add(player);
     charactersImages.removeAt(imageIndex);
     notifyListeners();
   }
 
-  resetPlayers() {
+  Future<void> fillPlayersFromCache() async {
+    PlayersDB _playerDb = PlayersDB();
+    List<Players> cachedPlayers = await _playerDb.getPlayersTable();
+    playersList = [...cachedPlayers];
+    playersListCopy = [...cachedPlayers];
+    for (int i = 0; i < cachedPlayers.length; i++) {
+      charactersImages
+          .removeWhere((String image) => image == cachedPlayers[i].playerImage);
+    }
+    notifyListeners();
+  }
+
+  void resetPlayers() {
     playersList.clear();
     charactersImages = [
       'assets/images/p1.png',
@@ -50,19 +64,19 @@ class PlayersProvider with ChangeNotifier {
     ];
   }
 
-  removePlayer(int index) {
+  void removePlayer(int index) {
     charactersImages.insert(0, playersList[index].playerImage);
     playersList.removeAt(index);
     playersListCopy.removeAt(index);
     notifyListeners();
   }
 
-  removeCopyPlayer(int index) {
+  void removeCopyPlayer(int index) {
     playersListCopy.removeAt(index);
     notifyListeners();
   }
 
-  sortList() {
+  void sortList() {
     playersList
         .sort((Players a, Players b) => a.playerScore.compareTo(b.playerScore));
     playersList = playersList.reversed.toList();

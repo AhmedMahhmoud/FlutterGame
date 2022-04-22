@@ -8,17 +8,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../Database/players_db.dart';
+
 class PLayerContainer extends StatelessWidget {
   final int playerIndex;
   final String playerName;
   final String playerImage;
-  const PLayerContainer({
+  PLayerContainer({
     this.playerIndex,
     this.playerName,
     this.playerImage,
     Key key,
   }) : super(key: key);
 
+  final PlayersDB _playersDB = PlayersDB();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,6 +56,9 @@ class PLayerContainer extends StatelessWidget {
             Expanded(child: Container()),
             InkWell(
               onTap: () {
+                _playersDB.removePlayer(
+                    Provider.of<PlayersProvider>(context, listen: false)
+                        .playersList[playerIndex]);
                 Provider.of<PlayersProvider>(context, listen: false)
                     .removePlayer(playerIndex);
               },

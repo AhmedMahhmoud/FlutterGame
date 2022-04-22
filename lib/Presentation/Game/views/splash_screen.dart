@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -7,8 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
+import '../../../Data/Providers/Players/players_provider.dart';
+import '../../../Database/initalize.dart';
 import '../../../core/constants.dart';
+import '../../../core/sharedPrefrences.dart';
+import '../../../main.dart';
 import '../../Home/views/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,11 +25,19 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Timer _timer;
 
-  _startDelay() {
+  void _startDelay() {
     _timer = Timer(const Duration(milliseconds: 4500), _goNext);
   }
 
-  _goNext() {
+  Future<void> intitalizeGame() async {
+    await Init().initialize().whenComplete(() async {
+      log('Filling players list from cache . . . ');
+      await Provider.of<PlayersProvider>(context, listen: false)
+          .fillPlayersFromCache();
+    });
+  }
+
+  void _goNext() {
     Navigator.push(
       context,
       PageRouteBuilder(
@@ -43,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    intitalizeGame();
     _startDelay();
     super.initState();
   }
