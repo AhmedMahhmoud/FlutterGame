@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'ColorManager/ColorManager.dart';
@@ -14,7 +13,7 @@ TextStyle funckyStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 17,
     color: ColorManager.accentColor,
-    fontFamily: GoogleFonts.getFont('Cairo').fontFamily);
+    fontFamily: 'Cairo');
 
 setResponsiveFontSize(size) {
   return ScreenUtil().setSp(size);
@@ -114,7 +113,7 @@ class RoundedButton extends StatelessWidget {
                 fontSize: setResponsiveFontSize(17),
                 fontWeight: FontWeight.bold,
                 color: ColorManager.primary,
-                fontFamily: GoogleFonts.getFont('Changa').fontFamily),
+                fontFamily: 'Changa'),
           ),
         ),
       ),

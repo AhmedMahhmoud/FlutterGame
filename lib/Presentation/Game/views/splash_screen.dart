@@ -5,7 +5,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -111,8 +110,8 @@ class _SplashScreenState extends State<SplashScreen> {
                             color: Colors.white,
                             fontSize: setResponsiveFontSize(28),
                             fontWeight: FontWeight.bold,
-                            fontFamily:
-                                GoogleFonts.getFont('Cairo').fontFamily)),
+
+                            fontFamily: 'Cairo')),
                   ),
                 ],
               ),

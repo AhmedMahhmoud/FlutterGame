@@ -19,7 +19,6 @@ import 'package:flutter_game/core/Shared/hoverButton.dart';
 import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:scratcher/widgets.dart';
@@ -139,7 +138,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                 ),
                                 !_switchToNewPlayer
                                     ? AutoSizeText(
-                                        'خربش الصورة عشان تعرف انت جوة ولا برا اللعبة',
+                                        'خربش الصورة عشان تعرف انت جوة ولا بره اللعبة',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -171,14 +170,11 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                     padding: EdgeInsets.only(
                                                         left: 16.w),
                                                     child: AutoSizeText(
-                                                      'ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف \n هو اللي برا اللعبة ولا لا !',
+                                                      'ادي الموبايل ل ${value.playersList[_currentIndex].playerName} عشان يعرف \n هو اللي بره اللعبة ولا لا !',
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
-                                                          fontFamily: GoogleFonts
-                                                                  .getFont(
-                                                                      'Changa')
-                                                              .fontFamily,
+                                                          fontFamily: 'Changa'                                                              ,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: Colors.white,
@@ -256,7 +252,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                     AutoSizeText(
                                                                   _currentIndex ==
                                                                           _whoIsOutIndex
-                                                                      ? 'برا'
+                                                                      ? 'بره'
                                                                       : randomGameName,
 
                                                                       textAlign:

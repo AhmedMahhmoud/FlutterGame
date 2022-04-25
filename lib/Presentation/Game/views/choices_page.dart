@@ -80,14 +80,14 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     var playersProv = Provider.of<PlayersProvider>(context, listen: true);
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/gameBackground.jpg'),
-                  fit: BoxFit.cover)),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/gameBackground.jpg'),
+                    fit: BoxFit.cover)),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
                 SizedBox(
