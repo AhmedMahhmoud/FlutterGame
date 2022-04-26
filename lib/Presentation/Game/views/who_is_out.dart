@@ -92,11 +92,10 @@ class _WhoIsOutState extends State<WhoIsOut> {
   }
 
   String _getRandomAnimal() {
-    int animalsTableLength = animalData.itemsName.length;
-    final random = Random().nextInt(animalsTableLength);
-    randomGameName = Provider.of<GameProvider>(context, listen: false)
-        .game
-        .itemsName[random];
+    GameProvider gameProv = Provider.of<GameProvider>(context, listen: false);
+    int animalsTableLength = gameProv.game.itemsName.length;
+    int random = Random().nextInt(animalsTableLength);
+    randomGameName = gameProv.game.itemsName[random];
     Provider.of<GameProvider>(context, listen: false)
         .setCurrentGame(randomGameName);
     return randomGameName;
@@ -106,7 +105,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
     _playersLength =
         Provider.of<PlayersProvider>(context, listen: false).playersList.length;
 
-    final random = Random().nextInt(_playersLength);
+    var random = Random().nextInt(_playersLength);
     return random;
   }
 
@@ -174,7 +173,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
-                                                          fontFamily: 'Changa'                                                              ,
+                                                          fontFamily: 'Changa',
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: Colors.white,
@@ -254,9 +253,9 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                           _whoIsOutIndex
                                                                       ? 'بره'
                                                                       : randomGameName,
-
-                                                                      textAlign:
-                                                                      TextAlign.center,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
