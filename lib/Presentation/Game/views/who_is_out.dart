@@ -240,8 +240,8 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                     .all(20.0),
                                                             child:
                                                                 ClayContainer(
-                                                              height: 70.h,
-                                                              width: 70.w,
+                                                              height: 90.h,
+                                                              width: 90.w,
                                                               borderRadius: 50,
                                                               curveType:
                                                                   CurveType
@@ -262,7 +262,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                               .bold,
                                                                       fontSize:
                                                                           setResponsiveFontSize(
-                                                                              16)),
+                                                                              13)),
                                                                 ),
                                                               ),
                                                             ),
