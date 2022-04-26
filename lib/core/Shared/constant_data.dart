@@ -117,31 +117,27 @@ Game foodData = Game(
 Game makeupData = Game(
     id: 5,
     itemsName: [
-      'برايمر',
-      'فاونديشن',
-      'bb cream',
-      'كونسيلر',
-      'كوريكتور',
-      'كومباكت بودر',
-      'لوس بودر',
-      'بلاشر',
-      'تنت',
-      'ايلينر',
-      'كحل',
-      'مسكرا رموش',
-      'مصحح حواجب',
-      'مسكرا حواجب',
-      'Eye shadow',
-      'eye cream',
-      'كونتور',
-      'فرش الميكب',
-      'روج',
-      'lip liner',
-      'Bronzer',
-      'Highlighter',
-      'Beauty Blender',
-      'Blush',
-      'Mascara',
+          'برايمر',
+          'Lip balm',
+          'Lip gloss'
+          'فاونديشن',
+          'Makeup remover'
+          'كونسيلر',
+          'كولر كوريكتور',
+          'لوس بودر'
+              'ايلينر',
+          'كحل'
+              'مسكرا حواجب',
+          'Eye shadow'
+              'كونتور'
+              'lip liner',
+          'Bronzer',
+          'Highlighter'
+              'Blusher',
+          'Mascara',
+          'Lip stick'
+
+
     ],
     categoryImage: 'assets/images/food.jpg',
     categoryName: 'قعدة بنات');

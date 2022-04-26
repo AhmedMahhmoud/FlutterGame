@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
@@ -49,13 +50,12 @@ class _SplashScreenState extends State<SplashScreen> {
         transitionDuration: const Duration(milliseconds: 1000),
       ),
     );
-
-    /* navigateReplacmentToPage(
-        context, Home());*/
   }
 
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     intitalizeGame();
     _startDelay();
     super.initState();
@@ -64,14 +64,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);  // to re-show bars
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height,
@@ -89,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: [
                   Center(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 3.4,
+                      height: MediaQuery.of(context).size.height / 3.3,
                       width: MediaQuery.of(context).size.width / 2,
                       child: ZoomIn(
                         child: const Image(
@@ -111,7 +113,9 @@ class _SplashScreenState extends State<SplashScreen> {
                             fontSize: setResponsiveFontSize(28),
                             fontWeight: FontWeight.bold,
 
-                            fontFamily: 'Cairo')),
+                            fontFamily: 'Cairo'
+
+                        )),
                   ),
                 ],
               ),

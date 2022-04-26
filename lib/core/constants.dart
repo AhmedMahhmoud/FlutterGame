@@ -15,7 +15,7 @@ TextStyle funckyStyle = TextStyle(
     color: ColorManager.accentColor,
     fontFamily: 'Cairo');
 
-setResponsiveFontSize(size) {
+double setResponsiveFontSize(size) {
   return ScreenUtil().setSp(size);
 }
 

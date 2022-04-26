@@ -20,7 +20,7 @@ class AddPLayerContainer extends StatelessWidget {
       color: Colors.white,
       child: Container(
         height: 75.h,
-        width: 360.w,
+        width: 380.w,
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
 import 'package:flutter_game/Database/initalize.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,13 +14,15 @@ import 'package:get_it/get_it.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  locator.intalizeLocator();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  //locator.intalizeLocator();
   // await intitalizeGame();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-InitLocator locator = InitLocator();
-GetIt getIt = GetIt.instance;
+/*InitLocator locator = InitLocator();
+GetIt getIt = GetIt.instance;*/
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);

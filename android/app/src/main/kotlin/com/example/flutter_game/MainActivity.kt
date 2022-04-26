@@ -1,4 +1,4 @@
-package com.example.flutter_game
+package com.game.bakasa
 
 import io.flutter.embedding.android.FlutterActivity
 

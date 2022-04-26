@@ -96,7 +96,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                 visible: value.playersList.isNotEmpty,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 6),
+                                      const EdgeInsets.symmetric(vertical: 8),
                                   child: PLayerContainer(
                                     playerIndex: index,
                                     playerImage: value.playersList.isEmpty
@@ -111,6 +111,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                             );
                           },
                         ),
+                      ),
+                      SizedBox(
+                        height: 8.h,
                       ),
                       value.playersList.length < 7
                           ? AddPLayerContainer(() {

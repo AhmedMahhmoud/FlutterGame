@@ -45,7 +45,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             SizedBox(
               height: 70.h,
             ),
-            AutoSizeText(
+            Text(
               'تلعب ايه',
               style: TextStyle(
                   fontSize: setResponsiveFontSize(20),
@@ -55,6 +55,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             SizedBox(
               height: 25.h,
             ),
+
+
+
             FadeInRight(
               duration: const Duration(seconds: 1),
               child: CategoriesCard(
