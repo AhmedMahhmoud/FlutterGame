@@ -112,32 +112,28 @@ Game foodData = Game(
     categoryImage: 'assets/images/food.jpg',
     categoryName: 'اكلات مصرية');
 
-
-
 Game makeupData = Game(
     id: 5,
     itemsName: [
-          'برايمر',
-          'Lip balm',
-          'Lip gloss'
-          'فاونديشن',
-          'Makeup remover'
-          'كونسيلر',
-          'كولر كوريكتور',
-          'لوس بودر'
-              'ايلينر',
-          'كحل'
-              'مسكرا حواجب',
-          'Eye shadow'
-              'كونتور'
-              'lip liner',
-          'Bronzer',
-          'Highlighter'
-              'Blusher',
-          'Mascara',
-          'Lip stick'
-
-
+      'برايمر',
+      'Lip balm',
+      'Lip gloss',
+      'فاونديشن',
+      'Makeup remover',
+      'كونسيلر',
+      'كولر كوريكتور',
+      'لوس بودر',
+      'ايلينر',
+      'كحل',
+      'مسكرا حواجب',
+      'Eye shadow',
+      'كونتور',
+      'lip liner',
+      'Bronzer',
+      'Highlighter',
+      'Blusher',
+      'Mascara',
+      'Lip stick'
     ],
     categoryImage: 'assets/images/food.jpg',
     categoryName: 'قعدة بنات');

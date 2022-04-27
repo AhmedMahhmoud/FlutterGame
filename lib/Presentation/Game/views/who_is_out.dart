@@ -234,39 +234,33 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                                   'Scratch progress: $value%'),
                                                           onThreshold: () => lg.log(
                                                               'Threshold reached, you won!'),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(20.0),
-                                                            child:
-                                                                ClayContainer(
-                                                              height: 90.h,
-                                                              width: 90.w,
+                                                          child: ClayContainer(
+                                                              height: 115.h,
+                                                              width: 115.w,
                                                               borderRadius: 50,
                                                               curveType:
-                                                                  CurveType
-                                                                      .concave,
+                                                            CurveType
+                                                                .concave,
                                                               child: Center(
-                                                                child:
-                                                                    AutoSizeText(
-                                                                  _currentIndex ==
-                                                                          _whoIsOutIndex
-                                                                      ? 'بره'
-                                                                      : randomGameName,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          setResponsiveFontSize(
-                                                                              13)),
-                                                                ),
+                                                          child:
+                                                              AutoSizeText(
+                                                            _currentIndex ==
+                                                                    _whoIsOutIndex
+                                                                ? 'بره'
+                                                                : randomGameName,
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .center,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize:
+                                                                    setResponsiveFontSize(
+                                                                        13)),
+                                                          ),
                                                               ),
                                                             ),
-                                                          ),
                                                         ),
                                                       ),
                                                     )
