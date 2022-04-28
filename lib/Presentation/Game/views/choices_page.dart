@@ -94,7 +94,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   height: 15.h,
                 ),
                 AutoSizeText(
-                  'تتوقع مين ؟',
+                  'تفتكر الكلام على إيه ؟',
                   style: boldStyle.copyWith(
                       fontSize: setResponsiveFontSize(20),
                       fontWeight: FontWeight.bold,
