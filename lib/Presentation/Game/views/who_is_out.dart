@@ -36,7 +36,6 @@ class _WhoIsOutState extends State<WhoIsOut> {
   int _currentIndex = 0;
   bool _switchToNewPlayer = true;
   int _playersLength;
-  double scratchProgress=0;
   int _turnNumber = 0; // (number of players *2)
   String randomGameName;
 
@@ -80,7 +79,6 @@ class _WhoIsOutState extends State<WhoIsOut> {
 
   void goNextTurn() {
     setState(() {
-      scratchProgress=0;
       _turnNumber++;
     });
   }
@@ -231,40 +229,44 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                             'assets/images/scratch.PNG',
                                                             fit: BoxFit.cover,
                                                           ),
-                                                          onChange: (value) {
-                                                            print('Scratch progress: $value%');
-                                                            scratchProgress=value;
-                                                          }
-                                                              ,
+                                                          onChange: (value) =>
+                                                              print(
+                                                                  'Scratch progress: $value%'),
                                                           onThreshold: () => lg.log(
                                                               'Threshold reached, you won!'),
-                                                          child: ClayContainer(
-                                                              height: 115.h,
-                                                              width: 115.w,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(20.0),
+                                                            child:
+                                                                ClayContainer(
+                                                              height: 90.h,
+                                                              width: 90.w,
                                                               borderRadius: 50,
                                                               curveType:
-                                                            CurveType
-                                                                .concave,
+                                                                  CurveType
+                                                                      .concave,
                                                               child: Center(
-                                                          child:
-                                                              AutoSizeText(
-                                                            _currentIndex ==
-                                                                    _whoIsOutIndex
-                                                                ? 'بره'
-                                                                : randomGameName,
-                                                            textAlign:
-                                                                TextAlign
-                                                                    .center,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize:
-                                                                    setResponsiveFontSize(
-                                                                        13)),
-                                                          ),
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  _currentIndex ==
+                                                                          _whoIsOutIndex
+                                                                      ? 'بره'
+                                                                      : randomGameName,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          setResponsiveFontSize(
+                                                                              13)),
+                                                                ),
                                                               ),
                                                             ),
+                                                          ),
                                                         ),
                                                       ),
                                                     )
@@ -284,23 +286,13 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                     btnColor: ColorManager.successColor,
                                     title: 'التالى',
                                     btnFunc: () {
+                                      _switchToNewPlayer = !_switchToNewPlayer;
 
-if(!_switchToNewPlayer&&scratchProgress==0){
-            showAnimatedToast(context,
-            'خربش الأول');
-            return;
-            }else{
-            _switchToNewPlayer = !_switchToNewPlayer;
-
-            if (_switchToNewPlayer &&
-            _turnNumber % 2 != 0) {
-            incrementIndex();
-            }
-            goNextTurn();
-            }
-
-
-
+                                      if (_switchToNewPlayer &&
+                                          _turnNumber % 2 != 0) {
+                                        incrementIndex();
+                                      }
+                                      goNextTurn();
                                     },
                                   )
                                 ]

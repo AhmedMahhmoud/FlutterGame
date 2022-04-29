@@ -49,6 +49,7 @@ dependencies:
   scratcher: ^2.1.0
   shape_of_view: ^1.0.2
   shared_preferences: ^2.0.0
+  new_version: ^0.3.0
   sembast: any
 
 dev_dependencies:

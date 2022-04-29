@@ -117,7 +117,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                       ),
                       value.playersList.length < 7
                           ? AddPLayerContainer(() {
-                              return showDialog(
+                              return showDialog(  
                                 context: context,
                                 builder: (BuildContext context) {
                                   int characterIndex = 0;
