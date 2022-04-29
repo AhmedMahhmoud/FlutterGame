@@ -44,7 +44,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
     });
   }
 
-  double listHeight = 90.h;
+  double listHeight = 95.h;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
@@ -117,7 +117,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                       ),
                       value.playersList.length < 7
                           ? AddPLayerContainer(() {
-                              return showDialog(  
+                              return showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   int characterIndex = 0;

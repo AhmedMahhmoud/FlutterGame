@@ -192,7 +192,6 @@ class _VotingScreenState extends State<VotingScreen> {
                             title: 'التالى',
                             btnColor: ColorManager.successColor,
                             btnFunc: () {
-                              print('aaaaa');
                               navigateReplacmentToPage(
                                   context, FindOutScreen());
                             },
