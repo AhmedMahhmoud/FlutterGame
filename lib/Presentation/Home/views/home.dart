@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 import '../../../Data/Providers/Animal/animal_provider.dart';
+import '../../../Services/AppVersion/app_version.dart';
 import '../../../core/Shared/constant_data.dart';
 import 'package:provider/provider.dart';
+import '../../../core/Shared/rounded_action_button.dart';
 import '../../Game/views/add_players.dart';
 import '../../Game/views/how_to_play_screen.dart';
 import '../../Game/widgets/categories_container.dart';
@@ -28,6 +30,13 @@ class Home extends StatefulWidget {
 // }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    AppStoreVersion _appStoreVersion = AppStoreVersion();
+    _appStoreVersion.checkAppUpdate(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     GameProvider gameProv = Provider.of<GameProvider>(context, listen: false);
