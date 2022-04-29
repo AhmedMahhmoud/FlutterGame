@@ -103,7 +103,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                 SizedBox(
                   height: 15.h,
                 ),
-                DisplayChoices(
+                DisplayChoices(screen: 'guess',
                   headerImage: playersProv
                       .playersList[playersProv.whoIsOutIndex].playerImage,
                   content: Column(
@@ -143,7 +143,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                                       ),
                                     ),
                                     alignment: Alignment.center,
-                                    height: 55.h,
+                                    height: 65.h,
                                     width: 250.w,
                                   ),
                                 ));
@@ -162,7 +162,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                         btnColor: ColorManager.successColor,
                         title: 'التالى',
                         btnFunc: () async {
-                          await playersProv.sortList();
+                           playersProv.sortList();
                           navigateReplacmentToPage(context, FinalResult());
                         },
                       )

@@ -5,8 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayChoices extends StatelessWidget {
-  const DisplayChoices({
+  final String screen;
+
+   const DisplayChoices({
     this.content,
+    this.screen,
     this.headerImage,
     Key key,
   }) : super(key: key);
@@ -25,7 +28,7 @@ class DisplayChoices extends StatelessWidget {
             ),
             Container(
               width: 350.w,
-              height: 650.h,
+              height:screen=='guess'?650.h: 700.h,
               child: content,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
