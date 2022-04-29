@@ -80,7 +80,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
 
   void goNextTurn() {
     setState(() {
-      scratchProgress=0;
+      scratchProgress= 0;
       _turnNumber++;
     });
   }

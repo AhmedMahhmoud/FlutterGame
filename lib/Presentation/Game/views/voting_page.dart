@@ -178,7 +178,7 @@ class _VotingScreenState extends State<VotingScreen> {
                                   ),
                                 ),
                                 alignment: Alignment.center,
-                                height: 70.h,
+                                height: 65.h,
                                 width: 250.w,
                               )));
                     },
@@ -187,7 +187,7 @@ class _VotingScreenState extends State<VotingScreen> {
                   const Spacer(),
                   button_display_index == playersProv.playersList.length
                       ? Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.only(bottom: 10,top: 10),
                           child: RoundedActionButton(
                             title: 'التالى',
                             btnColor: ColorManager.successColor,

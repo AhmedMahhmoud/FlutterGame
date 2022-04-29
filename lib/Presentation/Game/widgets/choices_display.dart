@@ -25,7 +25,7 @@ class DisplayChoices extends StatelessWidget {
             ),
             Container(
               width: 350.w,
-              height: 630.h,
+              height: 650.h,
               child: content,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
