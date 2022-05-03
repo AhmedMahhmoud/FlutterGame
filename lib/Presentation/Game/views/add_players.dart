@@ -54,7 +54,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
         FocusScope.of(context).unfocus();
       },
       child: WillPopScope(
-        onWillPop: () { navigateReplacmentToPage(context,  Home()); },
+        onWillPop: () { Navigator.pop(context); },
         child: Scaffold(
           backgroundColor: Colors.white,
           body: SafeArea(

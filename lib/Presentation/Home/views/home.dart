@@ -29,7 +29,7 @@ class Home extends StatefulWidget {
 //   locator.locator<AnimalProvider>().getAnimalFromDb(_animal);
 // }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home>  {
   @override
   void initState() {
     AppStoreVersion _appStoreVersion = AppStoreVersion();
@@ -40,7 +40,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     GameProvider gameProv = Provider.of<GameProvider>(context, listen: false);
-    // final _animalProv = locator.locator<AnimalProvider>();
     return WillPopScope(
       onWillPop: () => SystemNavigator.pop(),
       child: SafeArea(

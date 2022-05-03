@@ -55,7 +55,7 @@ fontSize: setResponsiveFontSize(16),
             ),
             FlatButton(
               onPressed: () async {
-                navigateReplacmentToPage(context,  Home());
+                navigateToPage(context,  Home());
                 //SystemNavigator.pop();
               },
               child: Container(

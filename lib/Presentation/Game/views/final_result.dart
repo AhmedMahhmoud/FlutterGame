@@ -10,6 +10,7 @@ import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 double listHeight = 90.h;
@@ -18,8 +19,20 @@ class FinalResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () =>
-          navigateReplacmentToPage(context,  Home()),
+      onWillPop: () {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Home()
+            ),
+            ModalRoute.withName("/Home")
+        );
+      }
+
+
+
+
+          ,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -85,7 +98,7 @@ class FinalResult extends StatelessWidget {
                       btnColor: ColorManager.successColor,
                       title: 'دور جديد',
                       btnFunc: () {
-                        navigateReplacmentToPage(
+                        navigateToPage(
                             context, const AddPlayerScreen(false));
                       },
                     ),
@@ -96,7 +109,7 @@ class FinalResult extends StatelessWidget {
                       btnColor: ColorManager.failColor,
                       title: 'إنهاء اللعبة',
                       btnFunc: () {
-                        navigateReplacmentToPage(context, Home());
+                        navigateToPage(context, Home());
                       },
                     )
                   ],

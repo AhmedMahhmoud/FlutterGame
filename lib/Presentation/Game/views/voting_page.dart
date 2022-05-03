@@ -207,7 +207,7 @@ class _VotingScreenState extends State<VotingScreen> {
                               btnColor: ColorManager.successColor,
                               btnFunc: () {
 
-                                navigateReplacmentToPage(
+                                navigateToPage(
                                     context, FindOutScreen());
                               },
                             ),

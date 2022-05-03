@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import '../../../Data/Providers/Animal/animal_provider.dart';
@@ -27,9 +28,31 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   int _cuurentIndex = 0;
   bool _choiceResult;
   AudioCache player = AudioCache();
+
+
+
+
+
+/*  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayerState audioPlayerState = AudioPlayerState.PAUSED;
+  AudioCache audioCache;
+  String correctPath = 'sounds/CorrectAnswer.mp3';
+  String wrongPath = 'sounds/WrongAnswer.mp3';*/
+
   @override
   void initState() {
     super.initState();
+
+/*    audioCache = AudioCache(fixedPlayer: audioPlayer);
+    audioPlayer.onPlayerStateChanged.listen((AudioPlayerState state) {
+      if (mounted) {
+        setState(() {
+          audioPlayerState = state;
+        });
+      }
+    });*/
+
+
     choicesList = Provider.of<GameProvider>(context, listen: false)
         .generateRandomAnimalsForChoices();
   }
@@ -40,6 +63,28 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     });
   }
 
+
+  @override
+  void dispose() {
+    super.dispose();
+    player.clearCache();
+ /*   pauseMusic();
+    audioPlayer.release();
+    audioPlayer.dispose();
+    audioCache.clearCache();*/
+  }
+/*
+  Future<void> playCorrectMusic() async {
+    await audioCache.play(correctPath);
+  } Future<void> playWrongMusic() async {
+    await audioCache.play(wrongPath);
+  }
+
+  pauseMusic() async {
+    await audioPlayer.pause();
+  }
+*/
+
   Color setButtonColor(int index) {
     if (_choiceResult == null) {
       return ColorManager.darkGrey;
@@ -47,9 +92,11 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
       if (_cuurentIndex == index) {
         if (_choiceResult) {
           player.play('sounds/CorrectAnswer.mp3');
+        //  playCorrectMusic();
           return ColorManager.successColor;
         } else {
-          player.play('sounds/WrongAnswer.mp3');
+        player.play('sounds/WrongAnswer.mp3');
+      //    playWrongMusic();
           return ColorManager.failColor;
         }
       } else {
@@ -57,6 +104,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
       }
     }
   }
+
 
   isCorrectAnswer(String choosenAnimal) {
     if (choosenAnimal ==
@@ -173,7 +221,8 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                           title: 'التالى',
                           btnFunc: () async {
                              playersProv.sortList();
-                            navigateReplacmentToPage(context, FinalResult());
+ player.clearCache();
+                            navigateToPage(context, FinalResult());
                           },
                         )
                       : Container()

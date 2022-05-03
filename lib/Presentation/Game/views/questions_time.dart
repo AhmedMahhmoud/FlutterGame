@@ -156,7 +156,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               child: RoundedActionButton(
                 btnFunc: () {
                   if (counter == _playerList.length - 1) {
-                    navigateReplacmentToPage(context, RandomQuestionsTime());
+                    navigateToPage(context, RandomQuestionsTime());
                   } else if (_currentIndex != _playerList.length) {
                     counter++;
                     checkPlayersSimilarity();

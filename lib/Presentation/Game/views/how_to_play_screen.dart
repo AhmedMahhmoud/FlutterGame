@@ -10,7 +10,7 @@ class HowToPlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () =>  navigateToPage(context,  Home()),
+      onWillPop: () {Navigator.pop(context);}  ,
       child: SafeArea(
         child: Scaffold(
             body: SingleChildScrollView(

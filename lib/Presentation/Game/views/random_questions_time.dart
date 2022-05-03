@@ -136,7 +136,7 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
                         title: 'صوت',
                         btnColor: ColorManager.successColor,
                         btnFunc: () {
-                          navigateReplacmentToPage(context, VotingScreen());
+                          navigateToPage(context, VotingScreen());
                         },
                       ),
                     )

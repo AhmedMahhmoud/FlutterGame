@@ -120,7 +120,7 @@ class _FindOutScreenState extends State<FindOutScreen> {
                       btnColor: ColorManager.successColor,
                       title: 'التالى',
                       btnFunc: () {
-                        navigateReplacmentToPage(context, ChoiceScreen());
+                        navigateToPage(context, ChoiceScreen());
                       },
                     ),
                   ],
