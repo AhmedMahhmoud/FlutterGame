@@ -64,7 +64,7 @@ class _VotingScreenState extends State<VotingScreen> {
               content: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 50.w),
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
                       child: AutoSizeText(
@@ -184,10 +184,12 @@ class _VotingScreenState extends State<VotingScreen> {
                     },
                     itemCount: playersProv.suspectsPlayers.length,
                   ),
-                  const Spacer(),
+
+                  //const Spacer(),
+
                   button_display_index == playersProv.playersList.length
                       ? Padding(
-                          padding: const EdgeInsets.only(bottom: 10, top: 10),
+                          padding: EdgeInsets.only(bottom: 10.h, top: 16.h),
                           child: RoundedActionButton(
                             title: 'التالى',
                             btnColor: ColorManager.successColor,
