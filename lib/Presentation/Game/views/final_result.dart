@@ -19,7 +19,7 @@ class FinalResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () =>
-          navigateReplacmentToPage(context, AddPlayerScreen(false)),
+          navigateReplacmentToPage(context,  Home()),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -52,7 +52,7 @@ class FinalResult extends StatelessWidget {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 500),
                       height: listHeight * value.playersList.length,
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      margin:  EdgeInsets.symmetric(horizontal: 8.w),
                       child: ListView.builder(
                         itemCount: value.playersList.isEmpty
                             ? 1
@@ -63,7 +63,7 @@ class FinalResult extends StatelessWidget {
                               visible: value.playersList.isNotEmpty,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 6),
+                                     EdgeInsets.symmetric(vertical: 6.h),
                                 child: PlayerRanking(
                                   playerScore:
                                       value.playersList[index].playerScore,
@@ -86,7 +86,7 @@ class FinalResult extends StatelessWidget {
                       title: 'دور جديد',
                       btnFunc: () {
                         navigateReplacmentToPage(
-                            context, AddPlayerScreen(false));
+                            context, const AddPlayerScreen(false));
                       },
                     ),
                     SizedBox(

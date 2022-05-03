@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 import '../../../Data/Providers/Animal/animal_provider.dart';
+import '../../../Services/AppVersion/app_version.dart';
 import '../../../core/Shared/constant_data.dart';
 import 'package:provider/provider.dart';
+import '../../../core/Shared/rounded_action_button.dart';
 import '../../Game/views/add_players.dart';
 import '../../Game/views/how_to_play_screen.dart';
 import '../../Game/widgets/categories_container.dart';
@@ -29,25 +31,30 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
+  void initState() {
+    AppStoreVersion _appStoreVersion = AppStoreVersion();
+    _appStoreVersion.checkAppUpdate(context);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final gameProv = Provider.of<GameProvider>(context, listen: false);
+    GameProvider gameProv = Provider.of<GameProvider>(context, listen: false);
     // final _animalProv = locator.locator<AnimalProvider>();
     return WillPopScope(
       onWillPop: () => SystemNavigator.pop(),
       child: SafeArea(
-        child: Scaffold(
-            body: SingleChildScrollView(
-              child: Container(
-          decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/gameBackground.jpg'),
-                    fit: BoxFit.cover)),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: InkWell(
-              onTap: (){
-                navigateToPage(context,  HowToPlayScreen());
-              },
+        child: GestureDetector(
+          onTap: () {},
+          child: Scaffold(
+              body: SingleChildScrollView(
+            child: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/gameBackground.jpg'),
+                      fit: BoxFit.cover)),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
                   SizedBox(
@@ -138,36 +145,41 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Directionality(
                     textDirection: ui.TextDirection.rtl,
                     child: Padding(
-                      padding: EdgeInsets.only(top: 16.h, right: 8.w, left: 8.w),
+                      padding:
+                          EdgeInsets.only(top: 16.h, right: 8.w, left: 8.w),
                       child: Align(
                         alignment: Alignment.topRight,
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                                child: Image.asset(
-                                  'assets/images/h2p.png',
-                                  width: 35.w,
-                                ),
-                                backgroundColor: Colors.white,
-                                radius: 28.w),
-                            AutoSizeText(
-                              'شرح اللعبة',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: setResponsiveFontSize(16),
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        child: InkWell(
+                          onTap: () =>
+                              navigateToPage(context, HowToPlayScreen()),
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                  child: Image.asset(
+                                    'assets/images/h2p.png',
+                                    width: 35.w,
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  radius: 28.w),
+                              AutoSizeText(
+                                'شرح اللعبة',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: setResponsiveFontSize(16),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-          ),
+            ),
+          )),
         ),
-            )),
       ),
     );
   }

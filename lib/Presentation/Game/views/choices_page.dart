@@ -1,9 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import '../../../Data/Providers/Animal/animal_provider.dart';
 import '../../../Data/Providers/Players/players_provider.dart';
 import '../../../Domain/Models/animal_model.dart';
+import '../widgets/exitDialog.dart';
 import 'who_is_out.dart';
 import '../widgets/choices_display.dart';
 import '../../../core/ColorManager/ColorManager.dart';
@@ -78,96 +80,105 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   Widget build(BuildContext context) {
     var playersProv = Provider.of<PlayersProvider>(context, listen: true);
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/gameBackground.jpg'),
-                    fit: BoxFit.cover)),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 15.h,
-                ),
-                AutoSizeText(
-                  'تفتكر الكلام على إيه ؟',
-                  style: boldStyle.copyWith(
-                      fontSize: setResponsiveFontSize(20),
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                DisplayChoices(screen: 'guess',
-                  headerImage: playersProv
-                      .playersList[playersProv.whoIsOutIndex].playerImage,
-                  content: Column(
-                    children: [
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  onTap: _choiceResult == null
-                                      ? () {
-                                          setCurrentIndex(index);
-                                          isCorrectAnswer(choicesList[index]);
-                                        }
-                                      : null,
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    decoration: BoxDecoration(
-                                        color: setButtonColor(index),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                      child: AutoSizeText(
-                                        choicesList[index],
-                                        style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.9),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize:
-                                                setResponsiveFontSize(16)),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    height: 65.h,
-                                    width: 250.w,
-                                  ),
-                                ));
-                          },
-                          itemCount: choicesList.length,
-                        ),
-                      ),
-                    ],
+    return WillPopScope(
+      onWillPop: ()async{
+        await showDialog(
+            context: context,
+            builder: (BuildContext context) => ZoomIn(
+              child: const exitDialog(),
+            ));
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/gameBackground.jpg'),
+                      fit: BoxFit.cover)),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 15.h,
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                _choiceResult != null
-                    ? RoundedActionButton(
-                        btnColor: ColorManager.successColor,
-                        title: 'التالى',
-                        btnFunc: () async {
-                           playersProv.sortList();
-                          navigateReplacmentToPage(context, FinalResult());
-                        },
-                      )
-                    : Container()
-              ],
+                  AutoSizeText(
+                    'تفتكر الكلام على إيه ؟',
+                    style: boldStyle.copyWith(
+                        fontSize: setResponsiveFontSize(20),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  DisplayChoices(screen: 'guess',
+                    headerImage: playersProv
+                        .playersList[playersProv.whoIsOutIndex].playerImage,
+                    content: Column(
+                      children: [
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    onTap: _choiceResult == null
+                                        ? () {
+                                            setCurrentIndex(index);
+                                            isCorrectAnswer(choicesList[index]);
+                                          }
+                                        : null,
+                                    child: Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      decoration: BoxDecoration(
+                                          color: setButtonColor(index),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          choicesList[index],
+                                          style: TextStyle(
+                                              color:
+                                                  Colors.white.withOpacity(0.9),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize:
+                                                  setResponsiveFontSize(16)),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      alignment: Alignment.center,
+                                      height: 65.h,
+                                      width: 250.w,
+                                    ),
+                                  ));
+                            },
+                            itemCount: choicesList.length,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  _choiceResult != null
+                      ? RoundedActionButton(
+                          btnColor: ColorManager.successColor,
+                          title: 'التالى',
+                          btnFunc: () async {
+                             playersProv.sortList();
+                            navigateReplacmentToPage(context, FinalResult());
+                          },
+                        )
+                      : Container()
+                ],
+              ),
             ),
           ),
         ),
