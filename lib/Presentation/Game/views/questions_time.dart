@@ -16,6 +16,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/ExitDialog.dart';
+
 class QuestionScreen extends StatefulWidget {
   @override
   _QuestionScreenState createState() => _QuestionScreenState();
@@ -63,117 +65,126 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _currentIndex == _playerList.length
-            ? Container()
-            : AnimatedContainer(
-                duration: const Duration(seconds: 1),
-                child: SlideInDown(
-                    duration: const Duration(milliseconds: 500),
-                    child: AnimatedOpacity(
-                      opacity: test ? 0.0 : 1.0,
-                      duration: const Duration(seconds: 1),
-                      child: Image.asset(
-                        'assets/images/questionsTime.png',
-                        height: 300.h,
-                      ),
-                    )),
-              ),
-        if (!_showQuestion) ...[
-          test == true
-              ? ZoomIn(
-                  delay: const Duration(milliseconds: 500),
-                  duration: const Duration(
-                    seconds: 1,
-                  ),
-                  child: const DisplayTextInFrame(
-                    text:
-                        'كل واحد هيسأل شخص تانى سؤال \n اضغط التالى عشان تعرف \n مين هيسأل مين',
-                  ),
-                )
-              : Container(),
-          /*      Container(
-            width: 200,
-            child: AutoSizeText(
-              "كل واحد هيسأل شخص تانى سؤال اضغط التالى عشان تعرف مين هيسأل مين",
-              style: boldStyle.copyWith(
-                fontSize: 15,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),*/
-
-          test == true
-              ? ZoomIn(
-                  delay: const Duration(milliseconds: 500),
-                  duration: const Duration(
-                    seconds: 1,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20.h),
-                    child: RoundedActionButton(
-                      btnColor: ColorManager.playersCardsColor[3],
-                      title: 'التالى',
-                      btnFunc: () {
-                        setState(() {
-                          _showQuestion = true;
-                        });
-                      },
+    return WillPopScope(
+      onWillPop: () async {
+        await showDialog(
+            context: context,
+            builder: (context) => ZoomIn(
+                  child: const ExitDialog(),
+                ));
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _currentIndex == _playerList.length
+              ? Container()
+              : AnimatedContainer(
+                  duration: const Duration(seconds: 1),
+                  child: SlideInDown(
+                      duration: const Duration(milliseconds: 500),
+                      child: AnimatedOpacity(
+                        opacity: test ? 0.0 : 1.0,
+                        duration: const Duration(seconds: 1),
+                        child: Image.asset(
+                          'assets/images/questionsTime.png',
+                          height: 300.h,
+                        ),
+                      )),
+                ),
+          if (!_showQuestion) ...[
+            test == true
+                ? ZoomIn(
+                    delay: const Duration(milliseconds: 500),
+                    duration: const Duration(
+                      seconds: 1,
                     ),
-                  ),
-                )
-              : Container()
-          /*     RoundedButton(
-            title: "التالى",
-            btnColor: ColorManager.successColor,
-            btnFunc: () {
-              setState(() {
-                _showQuestion =true;
-              });
-            },
-          )*/
-        ] else ...[
-          DisplayTextInFrame(
-            text:
-                ' ${_askingPlayers[_pointer1].playerName} اسأل ${_askingPlayers[_pointer2].playerName} و حاول توقعة ',
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20.h),
-            child: RoundedActionButton(
-              btnFunc: () {
-                if (counter == _playerList.length - 1) {
-                  navigateReplacmentToPage(context, RandomQuestionsTime());
-                } else if (_currentIndex != _playerList.length) {
-                  counter++;
-                  checkPlayersSimilarity();
-                }
-              },
+                    child: const DisplayTextInFrame(
+                      text:
+                          'كل واحد هيسأل شخص تانى سؤال \n اضغط التالى عشان تعرف \n مين هيسأل مين',
+                    ),
+                  )
+                : Container(),
+            /*      Container(
+              width: 200,
+              child: AutoSizeText(
+                "كل واحد هيسأل شخص تانى سؤال اضغط التالى عشان تعرف مين هيسأل مين",
+                style: boldStyle.copyWith(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),*/
+
+            test == true
+                ? ZoomIn(
+                    delay: const Duration(milliseconds: 500),
+                    duration: const Duration(
+                      seconds: 1,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 20.h),
+                      child: RoundedActionButton(
+                        btnColor: ColorManager.playersCardsColor[3],
+                        title: 'التالى',
+                        btnFunc: () {
+                          setState(() {
+                            _showQuestion = true;
+                          });
+                        },
+                      ),
+                    ),
+                  )
+                : Container()
+            /*     RoundedButton(
+              title: "التالى",
               btnColor: ColorManager.successColor,
-              title: 'التالى',
+              btnFunc: () {
+                setState(() {
+                  _showQuestion =true;
+                });
+              },
+            )*/
+          ] else ...[
+            DisplayTextInFrame(
+              text:
+                  ' ${_askingPlayers[_pointer1].playerName} اسأل ${_askingPlayers[_pointer2].playerName} و حاول توقعة ',
             ),
-          )
-          // ] else ...[
-          //   Container(
-          //     height: 500.h,
-          //     child: Center(
-          //       child: RoundedActionButton(
-          //         btnFunc: () {
-          //           MaterialPageRoute(
-          //             builder: (context) => RandomQuestionsTime(),
-          //           );
-          //         },
-          //         btnColor: ColorManager.successColor,
-          //         title: "التالى",
-          //       ),
-          //     ),
-          //   )
-          // ]
-        ]
-      ],
+            Padding(
+              padding: EdgeInsets.only(top: 20.h),
+              child: RoundedActionButton(
+                btnFunc: () {
+                  if (counter == _playerList.length - 1) {
+                    navigateToPage(context, RandomQuestionsTime());
+                  } else if (_currentIndex != _playerList.length) {
+                    counter++;
+                    checkPlayersSimilarity();
+                  }
+                },
+                btnColor: ColorManager.successColor,
+                title: 'التالى',
+              ),
+            )
+            // ] else ...[
+            //   Container(
+            //     height: 500.h,
+            //     child: Center(
+            //       child: RoundedActionButton(
+            //         btnFunc: () {
+            //           MaterialPageRoute(
+            //             builder: (context) => RandomQuestionsTime(),
+            //           );
+            //         },
+            //         btnColor: ColorManager.successColor,
+            //         title: "التالى",
+            //       ),
+            //     ),
+            //   )
+            // ]
+          ]
+        ],
+      ),
     );
   }
 }

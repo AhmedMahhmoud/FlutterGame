@@ -10,6 +10,7 @@ import 'package:flutter_game/core/Shared/rounded_action_button.dart';
 import 'package:flutter_game/core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 double listHeight = 90.h;
@@ -18,8 +19,20 @@ class FinalResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () =>
-          navigateReplacmentToPage(context, AddPlayerScreen(false)),
+      onWillPop: () {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Home()
+            ),
+            ModalRoute.withName("/Home")
+        );
+      }
+
+
+
+
+          ,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -52,7 +65,7 @@ class FinalResult extends StatelessWidget {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 500),
                       height: listHeight * value.playersList.length,
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      margin:  EdgeInsets.symmetric(horizontal: 8.w),
                       child: ListView.builder(
                         itemCount: value.playersList.isEmpty
                             ? 1
@@ -63,7 +76,7 @@ class FinalResult extends StatelessWidget {
                               visible: value.playersList.isNotEmpty,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 6),
+                                     EdgeInsets.symmetric(vertical: 6.h),
                                 child: PlayerRanking(
                                   playerScore:
                                       value.playersList[index].playerScore,
@@ -85,8 +98,8 @@ class FinalResult extends StatelessWidget {
                       btnColor: ColorManager.successColor,
                       title: 'دور جديد',
                       btnFunc: () {
-                        navigateReplacmentToPage(
-                            context, AddPlayerScreen(false));
+                        navigateToPage(
+                            context, const AddPlayerScreen(false));
                       },
                     ),
                     SizedBox(
@@ -96,7 +109,7 @@ class FinalResult extends StatelessWidget {
                       btnColor: ColorManager.failColor,
                       title: 'إنهاء اللعبة',
                       btnFunc: () {
-                        navigateReplacmentToPage(context, Home());
+                        navigateToPage(context, Home());
                       },
                     )
                   ],

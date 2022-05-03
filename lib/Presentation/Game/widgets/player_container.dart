@@ -105,7 +105,7 @@ class PlayerRanking extends StatelessWidget {
       height: 75.h,
       width: 360.w,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding:  EdgeInsets.symmetric(horizontal: 20.w),
         child: Row(
           children: [
             Stack(
@@ -124,17 +124,17 @@ class PlayerRanking extends StatelessWidget {
                 ),
                 playerIndex <= 2
                     ? Positioned(
-                        bottom: 0,
-                        right: 0,
+                        bottom: 0.h,
+                        right: 0.w,
                         child: Container(
                           width: 25.w,
                           height: 25.h,
                           child: Center(
                             child: AutoSizeText(
                               (playerIndex + 1).toString(),
-                              style: const TextStyle(
+                              style:  TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.bold,fontSize: setResponsiveFontSize(16)
                               ),
                             ),
                           ),
