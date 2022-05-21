@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/core/constants.dart';
+import '../constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RoundedActionButton extends StatelessWidget {
@@ -21,9 +20,9 @@ class RoundedActionButton extends StatelessWidget {
       onTap: btnFunc,
       child: Container(
         height: 55.h,
-        width: 200.w,
+        width: 190.w,
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 8.w),
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Center(
             child: AutoSizeText(
               title,

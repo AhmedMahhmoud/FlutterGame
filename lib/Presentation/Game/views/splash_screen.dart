@@ -55,7 +55,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     intitalizeGame();
     _startDelay();
     super.initState();
@@ -64,7 +65,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void dispose() {
     _timer?.cancel();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);  // to re-show bars
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values); // to re-show bars
 
     super.dispose();
   }
@@ -112,10 +114,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             color: Colors.white,
                             fontSize: setResponsiveFontSize(28),
                             fontWeight: FontWeight.bold,
-
-                            fontFamily: 'Cairo'
-
-                        )),
+                            fontFamily: 'Cairo')),
                   ),
                 ],
               ),

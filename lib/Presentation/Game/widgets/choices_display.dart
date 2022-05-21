@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayChoices extends StatelessWidget {
   final String screen;
 
-   const DisplayChoices({
+  const DisplayChoices({
     this.content,
     this.screen,
     this.headerImage,
@@ -24,11 +21,11 @@ class DisplayChoices extends StatelessWidget {
           children: [
             SizedBox(
               width: 350.w,
-              height: 90.h,
+              height: 85.h,
             ),
             Container(
               width: 350.w,
-              height:screen=='guess'?650.h: 700.h,
+              height: screen == 'guess' ? 650.h : 720.h,
               child: content,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),

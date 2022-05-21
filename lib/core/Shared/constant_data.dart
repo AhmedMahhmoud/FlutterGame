@@ -1,4 +1,4 @@
-import 'package:flutter_game/Domain/Models/animal_model.dart';
+import '../../Domain/Models/animal_model.dart';
 
 Game animalData = Game(
     id: 1,
@@ -283,4 +283,5 @@ List<String> playersImages = [
   'assets/images/p5.png',
   'assets/images/p6.png',
   'assets/images/p7.png',
+  'assets/images/p8_3atef.jpg'
 ];

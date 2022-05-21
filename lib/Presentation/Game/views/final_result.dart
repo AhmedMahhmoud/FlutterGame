@@ -1,16 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
-import 'package:flutter_game/Presentation/Game/views/add_players.dart';
-import 'package:flutter_game/Presentation/Game/widgets/player_container.dart';
-import 'package:flutter_game/Presentation/Home/views/home.dart';
-import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/rounded_action_button.dart';
-import 'package:flutter_game/core/constants.dart';
+import '../../../Data/Providers/Players/players_provider.dart';
+import 'add_players.dart';
+import '../widgets/player_container.dart';
+import '../../Home/views/home.dart';
+import '../../../core/ColorManager/ColorManager.dart';
+import '../../../core/Shared/rounded_action_button.dart';
+import '../../../core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 double listHeight = 90.h;
@@ -22,17 +20,9 @@ class FinalResult extends StatelessWidget {
       onWillPop: () {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-                builder: (context) => Home()
-            ),
-            ModalRoute.withName("/Home")
-        );
-      }
-
-
-
-
-          ,
+            MaterialPageRoute(builder: (BuildContext context) => Home()),
+            ModalRoute.withName('/Home'));
+      },
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -45,7 +35,8 @@ class FinalResult extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Consumer<PlayersProvider>(
-            builder: (context, value, child) {
+            builder:
+                (BuildContext context, PlayersProvider value, Widget child) {
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -65,18 +56,17 @@ class FinalResult extends StatelessWidget {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 500),
                       height: listHeight * value.playersList.length,
-                      margin:  EdgeInsets.symmetric(horizontal: 8.w),
+                      margin: EdgeInsets.symmetric(horizontal: 8.w),
                       child: ListView.builder(
                         itemCount: value.playersList.isEmpty
                             ? 1
                             : value.playersList.length,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (BuildContext context, int index) {
                           return BounceInRight(
                             child: Visibility(
                               visible: value.playersList.isNotEmpty,
                               child: Padding(
-                                padding:
-                                     EdgeInsets.symmetric(vertical: 6.h),
+                                padding: EdgeInsets.symmetric(vertical: 6.h),
                                 child: PlayerRanking(
                                   playerScore:
                                       value.playersList[index].playerScore,
@@ -94,24 +84,29 @@ class FinalResult extends StatelessWidget {
                         },
                       ),
                     ),
-                    RoundedActionButton(
-                      btnColor: ColorManager.successColor,
-                      title: 'دور جديد',
-                      btnFunc: () {
-                        navigateToPage(
-                            context, const AddPlayerScreen(false));
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        RoundedActionButton(
+                          btnColor: ColorManager.successColor,
+                          title: 'دور جديد',
+                          btnFunc: () {
+                            navigateToPage(
+                                context, const AddPlayerScreen(false));
+                          },
+                        ),
+                        RoundedActionButton(
+                          btnColor: ColorManager.failColor,
+                          title: 'إنهاء اللعبة',
+                          btnFunc: () {
+                            navigateToPage(context, Home());
+                          },
+                        )
+                      ],
                     ),
                     SizedBox(
-                      height: 15.h,
+                      height: 10.h,
                     ),
-                    RoundedActionButton(
-                      btnColor: ColorManager.failColor,
-                      title: 'إنهاء اللعبة',
-                      btnFunc: () {
-                        navigateToPage(context, Home());
-                      },
-                    )
                   ],
                 ),
               );

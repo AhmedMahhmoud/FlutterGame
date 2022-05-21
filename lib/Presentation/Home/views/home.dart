@@ -7,14 +7,12 @@ import '../../../Data/Providers/Animal/animal_provider.dart';
 import '../../../Services/AppVersion/app_version.dart';
 import '../../../core/Shared/constant_data.dart';
 import 'package:provider/provider.dart';
-import '../../../core/Shared/rounded_action_button.dart';
 import '../../Game/views/add_players.dart';
 import '../../Game/views/how_to_play_screen.dart';
 import '../../Game/widgets/categories_container.dart';
 import '../../../core/ColorManager/ColorManager.dart';
 import '../../../core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 // ignore: use_key_in_widget_constructors
 class Home extends StatefulWidget {
@@ -29,7 +27,7 @@ class Home extends StatefulWidget {
 //   locator.locator<AnimalProvider>().getAnimalFromDb(_animal);
 // }
 
-class _HomeState extends State<Home>  {
+class _HomeState extends State<Home> {
   @override
   void initState() {
     AppStoreVersion _appStoreVersion = AppStoreVersion();

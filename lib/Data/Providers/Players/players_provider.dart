@@ -3,8 +3,8 @@ import 'dart:developer' as lg;
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game/Domain/Models/player_model.dart';
-import 'package:flutter_game/core/Shared/constant_data.dart';
+import '../../../Domain/Models/player_model.dart';
+import '../../../core/Shared/constant_data.dart';
 
 import '../../../Database/players_db.dart';
 
@@ -27,7 +27,7 @@ class PlayersProvider with ChangeNotifier {
     for (int i = 0; i < playersList.length; i++) {
       whoIsOutIndex = i;
       Future.delayed(const Duration(milliseconds: 500));
-      lg.log('player is ${i}');
+      lg.log('player is $i');
       notifyListeners();
     }
   }
@@ -61,6 +61,7 @@ class PlayersProvider with ChangeNotifier {
       'assets/images/p5.png',
       'assets/images/p6.png',
       'assets/images/p7.png',
+      'assets/images/p8_3atef.jpg'
     ];
   }
 

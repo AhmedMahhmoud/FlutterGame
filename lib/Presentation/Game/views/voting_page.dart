@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
-import 'package:flutter_game/Presentation/Game/widgets/choices_display.dart';
-import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/rounded_action_button.dart';
-import 'package:flutter_game/core/constants.dart';
+import '../../../Data/Providers/Players/players_provider.dart';
+import '../../../core/Shared/rounded_action_button.dart';
+import '../widgets/choices_display.dart';
+import '../../../core/ColorManager/ColorManager.dart';
+import '../../../core/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/ExitDialog.dart';
@@ -35,7 +35,8 @@ class _VotingScreenState extends State<VotingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var playersProv = Provider.of<PlayersProvider>(context, listen: true);
+    PlayersProvider playersProv =
+        Provider.of<PlayersProvider>(context, listen: true);
 
     return WillPopScope(
       onWillPop: () async {
@@ -89,7 +90,7 @@ class _VotingScreenState extends State<VotingScreen> {
                     ),
                     ListView.builder(
                       shrinkWrap: true,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (BuildContext context, int index) {
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
@@ -189,15 +190,12 @@ class _VotingScreenState extends State<VotingScreen> {
                                     ),
                                   ),
                                   alignment: Alignment.center,
-                                  height: 65.h,
+                                  height: 60.h,
                                   width: 250.w,
                                 )));
                       },
                       itemCount: playersProv.suspectsPlayers.length,
                     ),
-
-                    //const Spacer(),
-
                     button_display_index == playersProv.playersList.length
                         ? Padding(
                             padding: EdgeInsets.only(bottom: 10.h, top: 10.h),
@@ -210,6 +208,7 @@ class _VotingScreenState extends State<VotingScreen> {
                             ),
                           )
                         : Container()
+                    //const Spacer(),
                   ],
                 ),
               ),
