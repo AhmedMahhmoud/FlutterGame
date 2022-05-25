@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_game/Presentation/Game/widgets/update_dialog.dart';
 import 'package:new_version/new_version.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../Presentation/Game/widgets/update_dialog.dart';
 
 class AppStoreVersion {
   Future<void> checkAppUpdate(BuildContext context) async {

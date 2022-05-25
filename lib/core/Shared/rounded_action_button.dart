@@ -19,7 +19,7 @@ class RoundedActionButton extends StatelessWidget {
     return InkWell(
       onTap: btnFunc,
       child: Container(
-        height: 55.h,
+        height: 50.h,
         width: 190.w,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),

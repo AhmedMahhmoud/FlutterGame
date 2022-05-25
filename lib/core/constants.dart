@@ -43,6 +43,10 @@ navigateReplacmentToPage(BuildContext context, page) {
   );
 }
 
+navigatePushAnfRemoveUntilToPage(BuildContext context, page) {
+  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => page,), (route) => false);
+}
+
 showAnimatedToast(BuildContext context, String content) {
   showToast(
     content,

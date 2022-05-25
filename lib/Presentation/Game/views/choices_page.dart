@@ -142,7 +142,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 15.h,
+                    height: 8.h,
                   ),
                   AutoSizeText(
                     'تفتكر الكلام على إيه ؟',
@@ -152,7 +152,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                         color: Colors.white),
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: 10.h,
                   ),
                   DisplayChoices(
                     screen: 'guess',
@@ -195,7 +195,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                                         ),
                                       ),
                                       alignment: Alignment.center,
-                                      height: 65.h,
+                                      height: 60.h,
                                       width: 250.w,
                                     ),
                                   ));

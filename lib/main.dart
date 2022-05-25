@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'Data/Providers/Players/players_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:provider/provider.dart';
 import 'Data/Providers/Animal/animal_provider.dart';
 
 import 'Presentation/Game/views/splash_screen.dart';

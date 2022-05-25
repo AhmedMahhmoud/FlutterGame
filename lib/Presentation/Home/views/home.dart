@@ -1,12 +1,14 @@
+import 'dart:io';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 import '../../../Data/Providers/Animal/animal_provider.dart';
 import '../../../Services/AppVersion/app_version.dart';
 import '../../../core/Shared/constant_data.dart';
-import 'package:provider/provider.dart';
 import '../../Game/views/add_players.dart';
 import '../../Game/views/how_to_play_screen.dart';
 import '../../Game/widgets/categories_container.dart';
@@ -67,7 +69,43 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  FadeInRight(
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: SizedBox(
+                      height: categories.length*100.h,
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: Platform.isIOS
+                                ? MediaQuery.of(context).size.width /
+                                    (MediaQuery.of(context).size.height / 2)
+                                : MediaQuery.of(context).size.width /
+                                    (MediaQuery.of(context).size.height / 1.8),
+                            crossAxisSpacing: Platform.isIOS
+                                ? 5.w
+                                : MediaQuery.of(context).size.height * 0.02,
+                            mainAxisSpacing: Platform.isIOS
+                                ? 7.w
+                                : MediaQuery.of(context).size.width * 0.01,
+                            crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return CategoriesCard(
+                            catColor: ColorManager.playersCardsColor[index],
+                            onTap: () {
+                              startPlay(gameProv, index);
+
+                              navigateToPage(
+                                  context, const AddPlayerScreen(true));
+                            },
+                            catTitle: categories[index],
+                            catImage: categoryImages[index],
+                          );
+                        },
+                        itemCount: categories.length,
+                      ),
+                    ),
+                  ),
+
+                  /*  FadeInRight(
                     duration: const Duration(seconds: 1),
                     child: CategoriesCard(
                       catColor: ColorManager.playersCardsColor[0],
@@ -131,7 +169,7 @@ class _HomeState extends State<Home> {
                     delay: const Duration(milliseconds: 3600),
                     child: CategoriesCard(
                       catColor: ColorManager.playersCardsColor[6],
-                      catImage: 'assets/images/makeup.jpg',
+                      catImage: assets/images/makeup.jpg'',
                       onTap: () {
                         gameProv.setGameCategory(makeupData);
                         navigateToPage(context, const AddPlayerScreen(true));
@@ -171,7 +209,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
@@ -179,5 +217,52 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  void startPlay(gameProv, int index) {
+    switch (index) {
+      case 0:
+        {
+          gameProv.setGameCategory(animalData);
+        }
+        break;
+
+      case 1:
+        {
+          gameProv.setGameCategory(moviesData);
+        }
+        break;
+      case 2:
+        {
+          gameProv.setGameCategory(foodData);
+        }
+        break;
+      case 3:
+        {
+          gameProv.setGameCategory(clothesData);
+        }
+        break;
+      case 4:
+        {
+          gameProv.setGameCategory(animeData);
+        }
+        break;
+      case 5:
+        {
+          gameProv.setGameCategory(clothesData);
+        }
+        break;
+      case 6:
+        {
+          gameProv.setGameCategory(jobsData );
+        }
+        break;
+
+      default:
+        {
+          gameProv.setGameCategory(animalData);
+        }
+        break;
+    }
   }
 }

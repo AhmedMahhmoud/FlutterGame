@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -54,6 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);

@@ -16,101 +16,109 @@ double listHeight = 90.h;
 class FinalResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (BuildContext context) => Home()),
-            ModalRoute.withName('/Home'));
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    'assets/images/gameBackground.jpg',
-                  ),
-                  fit: BoxFit.fill)),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Consumer<PlayersProvider>(
-            builder:
-                (BuildContext context, PlayersProvider value, Widget child) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 5.h,
+    return SafeArea(
+      child
+          : WillPopScope(
+        onWillPop: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => Home()),
+              ModalRoute.withName('/Home'));
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/gameBackground.jpg',
                     ),
-                    AutoSizeText(
-                      'النتيجة',
-                      style: TextStyle(
-                          fontSize: setResponsiveFontSize(25),
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 500),
-                      height: listHeight * value.playersList.length,
-                      margin: EdgeInsets.symmetric(horizontal: 8.w),
-                      child: ListView.builder(
-                        itemCount: value.playersList.isEmpty
-                            ? 1
-                            : value.playersList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return BounceInRight(
-                            child: Visibility(
-                              visible: value.playersList.isNotEmpty,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6.h),
-                                child: PlayerRanking(
-                                  playerScore:
-                                      value.playersList[index].playerScore,
-                                  playerIndex: index,
-                                  playerImage: value.playersList.isEmpty
-                                      ? ''
-                                      : value.playersList[index].playerImage,
-                                  playerName: value.playersList.isEmpty
-                                      ? ' '
-                                      : value.playersList[index].playerName,
+                    fit: BoxFit.fill)),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Consumer<PlayersProvider>(
+              builder:
+                  (BuildContext context, PlayersProvider value, Widget child) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      AutoSizeText(
+                        'النتيجة',
+                        style: TextStyle(
+                            fontSize: setResponsiveFontSize(25),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        height: listHeight * value.playersList.length,
+                        margin: EdgeInsets.symmetric(horizontal: 8.w),
+                        child: ListView.builder(
+                          itemCount: value.playersList.isEmpty
+                              ? 1
+                              : value.playersList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return BounceInRight(
+                              child: Visibility(
+                                visible: value.playersList.isNotEmpty,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 6.h),
+                                  child: PlayerRanking(
+                                    playerScore:
+                                        value.playersList[index].playerScore,
+                                    playerIndex: index,
+                                    playerImage: value.playersList.isEmpty
+                                        ? ''
+                                        : value.playersList[index].playerImage,
+                                    playerName: value.playersList.isEmpty
+                                        ? ' '
+                                        : value.playersList[index].playerName,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        RoundedActionButton(
-                          btnColor: ColorManager.successColor,
-                          title: 'دور جديد',
-                          btnFunc: () {
-                            navigateToPage(
-                                context, const AddPlayerScreen(false));
+                            );
                           },
                         ),
-                        RoundedActionButton(
-                          btnColor: ColorManager.failColor,
-                          title: 'إنهاء اللعبة',
-                          btnFunc: () {
-                            navigateToPage(context, Home());
-                          },
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                  ],
-                ),
-              );
-            },
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          RoundedActionButton(
+                            btnColor: ColorManager.successColor,
+                            title: 'دور جديد',
+                            btnFunc: () {
+                              navigatePushAnfRemoveUntilToPage(
+                                  context, const AddPlayerScreen(false));
+                            },
+                          ),
+                          RoundedActionButton(
+                            btnColor: ColorManager.failColor,
+                            title: 'فورة جديدة',
+                            btnFunc: () {
+                              value.playersList.forEach((player) {player.playerScore=0; });
+                              navigateReplacmentToPage(context, Home());
+                            },
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),

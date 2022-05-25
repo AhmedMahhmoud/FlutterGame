@@ -112,31 +112,7 @@ Game foodData = Game(
     categoryImage: 'assets/images/food.jpg',
     categoryName: 'اكلات مصرية');
 
-Game makeupData = Game(
-    id: 5,
-    itemsName: [
-      'برايمر',
-      'Lip balm',
-      'Lip gloss',
-      'فاونديشن',
-      'Makeup remover',
-      'كونسيلر',
-      'كولر كوريكتور',
-      'لوس بودر',
-      'ايلينر',
-      'كحل',
-      'مسكرا حواجب',
-      'Eye shadow',
-      'كونتور',
-      'lip liner',
-      'Bronzer',
-      'Highlighter',
-      'Blusher',
-      'Mascara',
-      'Lip stick'
-    ],
-    categoryImage: 'assets/images/food.jpg',
-    categoryName: 'قعدة بنات');
+
 
 Game clothesData = Game(
     id: 3,
@@ -275,6 +251,119 @@ Game moviesData = Game(
     ],
     categoryImage: 'assets/images/food.jpg',
     categoryName: 'افلام');
+
+Game makeupData = Game(
+    id: 5,
+    itemsName: [
+          'برايمر',
+          'Lip balm',
+          'Lip gloss',
+          'فاونديشن',
+          'Makeup remover',
+          'كونسيلر',
+          'كولر كوريكتور',
+          'لوس بودر',
+          'ايلينر',
+          'كحل',
+          'مسكرا حواجب',
+          'Eye shadow',
+          'كونتور',
+          'lip liner',
+          'Bronzer',
+          'Highlighter',
+          'Blusher',
+          'Mascara',
+          'Lip stick'
+    ],
+    categoryImage: 'assets/images/food.jpg',
+    categoryName: 'قعدة بنات');
+
+
+Game animeData = Game(
+    id: 6,
+    itemsName: [
+          'Death Note',
+          'AttackOnTitan',
+          'Naruto',
+          'Konan',
+          'One Piece',
+          'Dragon Ball',
+          'HunterXHunter',
+          'Tokyo Ghoul',
+          'Demon Slayer',
+          'SevenDeadySins',
+          'Gintama',
+          'Fullmetal Alchemist',
+          'Code Geass',
+          'Vinland Saga',
+          'MyHero Academia',
+          'Bleach',
+          'One Punch Man',
+          'Haikyu',
+
+    ],
+    categoryImage: 'assets/images/anime.jpeg',
+    categoryName: 'إنمى');
+
+
+Game jobsData = Game(
+    id: 7,
+    itemsName: [
+          'مبرمج',
+          'مهندس',
+          'نجار',
+          'سباك',
+          'محامى',
+          'عامل نظافة',
+          'رقاصة',
+          'نقاش',
+          'طبال',
+          'سياسى',
+          'مذيع',
+          'صحفى',
+          'ممثل',
+          'مخرج',
+          'لاعب',
+          'مدرب',
+          'قهوجى',
+          'طباخ',
+          'كاشير',
+          'محاسب',
+          'سائق',
+          'رجل أعمال',
+          'قاضى',
+          'حرامى',
+          'نصاب',
+          'مهندس ديكور',
+          'فلاح',
+          'ظابط',
+          'عامل بوفية',
+          'ميكانيكي',
+          'كهربائى',
+          'سمكرى',
+          'حداد',
+          'حلاق',
+          'كوافيرة',
+          'مصمم ملابس',
+          'مطرب',
+          'مؤلف',
+          'مراسل صحفى',
+          'كومبارس',
+          'مدرس',
+          'دكتور',
+          'صيدلى',
+          'مسعف',
+          'مدرب جيم',
+
+
+
+    ],
+    categoryImage: 'assets/images/jobs.jpeg',
+    categoryName: 'وظائف');
+
+
+
+
 List<String> playersImages = [
   'assets/images/p1.png',
   'assets/images/p2.png',
@@ -284,4 +373,26 @@ List<String> playersImages = [
   'assets/images/p6.png',
   'assets/images/p7.png',
   'assets/images/p8_3atef.jpg'
+];
+
+
+List<String> categories = [
+      'حيوانات',
+      'افلام',
+      'اكلات مصرية',
+      'ملابس',
+      'إنمى',
+      'وظائف',
+      'قعدة بنات',
+];
+
+List<String> categoryImages = [
+      'assets/images/animals.jpg',
+      'assets/images/movies.jpg',
+      'assets/images/food.jpg',
+      'assets/images/clothes.jpg',
+
+      'assets/images/anime.jpeg',
+      'assets/images/jobs.jpeg',
+      'assets/images/makeup.jpg',
 ];

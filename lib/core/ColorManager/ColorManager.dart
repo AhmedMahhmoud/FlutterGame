@@ -5,11 +5,11 @@ class ColorManager {
     HexColor.fromHex('DA5AA7'),
     HexColor.fromHex('2E9CDB'),
     HexColor.fromHex('6B446F'),
-    HexColor.fromHex('25AE60'),
+    HexColor.fromHex('25AE60'),  HexColor.fromHex('FFAD1F'),
     failColor,
     successColor,
     HexColor.fromHex('6B4470'),
-    HexColor.fromHex('FFAD1F')
+
   ];
   static List<Color> categoriesCardsColors = [
     HexColor.fromHex('FD88C8'),

@@ -130,11 +130,25 @@ class _WhoIsOutState extends State<WhoIsOut> {
                           fit: BoxFit.fill)),
                   child: Column(
                     children: [
+
                       Container(
                         child: _turnNumber < value.playersList.length * 2
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  InkWell(
+                                    onTap: ()=>     showDialog(
+                                        context: context,
+                                        builder: (context) => ZoomIn(
+                                          child: const ExitDialog(),
+                                        )),
+                                    child: Padding(
+                                      padding:  EdgeInsets.only(top: 20.h,left: 20.h),
+                                      child: const Align(
+                                          alignment: Alignment.topLeft,
+                                          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                                    ),
+                                  ),
                                   SizedBox(
                                     height: 200.h,
                                   ),
@@ -244,6 +258,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                               print(
                                                                   'Scratch progress: $value%');
                                                               scratchProgress =
+
                                                                   value;
                                                             },
                                                             onThreshold: () =>
@@ -297,7 +312,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                       title: 'التالى',
                                       btnFunc: () {
                                         if (!_switchToNewPlayer &&
-                                            scratchProgress == 0) {
+                                            scratchProgress <10) {
                                           showAnimatedToast(
                                               context, 'خربش الأول');
                                           return;

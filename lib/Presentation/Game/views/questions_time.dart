@@ -77,6 +77,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+
           _currentIndex == _playerList.length
               ? Container()
               : AnimatedContainer(
@@ -105,17 +106,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                   )
                 : Container(),
-            /*      Container(
-              width: 200,
-              child: AutoSizeText(
-                "كل واحد هيسأل شخص تانى سؤال اضغط التالى عشان تعرف مين هيسأل مين",
-                style: boldStyle.copyWith(
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),*/
+
 
             test == true
                 ? ZoomIn(
@@ -137,15 +128,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                   )
                 : Container()
-            /*     RoundedButton(
-              title: "التالى",
-              btnColor: ColorManager.successColor,
-              btnFunc: () {
-                setState(() {
-                  _showQuestion =true;
-                });
-              },
-            )*/
+
           ] else ...[
             DisplayTextInFrame(
               text:

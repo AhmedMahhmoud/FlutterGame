@@ -27,34 +27,40 @@ class CategoriesCard extends StatelessWidget {
           children: [
             SizedBox(
               width: 350.w,
-              height: 30.h,
+              height: 100.h,
             ),
             InkWell(
               onTap: onTap,
               child: Container(
                 padding: EdgeInsets.only(right: 20.w),
                 width: 350.w,
-                height: 90.h,
+                height: 120.h,
                 alignment: Alignment.centerRight,
-                child: SizedBox(
-                  width: 180.w,
-                  height: 90.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AutoSizeText(
-                        catTitle,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: setResponsiveFontSize(18),
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(child: Container()),
-                    const  Icon(
-                        FontAwesomeIcons.angleRight,
-                        color: Colors.white,
-                      )
-                    ],
+                child: Padding(
+                  padding:  EdgeInsets.only(top: 30.h),
+                  child: SizedBox(
+                    width: 180.w,
+                    height: 90.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.only(left: 4.w),
+                          child: AutoSizeText(
+                            catTitle,textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: setResponsiveFontSize(17),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                   /*     Expanded(child: Container()),
+                      const  Icon(
+                          FontAwesomeIcons.angleRight,
+                          color: Colors.white,
+                        )*/
+                      ],
+                    ),
                   ),
                 ),
                 decoration: BoxDecoration(
@@ -80,7 +86,8 @@ class CategoriesCard extends StatelessWidget {
           ],
         ),
         Positioned(
-          left: 20.w,
+          left: 40.w,
+          top: 50.h,
           child: Container(
             width: 100.w,
             height: 100.h,

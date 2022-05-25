@@ -21,11 +21,11 @@ class DisplayChoices extends StatelessWidget {
           children: [
             SizedBox(
               width: 350.w,
-              height: 85.h,
+              height: 90.h,
             ),
             Container(
               width: 350.w,
-              height: screen == 'guess' ? 650.h : 720.h,
+              height: screen == 'guess' ? 650.h : 680.h,
               child: content,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
