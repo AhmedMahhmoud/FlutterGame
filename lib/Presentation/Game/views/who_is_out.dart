@@ -251,7 +251,7 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                                               // off sound
                                                             },
                                                             image: Image.asset(
-                                                              'assets/images/scratch.PNG',
+                                                              'assets/images/bakasa.png',
                                                               fit: BoxFit.cover,
                                                             ),
                                                             onChange: (value) {

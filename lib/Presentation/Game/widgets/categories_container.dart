@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/core/constants.dart';
+import '../../../core/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,24 +20,24 @@ class CategoriesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topLeft,
-      children: [
-        Column(
-          children: [
-            SizedBox(
-              width: 350.w,
-              height: 100.h,
-            ),
-            InkWell(
-              onTap: onTap,
-              child: Container(
+    return InkWell(
+      onTap: onTap,
+      child: Stack(
+        //  alignment: Alignment.topLeft,
+        children: [
+          Column(
+            children: [
+              SizedBox(
+                width: 350.w,
+                height: 100.h,
+              ),
+              Container(
                 padding: EdgeInsets.only(right: 20.w),
                 width: 350.w,
                 height: 120.h,
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding:  EdgeInsets.only(top: 30.h),
+                  padding: EdgeInsets.only(top: 30.h),
                   child: SizedBox(
                     width: 180.w,
                     height: 90.h,
@@ -45,16 +45,17 @@ class CategoriesCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.only(left: 4.w),
+                          padding: EdgeInsets.only(left: 4.w),
                           child: AutoSizeText(
-                            catTitle,textAlign: TextAlign.start,
+                            catTitle,
+                            textAlign: TextAlign.start,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: setResponsiveFontSize(17),
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                   /*     Expanded(child: Container()),
+                        /*     Expanded(child: Container()),
                       const  Icon(
                           FontAwesomeIcons.angleRight,
                           color: Colors.white,
@@ -82,24 +83,24 @@ class CategoriesCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-            ),
-          ],
-        ),
-        Positioned(
-          left: 40.w,
-          top: 50.h,
-          child: Container(
-            width: 100.w,
-            height: 100.h,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 2.w, color: Colors.white),
-                color: Colors.red,
-                image: DecorationImage(
-                    image: AssetImage(catImage), fit: BoxFit.cover)),
+            ],
           ),
-        )
-      ],
+          Positioned(
+            left: 40.w,
+            top: 50.h,
+            child: Container(
+              width: 100.w,
+              height: 100.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(width: 2.w, color: Colors.white),
+                  color: Colors.red,
+                  image: DecorationImage(
+                      image: AssetImage(catImage), fit: BoxFit.cover)),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,15 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   //locator.intalizeLocator();
   // await intitalizeGame();
-  runApp(const MyApp());
+
+/*DevicePreview(
+  enabled: !kReleaseMode,
+
+  builder: (context)=>const MyApp(),
+);*/
+
+runApp(const MyApp())  ;
+
 }
 
 /*InitLocator locator = InitLocator();

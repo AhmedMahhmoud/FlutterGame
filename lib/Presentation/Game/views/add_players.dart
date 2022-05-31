@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,8 +60,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
           await showDialog(
               context: context,
               builder: (BuildContext context) => ZoomIn(
-            child: const ExitDialog(),
-          ));
+                    child: const ExitDialog(),
+                  ));
         },
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -80,7 +81,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 800.h,
+                          height: MediaQuery.of(context).size.height / 1.09,
                           child: Column(
                             children: [
                               SizedBox(
@@ -99,10 +100,12 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
                                 height:
-                                //value.playersList.length==8?(listHeight * value.playersList.length):630.h
-                               (listHeight * value.playersList.length)>600?600:listHeight * value.playersList.length
-
-                            ,    margin: EdgeInsets.symmetric(horizontal: 15.w),
+                                    //value.playersList.length==8?(listHeight * value.playersList.length):630.h
+                                    (listHeight * value.playersList.length) >
+                                            600
+                                        ? 650.h
+                                        : listHeight * value.playersList.length,
+                                margin: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: ListView.builder(
                                   itemCount: value.playersList.isEmpty
                                       ? 1
@@ -397,7 +400,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                                 btnFunc: () {
                                   navigateToPage(context, WhoIsOut());
                                 },
-                              ) ,SizedBox(height: 12.h,)
+                              ),
+                        SizedBox(
+                          height: 12.h,
+                        )
                       ],
                     ),
                   );

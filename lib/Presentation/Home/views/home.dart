@@ -4,6 +4,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:new_version/new_version.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 import '../../../Data/Providers/Animal/animal_provider.dart';
@@ -32,8 +33,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
-    AppStoreVersion _appStoreVersion = AppStoreVersion();
-    _appStoreVersion.checkAppUpdate(context);
+    try {
+      AppStoreVersion _appStoreVersion = AppStoreVersion();
+      _appStoreVersion.checkAppUpdate(context);
+
+
+    } catch (e) {
+      debugPrint('exception is $e');
+    }
     super.initState();
   }
 
@@ -72,7 +79,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.w),
                     child: SizedBox(
-                      height: categories.length*100.h,
+                      height: categories.length * 100.h,
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             childAspectRatio: Platform.isIOS
@@ -249,12 +256,12 @@ class _HomeState extends State<Home> {
         break;
       case 5:
         {
-          gameProv.setGameCategory(clothesData);
+          gameProv.setGameCategory(jobsData);
         }
         break;
       case 6:
         {
-          gameProv.setGameCategory(jobsData );
+          gameProv.setGameCategory(makeupData);
         }
         break;
 
