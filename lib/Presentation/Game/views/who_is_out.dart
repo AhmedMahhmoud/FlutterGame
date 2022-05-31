@@ -106,18 +106,19 @@ class _WhoIsOutState extends State<WhoIsOut> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        await showDialog(
-            context: context,
-            builder: (context) => ZoomIn(
-                  child: const ExitDialog(),
-                ));
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Consumer<PlayersProvider>(
+    return  SafeArea(
+      child
+          : WillPopScope(
+        onWillPop: () async {
+          await showDialog(
+              context: context,
+              builder: (context) => ZoomIn(
+                    child: const ExitDialog(),
+                  ));
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Consumer<PlayersProvider>(
             builder: (context, value, child) {
               return Container(
                   width: MediaQuery.of(context).size.width,
@@ -137,11 +138,15 @@ class _WhoIsOutState extends State<WhoIsOut> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   InkWell(
-                                    onTap: ()=>     showDialog(
-                                        context: context,
-                                        builder: (context) => ZoomIn(
-                                          child: const ExitDialog(),
-                                        )),
+                                    onTap: (){
+                                      print("aaa");
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => ZoomIn(
+                                            child: const ExitDialog(),
+                                          ));
+
+              }     ,
                                     child: Padding(
                                       padding:  EdgeInsets.only(top: 20.h,left: 20.h),
                                       child: const Align(

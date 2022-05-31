@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayChoices extends StatelessWidget {
@@ -25,7 +26,7 @@ class DisplayChoices extends StatelessWidget {
             ),
             Container(
               width: 350.w,
-              height: screen == 'guess' ? 650.h : 680.h,
+              height: screen == 'guess' ?   Device.get().hasNotch?610.h:            650.h :  Device.get().hasNotch?650.h:     680.h,
               child: content,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),

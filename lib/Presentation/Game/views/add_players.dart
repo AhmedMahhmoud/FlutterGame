@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import '../widgets/add_player_container.dart';
 import '../widgets/exitDialog.dart';
 import '../widgets/player_container.dart';
@@ -49,24 +50,27 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   double listHeight = 95.h;
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
-    return GestureDetector(
-      onTap: () async {
-        FocusScope.of(context).unfocus();
-      },
-      child: WillPopScope(
-        onWillPop: () async {
-          await showDialog(
-              context: context,
-              builder: (BuildContext context) => ZoomIn(
-                    child: const ExitDialog(),
-                  ));
+
+  /*  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);*/
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () async {
+          FocusScope.of(context).unfocus();
         },
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: SafeArea(
-            child: Container(
+        child: WillPopScope(
+          onWillPop: () async {
+            await showDialog(
+                context: context,
+                builder: (BuildContext context) => ZoomIn(
+                      child: const ExitDialog(),
+                    ));
+          },
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
@@ -81,7 +85,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                     child: Column(
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 1.09,
+                          height:
+
+                          MediaQuery.of(context).size.height /    ( Device.get().hasNotch ? 1.2:      1.085),
                           child: Column(
                             children: [
                               SizedBox(
@@ -100,10 +106,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
                                 height:
-                                    //value.playersList.length==8?(listHeight * value.playersList.length):630.h
-                                    (listHeight * value.playersList.length) >
-                                            600
-                                        ? 650.h
+
+
+                                    (listHeight * value.playersList.length) > 600
+                                        ? Device.get().hasNotch?580.h:650.h
                                         : listHeight * value.playersList.length,
                                 margin: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: ListView.builder(

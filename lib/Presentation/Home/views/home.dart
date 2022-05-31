@@ -82,17 +82,10 @@ class _HomeState extends State<Home> {
                       height: categories.length * 100.h,
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: Platform.isIOS
-                                ? MediaQuery.of(context).size.width /
-                                    (MediaQuery.of(context).size.height / 2)
-                                : MediaQuery.of(context).size.width /
+                            childAspectRatio: MediaQuery.of(context).size.width /
                                     (MediaQuery.of(context).size.height / 1.8),
-                            crossAxisSpacing: Platform.isIOS
-                                ? 5.w
-                                : MediaQuery.of(context).size.height * 0.02,
-                            mainAxisSpacing: Platform.isIOS
-                                ? 7.w
-                                : MediaQuery.of(context).size.width * 0.01,
+                            crossAxisSpacing:  MediaQuery.of(context).size.height * 0.02,
+                            mainAxisSpacing:  MediaQuery.of(context).size.width * 0.01,
                             crossAxisCount: 2),
                         itemBuilder: (context, index) {
                           return CategoriesCard(

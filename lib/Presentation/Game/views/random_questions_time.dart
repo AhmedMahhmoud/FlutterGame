@@ -31,15 +31,15 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
   Widget build(BuildContext context) {
     PlayersProvider playersProv =
         Provider.of<PlayersProvider>(context, listen: true);
-    return WillPopScope(
-      onWillPop: () async {
-        await showDialog(
-            context: context,
-            builder: (BuildContext context) => ZoomIn(
-                  child: const ExitDialog(),
-                ));
-      },
-      child: SafeArea(
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async {
+          await showDialog(
+              context: context,
+              builder: (BuildContext context) => ZoomIn(
+                    child: const ExitDialog(),
+                  ));
+        },
         child: Scaffold(
           body: Container(
             width: MediaQuery.of(context).size.width,
