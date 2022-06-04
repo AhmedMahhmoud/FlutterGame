@@ -2,18 +2,16 @@ import 'dart:ui';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game/Data/Providers/Players/players_provider.dart';
-import 'package:flutter_game/core/ColorManager/ColorManager.dart';
-import 'package:flutter_game/core/Shared/rounded_action_button.dart';
-import 'package:flutter_game/core/constants.dart';
+import '../../../Data/Providers/Players/players_provider.dart';
+import '../../../core/ColorManager/ColorManager.dart';
+import '../../../core/Shared/rounded_action_button.dart';
+import '../../../core/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/ExitDialog.dart';
 import 'choices_page.dart';
 
@@ -23,12 +21,14 @@ class FindOutScreen extends StatefulWidget {
 }
 
 class _FindOutScreenState extends State<FindOutScreen> {
+  BannerAd _bannerAd;
   AudioCache drums = AudioCache();
   bool countDown = true;
 
   @override
   void initState() {
     super.initState();
+
     if (!mounted) return;
     drums.play(
       'sounds/drum.mp3',
@@ -38,12 +38,31 @@ class _FindOutScreenState extends State<FindOutScreen> {
         countDown = false;
       });
     });
+    _bannerAd = createBannerAd()
+      ..load()
+      ..show();
+  }
+
+  BannerAd createBannerAd() {
+    return BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.banner,
+      listener: (MobileAdEvent event) {
+        print('BannerAd event $event');
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        try {
+          _bannerAd?.dispose();
+          _bannerAd = null;
+        } catch (e) {
+          print(e);
+        }
         await showDialog(
             context: context,
             builder: (BuildContext context) => ZoomIn(
@@ -122,7 +141,16 @@ class _FindOutScreenState extends State<FindOutScreen> {
                       btnColor: ColorManager.successColor,
                       title: 'التالى',
                       btnFunc: () {
-                        navigateToPage(context, ChoiceScreen());
+                        try {
+                          print(_bannerAd == null);
+                          if (_bannerAd != null) {
+                            _bannerAd.dispose();
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+
+                        navigateToPage(context, const ChoiceScreen());
                       },
                     ),
                   ],

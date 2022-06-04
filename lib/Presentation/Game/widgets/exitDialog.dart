@@ -1,8 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_game/Presentation/Game/widgets/update_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/ColorManager/ColorManager.dart';
@@ -36,11 +34,11 @@ class ExitDialog extends StatelessWidget {
                   fit: BoxFit.cover,
                 )),
             child: Column(children: [
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Center(
-                child: Text(
+                child: AutoSizeText(
                   'متأكد؟',
                   style: boldStyle.copyWith(
                       color: Colors.white, fontSize: setResponsiveFontSize(20)),

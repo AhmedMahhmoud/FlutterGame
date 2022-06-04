@@ -65,7 +65,9 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
                 ),
                 DisplayChoices(
                   headerImage: playersProv
-                      .playersList[playersProv.askingPlayerIndex].playerImage??playersProv.playersList.first.playerImage,
+                          .playersList[playersProv.askingPlayerIndex]
+                          .playerImage ??
+                      playersProv.playersList.first.playerImage,
                   content: Column(
                     children: [
                       Padding(
@@ -100,13 +102,14 @@ class _RandomQuestionsTimeState extends State<RandomQuestionsTime> {
 
                                       // updating lastAsking and currently asking player index
 
-                                      await Provider.of<PlayersProvider>(context,
+                                      await Provider.of<PlayersProvider>(
+                                              context,
                                               listen: false)
                                           .getAskingPlayer();
                                     },
                                     child: Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 10.w),
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
                                       decoration: BoxDecoration(
                                           color: ColorManager.darkGrey,
                                           borderRadius:

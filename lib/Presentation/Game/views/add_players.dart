@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,10 +49,9 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   double listHeight = 95.h;
   @override
   Widget build(BuildContext context) {
-
-  /*  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    /*  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);*/
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     return SafeArea(
       child: GestureDetector(
@@ -85,9 +83,8 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                     child: Column(
                       children: [
                         SizedBox(
-                          height:
-
-                          MediaQuery.of(context).size.height /    ( Device.get().hasNotch ? 1.2:      1.085),
+                          height: MediaQuery.of(context).size.height /
+                              (Device.get().hasNotch ? 1.2 : 1.085),
                           child: Column(
                             children: [
                               SizedBox(
@@ -105,11 +102,13 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
                               ),
                               AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
-                                height:
-
-
-                                    (listHeight * value.playersList.length) > 600
-                                        ? Device.get().hasNotch?580.h:650.h
+                                height: value.playersList.length == 8
+                                    ? 720.h
+                                    : (listHeight * value.playersList.length) >
+                                            600
+                                        ? Device.get().hasNotch
+                                            ? 580.h
+                                            : 650.h
                                         : listHeight * value.playersList.length,
                                 margin: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: ListView.builder(

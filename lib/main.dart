@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Data/Providers/Animal/animal_provider.dart';
 
 import 'Presentation/Game/views/splash_screen.dart';
+import 'ad_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,15 +16,14 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   //locator.intalizeLocator();
   // await intitalizeGame();
-
+  FirebaseAdMob.instance.initialize(appId: AdManager.appId);
 /*DevicePreview(
   enabled: !kReleaseMode,
 
   builder: (context)=>const MyApp(),
 );*/
 
-runApp(const MyApp())  ;
-
+  runApp(const MyApp());
 }
 
 /*InitLocator locator = InitLocator();

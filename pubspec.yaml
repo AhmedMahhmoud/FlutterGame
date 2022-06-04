@@ -43,6 +43,7 @@ dependencies:
   page_transition: ^2.0.5
   provider: ^6.0.2
   scratcher: ^2.1.0
+  firebase_admob: ^0.11.2
   sembast: any
   shape_of_view: ^1.0.2
   shared_preferences: ^2.0.0

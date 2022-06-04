@@ -13,6 +13,7 @@ class PlayersDB {
   PlayersDB._internal();
   //end of singleton...
   final Database _database = GetIt.I.get();
+  Database get db => _database;
   final StoreRef _store = intMapStoreFactory.store('players_store');
   Future<void> insertPlayer(Players players) async {
     return await _store.add(_database, players.toMap()).whenComplete(() {
@@ -34,9 +35,9 @@ class PlayersDB {
   }
 
   Future<List<Players>> getPlayersTable() async {
-    var snapshots = await _store.find(_database);
+    List<RecordSnapshot> snapshots = await _store.find(_database);
     return snapshots
-        .map((snapshot) => Players.fromMap(snapshot.value))
+        .map((RecordSnapshot snapshot) => Players.fromMap(snapshot.value))
         .toList(growable: false);
   }
 }
