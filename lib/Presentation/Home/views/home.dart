@@ -36,8 +36,6 @@ class _HomeState extends State<Home> {
     try {
       AppStoreVersion _appStoreVersion = AppStoreVersion();
       _appStoreVersion.checkAppUpdate(context);
-
-
     } catch (e) {
       debugPrint('exception is $e');
     }
@@ -82,17 +80,19 @@ class _HomeState extends State<Home> {
                       height: categories.length * 100.h,
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: MediaQuery.of(context).size.width /
+                            childAspectRatio:
+                                MediaQuery.of(context).size.width /
                                     (MediaQuery.of(context).size.height / 1.8),
-                            crossAxisSpacing:  MediaQuery.of(context).size.height * 0.02,
-                            mainAxisSpacing:  MediaQuery.of(context).size.width * 0.01,
+                            crossAxisSpacing:
+                                MediaQuery.of(context).size.height * 0.02,
+                            mainAxisSpacing:
+                                MediaQuery.of(context).size.width * 0.01,
                             crossAxisCount: 2),
                         itemBuilder: (context, index) {
                           return CategoriesCard(
                             catColor: ColorManager.playersCardsColor[index],
                             onTap: () {
                               startPlay(gameProv, index);
-
                               navigateToPage(
                                   context, const AddPlayerScreen(true));
                             },
@@ -255,6 +255,11 @@ class _HomeState extends State<Home> {
       case 6:
         {
           gameProv.setGameCategory(makeupData);
+        }
+        break;
+      case 7:
+        {
+          gameProv.setGameCategory(mixData);
         }
         break;
 
