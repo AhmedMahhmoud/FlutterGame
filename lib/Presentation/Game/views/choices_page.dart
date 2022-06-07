@@ -121,17 +121,17 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   Widget build(BuildContext context) {
     var playersProv = Provider.of<PlayersProvider>(context, listen: true);
-    return WillPopScope(
-      onWillPop: () async {
-        await showDialog(
-            context: context,
-            builder: (BuildContext context) => ZoomIn(
-                  child: const ExitDialog(),
-                ));
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async {
+          await showDialog(
+              context: context,
+              builder: (BuildContext context) => ZoomIn(
+                    child: const ExitDialog(),
+                  ));
+        },
+        child: Scaffold(
+          body: SingleChildScrollView(
             child: Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(

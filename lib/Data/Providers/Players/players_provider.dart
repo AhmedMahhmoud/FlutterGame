@@ -41,13 +41,17 @@ class PlayersProvider with ChangeNotifier {
 
   Future<void> fillPlayersFromCache() async {
     PlayersDB _playerDb = PlayersDB();
-    List<Players> cachedPlayers = await _playerDb.getPlayersTable();
-    playersList = [...cachedPlayers];
-    playersListCopy = [...cachedPlayers];
-    for (int i = 0; i < cachedPlayers.length; i++) {
-      charactersImages
-          .removeWhere((String image) => image == cachedPlayers[i].playerImage);
+    print('dd ${_playerDb.db}');
+    if (_playerDb.db != null) {
+      List<Players> cachedPlayers = await _playerDb.getPlayersTable();
+      playersList = [...cachedPlayers];
+      playersListCopy = [...cachedPlayers];
+      for (int i = 0; i < cachedPlayers.length; i++) {
+        charactersImages.removeWhere(
+            (String image) => image == cachedPlayers[i].playerImage);
+      }
     }
+
     notifyListeners();
   }
 

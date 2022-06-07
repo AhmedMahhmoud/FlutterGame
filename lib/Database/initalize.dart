@@ -14,10 +14,14 @@ class Init {
   }
 
   static Future<void> _initSembast() async {
-    Directory appDir = await getApplicationDocumentsDirectory();
-    await appDir.create(recursive: true);
-    String databasePath = join(appDir.path, 'sembast.db');
-    Database database = await databaseFactoryIo.openDatabase(databasePath);
-    GetIt.I.registerSingleton<Database>(database);
+    try {
+      Directory appDir = await getApplicationDocumentsDirectory();
+      await appDir.create(recursive: true);
+      String databasePath = join(appDir.path, 'sembast.db');
+      Database database = await databaseFactoryIo.openDatabase(databasePath);
+      GetIt.I.registerSingleton<Database>(database);
+    } catch (e) {
+      log(e);
+    }
   }
 }

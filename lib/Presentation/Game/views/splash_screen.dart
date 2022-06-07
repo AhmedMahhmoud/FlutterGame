@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:provider/provider.dart';
-
+import 'package:flutter/services.dart';
 import '../../../Data/Providers/Players/players_provider.dart';
 import '../../../Database/initalize.dart';
 import '../../../core/constants.dart';
@@ -56,9 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
 
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+
     intitalizeGame();
     _startDelay();
     super.initState();
@@ -67,14 +65,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void dispose() {
     _timer?.cancel();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values); // to re-show bars
+/*    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values); // to re-show bars*/
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
