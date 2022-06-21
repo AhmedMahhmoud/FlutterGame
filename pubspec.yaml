@@ -26,9 +26,12 @@ dependencies:
   audioplayers:
   auto_size_text: ^3.0.0
   clay_containers: ^0.3.2
+  permission_handler: any
+
   cupertino_icons: ^1.0.2
   dotted_border: ^2.0.0+2
   flutter_device_type: ^0.4.0
+  esc_pos_bluetooth:
 
   flutter:
     sdk: flutter
