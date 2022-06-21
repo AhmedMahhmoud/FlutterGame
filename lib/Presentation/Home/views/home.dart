@@ -74,33 +74,37 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: SizedBox(
-                      height: categories.length * 100.h,
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio:
-                                MediaQuery.of(context).size.width /
-                                    (MediaQuery.of(context).size.height / 1.8),
-                            crossAxisSpacing:
-                                MediaQuery.of(context).size.height * 0.02,
-                            mainAxisSpacing:
-                                MediaQuery.of(context).size.width * 0.01,
-                            crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return CategoriesCard(
-                            catColor: ColorManager.playersCardsColor[index],
-                            onTap: () {
-                              startPlay(gameProv, index);
-                              navigateToPage(
-                                  context, const AddPlayerScreen(true));
-                            },
-                            catTitle: categories[index],
-                            catImage: categoryImages[index],
-                          );
-                        },
-                        itemCount: categories.length,
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: SizedBox(
+                        height: categories.length * 100.h,
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio:
+                                      MediaQuery.of(context).size.width /
+                                          (MediaQuery.of(context).size.height /
+                                              1.8),
+                                  crossAxisSpacing:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                  mainAxisSpacing:
+                                      MediaQuery.of(context).size.width * 0.01,
+                                  crossAxisCount: 2),
+                          itemBuilder: (context, index) {
+                            return CategoriesCard(
+                              catColor: ColorManager.playersCardsColor[index],
+                              onTap: () {
+                                startPlay(gameProv, index);
+                                navigateToPage(
+                                    context, const AddPlayerScreen(true));
+                              },
+                              catTitle: categories[index],
+                              catImage: categoryImages[index],
+                            );
+                          },
+                          itemCount: categories.length,
+                        ),
                       ),
                     ),
                   ),
@@ -254,12 +258,17 @@ class _HomeState extends State<Home> {
         break;
       case 6:
         {
-          gameProv.setGameCategory(makeupData);
+          gameProv.setGameCategory(mixData);
         }
         break;
       case 7:
         {
-          gameProv.setGameCategory(mixData);
+          gameProv.setGameCategory(footballersData);
+        }
+        break;
+      case 8:
+        {
+          gameProv.setGameCategory(makeupData);
         }
         break;
 

@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
 import '../widgets/add_player_container.dart';
 import '../widgets/exitDialog.dart';
@@ -51,7 +50,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen>
   Widget build(BuildContext context) {
     /*  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);*/
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     return SafeArea(
       child: GestureDetector(
