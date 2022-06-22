@@ -6,7 +6,6 @@ import 'Data/Providers/Players/players_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Data/Providers/Animal/animal_provider.dart';
-
 import 'Presentation/Game/views/splash_screen.dart';
 import 'ad_manager.dart';
 
@@ -51,7 +50,9 @@ class MyApp extends StatelessWidget {
               child: MaterialApp(
                 theme: ThemeData(fontFamily: 'Cairo'),
                 debugShowCheckedModeBanner: false,
-                home:SplashScreen(),
+
+                home:
+                SplashScreen(),
                 title: 'بكاسة',
               ));
         });

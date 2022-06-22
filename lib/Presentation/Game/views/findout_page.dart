@@ -38,12 +38,12 @@ class _FindOutScreenState extends State<FindOutScreen> {
         countDown = false;
       });
     });
-    _bannerAd = createBannerAd()
+/*    _bannerAd = createBannerAd()
       ..load()
-      ..show();
+      ..show();*/
   }
 
-  BannerAd createBannerAd() {
+/*  BannerAd createBannerAd() {
     return BannerAd(
       adUnitId: BannerAd.testAdUnitId,
       size: AdSize.banner,
@@ -51,18 +51,18 @@ class _FindOutScreenState extends State<FindOutScreen> {
         print('BannerAd event $event');
       },
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        try {
+   /*     try {
           _bannerAd?.dispose();
           _bannerAd = null;
         } catch (e) {
           print(e);
-        }
+        }*/
         await showDialog(
             context: context,
             builder: (BuildContext context) => ZoomIn(
